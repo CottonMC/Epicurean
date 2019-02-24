@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "io.github.cottonmc.epigast.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "mixins.epigast.refmap.json",
+  "mixins": [
+    "MixinHungerHud"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

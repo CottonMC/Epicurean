@@ -1,0 +1,10 @@
+{
+  "item.epicurean-gastronomy.jelly": "Jelly",
+  "item.epicurean-gastronomy.super_jelly": "Super-Jelly",
+  "tooltip.epigast.jellied": "Jellied",
+  "tooltip.epigast.super_jellied": "Super-Jellied",
+  "item.edibles.jelly": "Jelly (Moldy)",
+  "item.edibles.super_jelly": "Super-Jelly (Moldy)",
+  "tooltip.epigast.deprecated.0": "This item is DEPRECATED.",
+  "tooltip.epigast.deprecated.1": "Put in a crafting table by itself to upgrade."
+}

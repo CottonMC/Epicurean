@@ -1,0 +1,61 @@
+buildscript {
+	repositories {
+		mavenCentral()
+		jcenter()
+		maven {
+			name = 'Fabric'
+			url = 'http://maven.modmuss50.me/'
+		}
+		maven {
+			url "https://plugins.gradle.org/m2/"
+		}
+
+	}
+	dependencies {
+		classpath "com.github.jengelman.gradle.plugins:shadow:2.0.0"
+		classpath "net.fabricmc:fabric-loom:0.2.0-SNAPSHOT"
+	}
+}
+
+apply plugin: "com.github.johnrengelman.shadow"
+apply plugin: net.fabricmc.loom.LoomGradlePlugin
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+archivesBaseName = "epicurean-gastronomy"
+group = "io.github.cottonmc"
+version = "2.0.0+19w08a"
+
+minecraft {
+	refmapName = 'mixins.epigast.refmap.json'
+}
+
+repositories {
+	//mavenCentral()
+	mavenLocal()
+}
+
+dependencies {
+	minecraft "com.mojang:minecraft:19w08a"
+	mappings "net.fabricmc:yarn:19w08a.4"
+	modCompile "net.fabricmc:fabric-loader:0.3.7.108"
+	modCompile "net.fabricmc:fabric:0.2.2.103"
+
+	shadow "blue.endless:jankson:1.1.1-SNAPSHOT"
+	implementation "blue.endless:jankson:1.1.1-SNAPSHOT"
+}
+
+jar {
+	classifier = "slim"
+}
+
+shadowJar {
+	classifier = "shadow"
+	configurations = [project.configurations.shadow]
+}
+
+remapJar {
+	jar = shadowJar.archivePath
+	dependsOn shadowJar
+}

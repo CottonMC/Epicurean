@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "package": "io.github.cottonmc.epicurean_gastronomy.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "mixins.epigast.refmap.json",
+  "mixins": [
+    "MixinJelliedFood",
+    "MixinEdibleItems",
+    "MixinOmnivore",
+    "MixinHopperHarvesting",
+    "MixinFertilizableNetherWart",
+    "MixinHungerManager"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
