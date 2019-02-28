@@ -24,8 +24,10 @@ public class IngredientProfiles implements SimpleSynchronousResourceReloadListen
 //		MEAL_INGREDIENTS.put(EpicureanItems.PEPPER, FlavorGroup.SPICY);
 		// Second-highest impact: add umami foods
 		Tag<Item> COOKED_MEATS = ItemTags.getContainer().get(new Identifier(Cotton.SHARED_NAMESPACE, "cooked_meat"));
-		for (Item meat : COOKED_MEATS.values()) {
-			MEAL_INGREDIENTS.put(meat, FlavorGroup.UMAMI);
+		if (COOKED_MEATS != null) {
+			for (Item meat : COOKED_MEATS.values()) {
+				MEAL_INGREDIENTS.put(meat, FlavorGroup.UMAMI);
+			}
 		}
 		MEAL_INGREDIENTS.put(Items.field_17516, FlavorGroup.UMAMI); //brown mushroom
 		MEAL_INGREDIENTS.put(Items.field_17517, FlavorGroup.UMAMI); //red mushroom
