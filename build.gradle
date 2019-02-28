@@ -34,6 +34,7 @@ minecraft {
 repositories {
 	//mavenCentral()
 	mavenLocal()
+	maven { url 'http://server.bbkr.space:8081/artifactory/libs-snapshot/' }
 }
 
 dependencies {
@@ -41,6 +42,8 @@ dependencies {
 	mappings "net.fabricmc:yarn:19w08a.4"
 	modCompile "net.fabricmc:fabric-loader:0.3.7.108"
 	modCompile "net.fabricmc:fabric:0.2.2.103"
+
+	modCompile "io.github.cottonmc:cotton:0.0.3+19w08a-SNAPSHOT"
 
 	shadow "blue.endless:jankson:1.1.1-SNAPSHOT"
 	implementation "blue.endless:jankson:1.1.1-SNAPSHOT"

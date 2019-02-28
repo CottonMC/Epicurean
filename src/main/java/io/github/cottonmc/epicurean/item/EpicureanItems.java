@@ -1,5 +1,8 @@
 package io.github.cottonmc.epicurean.item;
 
+import io.github.cottonmc.cotton.Cotton;
+import io.github.cottonmc.cotton.tags.TagEntryManager;
+import io.github.cottonmc.cotton.tags.TagType;
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
@@ -23,6 +26,9 @@ public class EpicureanItems {
 	}
 
 	public static void init() {
-
+		// add cooked meats to a tag
+		TagEntryManager.registerToTag(TagType.ITEM, new Identifier(Cotton.SHARED_NAMESPACE, "cooked_meat"),
+				"minecraft:cooked_beef", "minecraft:cooked_chicken", "minecraft:cooked_cod", "minecraft:cooked_mutton",
+				"minecraft:cooked_porkchop", "minecraft:cooked_rabbit", "minecraft:cooked_salmon");
 	}
 }

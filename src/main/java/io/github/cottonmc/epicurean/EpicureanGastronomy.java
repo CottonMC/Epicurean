@@ -1,6 +1,7 @@
 package io.github.cottonmc.epicurean;
 
 import io.github.cottonmc.epicurean.item.EpicureanItems;
+import io.github.cottonmc.epicurean.meal.IngredientProfiles;
 import io.github.cottonmc.epicurean.recipe.EpicureanRecipes;
 import net.fabricmc.api.ModInitializer;
 
@@ -17,6 +18,7 @@ public class EpicureanGastronomy implements ModInitializer {
         }
         EpicureanItems.init();
         EpicureanRecipes.init();
+        IngredientProfiles.init();
     }
 
 }
