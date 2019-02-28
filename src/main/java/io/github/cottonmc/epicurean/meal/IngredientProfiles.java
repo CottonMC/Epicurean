@@ -21,36 +21,39 @@ public class IngredientProfiles implements SimpleSynchronousResourceReloadListen
 	public void apply(ResourceManager manager) {
 		MEAL_INGREDIENTS.clear();
 		DRESSINGS.clear();
-		//TODO: move this all to tag-based? I think it's a good idea
+		Tag<Item> SPICY = ItemTags.getContainer().get(new Identifier(EpicureanGastronomy.MOD_ID, "spicy"));
+		Tag<Item> UMAMI = ItemTags.getContainer().get(new Identifier(EpicureanGastronomy.MOD_ID, "umami"));
+		Tag<Item> ACIDIC = ItemTags.getContainer().get(new Identifier(EpicureanGastronomy.MOD_ID, "acidic"));
+		Tag<Item> SWEET = ItemTags.getContainer().get(new Identifier(EpicureanGastronomy.MOD_ID, "sweet"));
+		Tag<Item> BITTER = ItemTags.getContainer().get(new Identifier(EpicureanGastronomy.MOD_ID, "bitter"));
+		Tag<Item> FILLING = ItemTags.getContainer().get(new Identifier(EpicureanGastronomy.MOD_ID, "filling"));
 
 		// Highest impact: add spicy foods
-//		MEAL_INGREDIENTS.put(EpicureanItems.PEPPER, FlavorGroup.SPICY);
+		if (SPICY != null) putTag(SPICY, FlavorGroup.SPICY);
+//		to add: pepper
 		// Second-highest impact: add umami foods
-		Tag<Item> COOKED_MEATS = ItemTags.getContainer().get(new Identifier(Cotton.SHARED_NAMESPACE, "cooked_meat"));
-		if (COOKED_MEATS != null) {
-			for (Item meat : COOKED_MEATS.values()) {
-				MEAL_INGREDIENTS.put(meat, FlavorGroup.UMAMI);
-			}
-		}
-		MEAL_INGREDIENTS.put(Items.field_17516, FlavorGroup.UMAMI); //brown mushroom
-		MEAL_INGREDIENTS.put(Items.field_17517, FlavorGroup.UMAMI); //red mushroom
-		DRESSINGS.put(Items.DRIED_KELP, FlavorGroup.UMAMI); //I think that's correct? feel free to shout at me if I'm wrong falk
+		if (UMAMI != null) putTag(UMAMI, FlavorGroup.UMAMI);
 		// Third-highest impact: add acidic foods
-//		MEAL_INGREDIENTS.put(EpicureanItems.TOMATO, FlavorGroup.ACIDIC);
+		if (ACIDIC != null) putTag(ACIDIC, FlavorGroup.ACIDIC);
+//		to add: tomato
 		// Fourth-highest impact: add sweet foods
-		MEAL_INGREDIENTS.put(Items.SUGAR, FlavorGroup.SWEET);
-		MEAL_INGREDIENTS.put(Items.APPLE, FlavorGroup.SWEET);
-		DRESSINGS.put(EpicureanItems.JELLY, FlavorGroup.SWEET);
-		DRESSINGS.put(EpicureanItems.SUPER_JELLY, FlavorGroup.SWEET);
+		if (SWEET != null) putTag(SWEET, FlavorGroup.SWEET);
 		// Fifth-highest impact: add bitter foods
-		MEAL_INGREDIENTS.put(Items.COCOA_BEANS, FlavorGroup.BITTER);
+		if (BITTER != null) putTag(BITTER, FlavorGroup.BITTER);
 		// Lowest impact: add filling foods
-		MEAL_INGREDIENTS.put(Items.WHEAT, FlavorGroup.FILLING);
-		MEAL_INGREDIENTS.put(Items.POTATO, FlavorGroup.FILLING);
-		MEAL_INGREDIENTS.put(Items.CARROT, FlavorGroup.FILLING);
-		MEAL_INGREDIENTS.put(Items.BREAD, FlavorGroup.FILLING);
-//		MEAL_INGREDIENTS.put(EpicureanItems.DASHI, FlavorGroup.FILLING);
+		if (FILLING != null) putTag(FILLING, FlavorGroup.FILLING);
+//		to add: dashi
 		EpicureanGastronomy.LOGGER.info("Ingredient profiles set!");
+	}
+
+	private void putTag(Tag<Item> tag, FlavorGroup flavor) {
+		Tag<Item> DRESSING_TAG = ItemTags.getContainer().get(new Identifier(EpicureanGastronomy.MOD_ID, "dressings"));
+		for (Item ingredient : tag.values()) {
+			if (DRESSING_TAG != null && DRESSING_TAG.contains(ingredient)) {
+				DRESSINGS.put(ingredient, flavor);
+			}
+			MEAL_INGREDIENTS.put(ingredient, flavor);
+		}
 	}
 
 	@Override

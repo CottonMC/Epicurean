@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "#c:cooked_meat",
+    "minecraft:red_mushroom",
+    "minecraft:brown_mushroom",
+    "minecraft:dried_kelp"
+  ]
+}
