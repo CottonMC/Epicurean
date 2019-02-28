@@ -1,6 +1,6 @@
-package io.github.cottonmc.epicurean_gastronomy.mixins;
+package io.github.cottonmc.epicurean.mixins;
 
-import io.github.cottonmc.epicurean_gastronomy.EpicureanGastronomy;
+import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;

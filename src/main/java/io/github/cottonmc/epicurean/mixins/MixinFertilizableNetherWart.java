@@ -1,4 +1,4 @@
-package io.github.cottonmc.epicurean_gastronomy.mixins;
+package io.github.cottonmc.epicurean.mixins;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;

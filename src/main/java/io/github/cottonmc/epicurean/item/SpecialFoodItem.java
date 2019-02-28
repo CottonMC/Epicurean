@@ -1,5 +1,6 @@
-package io.github.cottonmc.epicurean_gastronomy;
+package io.github.cottonmc.epicurean.item;
 
+import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import net.minecraft.advancement.criterion.Criterions;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

@@ -1,5 +1,6 @@
-package io.github.cottonmc.epicurean_gastronomy;
+package io.github.cottonmc.epicurean.item;
 
+import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
@@ -23,7 +24,7 @@ public class JellyItem extends FoodItem {
 
 	@Override
 	public boolean hasEnchantmentGlint(ItemStack stack) {
-		return stack.getItem() == EpicureanGastronomy.SUPER_JELLY;
+		return stack.getItem() == EpicureanItems.SUPER_JELLY;
 	}
 
 }

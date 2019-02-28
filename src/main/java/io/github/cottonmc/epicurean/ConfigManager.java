@@ -1,4 +1,4 @@
-package io.github.cottonmc.epicurean_gastronomy;
+package io.github.cottonmc.epicurean;
 
 import blue.endless.jankson.Jankson;
 import blue.endless.jankson.JsonObject;
@@ -51,11 +51,7 @@ public class ConfigManager {
 			catch (IOException e) {
 				e.printStackTrace();
 			}
-		} catch (SyntaxError syntaxError) {
-			syntaxError.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InstantiationException e) {
+		} catch (SyntaxError | InstantiationException | IllegalAccessException e) {
 			e.printStackTrace();
 		}
 		return null;

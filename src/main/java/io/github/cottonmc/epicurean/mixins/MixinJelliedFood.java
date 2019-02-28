@@ -1,8 +1,8 @@
-package io.github.cottonmc.epicurean_gastronomy.mixins;
+package io.github.cottonmc.epicurean.mixins;
 
-import io.github.cottonmc.epicurean_gastronomy.ConfigManager;
-import io.github.cottonmc.epicurean_gastronomy.EpicureanGastronomy;
-import io.github.cottonmc.epicurean_gastronomy.EpiGastConfig;
+import io.github.cottonmc.epicurean.ConfigManager;
+import io.github.cottonmc.epicurean.EpicureanGastronomy;
+import io.github.cottonmc.epicurean.EpicureanConfig;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -60,7 +60,7 @@ public class MixinJelliedFood extends Item {
 
 	@Inject(method = "<init>", at = @At("RETURN"))
 	public void overhaulHunger(int hunger, float saturation, boolean wolfFood, Item.Settings settings, CallbackInfo ci) {
-		if (EpicureanGastronomy.config == null) EpicureanGastronomy.config = ConfigManager.load(EpiGastConfig.class);
+		if (EpicureanGastronomy.config == null) EpicureanGastronomy.config = ConfigManager.load(EpicureanConfig.class);
 		else {
 			if (EpicureanGastronomy.config.useSaturationOnly) ((FoodItem) (Object) this).setAlwaysConsumable();
 		}

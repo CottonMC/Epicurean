@@ -1,4 +1,4 @@
-package io.github.cottonmc.epicurean_gastronomy;
+package io.github.cottonmc.epicurean.item;
 
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;

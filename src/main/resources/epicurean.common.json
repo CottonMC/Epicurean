@@ -1,8 +1,8 @@
 {
   "required": true,
-  "package": "io.github.cottonmc.epicurean_gastronomy.mixins",
+  "package": "io.github.cottonmc.epicurean.mixins",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "mixins.epigast.refmap.json",
+  "refmap": "mixins.epicurean.refmap.json",
   "mixins": [
     "MixinJelliedFood",
     "MixinEdibleItems",

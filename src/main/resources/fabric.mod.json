@@ -1,14 +1,14 @@
 {
-  "id": "epicurean-gastronomy",
+  "id": "epicurean",
   "name": "Epicurean Gastronomy",
   "version": "1.1.0",
   "side": "universal",
   "initializers": [
-    "io.github.cottonmc.epigast.EpicureanGastronomy"
+    "io.github.cottonmc.epicurean.EpicureanGastronomy"
     ],
     "mixins": {
-        "common": "epigast.common.json",
-        "client": "epigast.client.json"
+        "common": "epicurean.common.json",
+        "client": "epicurean.client.json"
     },
     "requires": {
         "fabric": "*"

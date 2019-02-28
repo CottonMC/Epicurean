@@ -1,5 +1,6 @@
-package io.github.cottonmc.epicurean_gastronomy;
+package io.github.cottonmc.epicurean.recipe;
 
+import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.RecipeSerializer;
@@ -35,7 +36,7 @@ public class RemakeJellyRecipe extends SpecialCraftingRecipe {
 
 	@Override
 	public ItemStack craft(CraftingInventory inv) {
-		Identifier newId = new Identifier(EpicureanGastronomy.modId, oldId.getPath());
+		Identifier newId = new Identifier(EpicureanGastronomy.MOD_ID, oldId.getPath());
 		return new ItemStack(Registry.ITEM.get(newId));
 	}
 
@@ -46,6 +47,6 @@ public class RemakeJellyRecipe extends SpecialCraftingRecipe {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return EpicureanGastronomy.REMAKE_JELLY_SERIALIZER;
+		return EpicureanRecipes.REMAKE_JELLY_SERIALIZER;
 	}
 }

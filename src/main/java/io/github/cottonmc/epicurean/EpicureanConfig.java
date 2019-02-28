@@ -1,8 +1,8 @@
-package io.github.cottonmc.epicurean_gastronomy;
+package io.github.cottonmc.epicurean;
 
 import blue.endless.jankson.Comment;
 
-public class EpiGastConfig {
+public class EpicureanConfig {
 
 	@Comment(value="Allow hoppers to automatically harvest crops above them.")
 	public boolean hopperHarvest = true;

@@ -1,5 +1,9 @@
-package io.github.cottonmc.epicurean_gastronomy;
+package io.github.cottonmc.epicurean.recipe;
 
+import io.github.cottonmc.epicurean.EpicureanGastronomy;
+import io.github.cottonmc.epicurean.item.EpicureanItems;
+import io.github.cottonmc.epicurean.item.JellyItem;
+import io.github.cottonmc.epicurean.item.SpecialFoodItem;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.FoodItem;
 import net.minecraft.item.ItemStack;
@@ -50,7 +54,7 @@ public class AddJellyRecipe extends SpecialCraftingRecipe {
 		ItemStack food = inv.getInvStack(foodSlot).copy();
 		if (!food.hasTag()) food.setTag(new CompoundTag());
 		CompoundTag tag = new CompoundTag().copyFrom(food.getTag());
-		if (jelly.getItem() == EpicureanGastronomy.SUPER_JELLY) tag.putByte("super_jellied", (byte)0);
+		if (jelly.getItem() == EpicureanItems.SUPER_JELLY) tag.putByte("super_jellied", (byte)0);
 		else tag.putByte("jellied", (byte)0);
 		food.setTag(tag);
 		return food;
@@ -63,6 +67,6 @@ public class AddJellyRecipe extends SpecialCraftingRecipe {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return EpicureanGastronomy.ADD_JELLY_SERIALIZER;
+		return EpicureanRecipes.ADD_JELLY_SERIALIZER;
 	}
 }
