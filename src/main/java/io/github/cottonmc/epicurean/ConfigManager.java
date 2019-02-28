@@ -12,7 +12,7 @@ import java.io.IOException;
 public class ConfigManager {
 	private static String configName = "EpicureanGastronomy";
 	public static <T> T load(Class<T> clazz){
-		System.out.println("Loading config!");
+		EpicureanGastronomy.LOGGER.info("Loading config!");
 		try {
 			File file = new File(FabricLoader.getInstance().getConfigDirectory().toString() + "/" + configName + ".conf");
 			File oldConfig = new File(FabricLoader.getInstance().getConfigDirectory().toString() + "/Edibles.conf");
@@ -34,7 +34,7 @@ public class ConfigManager {
 					out.close();
 				}
 				catch (IOException e) {
-					e.printStackTrace();
+					EpicureanGastronomy.LOGGER.warn("Failed to upgrade config file: ", e);
 				}
 			}
 
@@ -49,10 +49,10 @@ public class ConfigManager {
 				return jankson.fromJson(json, clazz);
 			}
 			catch (IOException e) {
-				e.printStackTrace();
+				EpicureanGastronomy.LOGGER.warn("Failed to load config file: ", e);
 			}
 		} catch (SyntaxError | InstantiationException | IllegalAccessException e) {
-			e.printStackTrace();
+			EpicureanGastronomy.LOGGER.warn("Failed to load config file: ", e);
 		}
 		return null;
 	}
@@ -72,8 +72,8 @@ public class ConfigManager {
 			out.flush();
 			out.close();
 
-		} catch (IOException ex) {
-			ex.printStackTrace();
+		} catch (IOException e) {
+			EpicureanGastronomy.LOGGER.warn("Failed to save config file: ", e);
 		}
 	}
 }
