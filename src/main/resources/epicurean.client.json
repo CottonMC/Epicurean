@@ -4,7 +4,8 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "mixins.epicurean.refmap.json",
   "mixins": [
-    "MixinHungerHud"
+    "MixinHungerHud",
+    "MixinIngredientTooltips"
   ],
   "injectors": {
     "defaultRequire": 1

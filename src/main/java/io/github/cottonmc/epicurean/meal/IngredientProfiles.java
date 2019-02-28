@@ -11,15 +11,18 @@ import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
 
+import java.util.HashMap;
 import java.util.Map;
 public class IngredientProfiles implements SimpleSynchronousResourceReloadListener {
-	public static Map<Item, FlavorGroup> MEAL_INGREDIENTS;
-	public static Map<Item, FlavorGroup> DRESSINGS;
+	public static Map<Item, FlavorGroup> MEAL_INGREDIENTS = new HashMap<>();
+	public static Map<Item, FlavorGroup> DRESSINGS = new HashMap<>();
 
 	@Override
 	public void apply(ResourceManager manager) {
 		MEAL_INGREDIENTS.clear();
 		DRESSINGS.clear();
+		//TODO: move this all to tag-based? I think it's a good idea
+
 		// Highest impact: add spicy foods
 //		MEAL_INGREDIENTS.put(EpicureanItems.PEPPER, FlavorGroup.SPICY);
 		// Second-highest impact: add umami foods
@@ -31,10 +34,12 @@ public class IngredientProfiles implements SimpleSynchronousResourceReloadListen
 		}
 		MEAL_INGREDIENTS.put(Items.field_17516, FlavorGroup.UMAMI); //brown mushroom
 		MEAL_INGREDIENTS.put(Items.field_17517, FlavorGroup.UMAMI); //red mushroom
+		DRESSINGS.put(Items.DRIED_KELP, FlavorGroup.UMAMI); //I think that's correct? feel free to shout at me if I'm wrong falk
 		// Third-highest impact: add acidic foods
 //		MEAL_INGREDIENTS.put(EpicureanItems.TOMATO, FlavorGroup.ACIDIC);
 		// Fourth-highest impact: add sweet foods
 		MEAL_INGREDIENTS.put(Items.SUGAR, FlavorGroup.SWEET);
+		MEAL_INGREDIENTS.put(Items.APPLE, FlavorGroup.SWEET);
 		DRESSINGS.put(EpicureanItems.JELLY, FlavorGroup.SWEET);
 		DRESSINGS.put(EpicureanItems.SUPER_JELLY, FlavorGroup.SWEET);
 		// Fifth-highest impact: add bitter foods
@@ -43,6 +48,7 @@ public class IngredientProfiles implements SimpleSynchronousResourceReloadListen
 		MEAL_INGREDIENTS.put(Items.WHEAT, FlavorGroup.FILLING);
 		MEAL_INGREDIENTS.put(Items.POTATO, FlavorGroup.FILLING);
 		MEAL_INGREDIENTS.put(Items.CARROT, FlavorGroup.FILLING);
+		MEAL_INGREDIENTS.put(Items.BREAD, FlavorGroup.FILLING);
 //		MEAL_INGREDIENTS.put(EpicureanItems.DASHI, FlavorGroup.FILLING);
 		EpicureanGastronomy.LOGGER.info("Ingredient profiles set!");
 	}

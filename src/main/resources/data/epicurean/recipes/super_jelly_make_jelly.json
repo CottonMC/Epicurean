@@ -1,12 +1,12 @@
 {
-  "group": "epicurean-gastronomy:super_jelly",
+  "group": "epicurean:super_jelly",
   "type": "crafting_shapeless",
   "ingredients": [
     {
       "item": "minecraft:glass_bottle"
     },
     {
-      "item": "epicurean-gastronomy:jelly"
+      "item": "epicurean:jelly"
     },
     {
       "item": "minecraft:slime_ball"
@@ -16,7 +16,7 @@
     }
   ],
   "result": {
-    "item": "epicurean-gastronomy:super_jelly",
+    "item": "epicurean:super_jelly",
     "count": 1
   }
 }

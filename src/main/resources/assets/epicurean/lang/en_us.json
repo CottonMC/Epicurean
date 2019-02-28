@@ -1,10 +1,22 @@
 {
-  "item.epicurean-gastronomy.jelly": "Jelly",
-  "item.epicurean-gastronomy.super_jelly": "Super-Jelly",
-  "tooltip.epigast.jellied": "Jellied",
-  "tooltip.epigast.super_jellied": "Super-Jellied",
+  "item.epicurean.jelly": "Jelly",
+  "item.epicurean.super_jelly": "Super-Jelly",
+  "tooltip.epicurean.jellied": "Jellied",
+  "tooltip.epicurean.super_jellied": "Super-Jellied",
+  "tooltip.epicurean.ingredient.spicy": "Ingredient - spicy",
+  "tooltip.epicurean.ingredient.umami": "Ingredient - umami",
+  "tooltip.epicurean.ingredient.acidic": "Ingredient - acidic",
+  "tooltip.epicurean.ingredient.sweet": "Ingredient - sweet",
+  "tooltip.epicurean.ingredient.bitter": "Ingredient - bitter",
+  "tooltip.epicurean.ingredient.filling": "Ingredient - filling",
+  "tooltip.epicurean.dressing.spicy": "Dressing - spicy",
+  "tooltip.epicurean.dressing.umami": "Dressing - umami",
+  "tooltip.epicurean.dressing.acidic": "Dressing - acidic",
+  "tooltip.epicurean.dressing.sweet": "Dressing - sweet",
+  "tooltip.epicurean.dressing.bitter": "Dressing - bitter",
+  "tooltip.epicurean.dressing.filling": "Dressing - filling",
   "item.edibles.jelly": "Jelly (Moldy)",
   "item.edibles.super_jelly": "Super-Jelly (Moldy)",
-  "tooltip.epigast.deprecated.0": "This item is DEPRECATED.",
-  "tooltip.epigast.deprecated.1": "Put in a crafting table by itself to upgrade."
+  "tooltip.epicurean.deprecated.0": "This item is DEPRECATED.",
+  "tooltip.epicurean.deprecated.1": "Put in a crafting table by itself to upgrade."
 }

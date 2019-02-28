@@ -1,5 +1,5 @@
 {
-  "group": "epicurean-gastronomy:super_jelly",
+  "group": "epicurea:super_jelly",
   "type": "crafting_shapeless",
   "ingredients": [
     {
@@ -22,7 +22,7 @@
     }
   ],
   "result": {
-    "item": "epicurean-gastronomy:super_jelly",
+    "item": "epicurean:super_jelly",
     "count": 1
   }
 }

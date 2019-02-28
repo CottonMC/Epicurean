@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "epicurean-gastronomy:item/super_jelly"
+    "layer0": "epicurean:item/super_jelly"
   }
 }

@@ -17,7 +17,7 @@ public class DeprecatedItem extends Item {
 
 	@Override
 	public void buildTooltip(ItemStack stack, World world, List<TextComponent> tooltips, TooltipContext ctx) {
-		tooltips.add(new TranslatableTextComponent("tooltip.epigast.deprecated.0").applyFormat(TextFormat.RED));
-		tooltips.add(new TranslatableTextComponent("tooltip.epigast.deprecated.1").applyFormat(TextFormat.GRAY));
+		tooltips.add(new TranslatableTextComponent("tooltip.epicurean.deprecated.0").applyFormat(TextFormat.RED));
+		tooltips.add(new TranslatableTextComponent("tooltip.epicurean.deprecated.1").applyFormat(TextFormat.GRAY));
 	}
 }

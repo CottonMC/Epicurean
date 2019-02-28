@@ -3,6 +3,7 @@ package io.github.cottonmc.epicurean.mixins;
 import io.github.cottonmc.epicurean.ConfigManager;
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import io.github.cottonmc.epicurean.EpicureanConfig;
+import io.github.cottonmc.epicurean.meal.IngredientProfiles;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -14,6 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.text.TextComponent;
 import net.minecraft.text.TextFormat;
 import net.minecraft.text.TranslatableTextComponent;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -50,9 +53,9 @@ public class MixinJelliedFood extends Item {
 	public void buildTooltip(ItemStack stack, World world, List<TextComponent> tooltips, TooltipContext ctx) {
 		if (stack.hasTag())  {
 			if (stack.getTag().containsKey("jellied")) {
-				tooltips.add(new TranslatableTextComponent("tooltip.epigast.jellied").applyFormat(TextFormat.DARK_RED));
+				tooltips.add(new TranslatableTextComponent("tooltip.epicurean.jellied").applyFormat(TextFormat.DARK_RED));
 			} else if (stack.getTag().containsKey("super_jellied")) {
-				tooltips.add(new TranslatableTextComponent("tooltip.epigast.super_jellied").applyFormat(TextFormat.GREEN));
+				tooltips.add(new TranslatableTextComponent("tooltip.epicurean.super_jellied").applyFormat(TextFormat.GREEN));
 			}
 		}
 		super.buildTooltip(stack, world, tooltips, ctx);

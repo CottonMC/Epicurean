@@ -2,8 +2,8 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "epicurean-gastronomy:super_jelly_make_scratch",
-      "epicurean-gastronomy:super_jelly_make_jelly"
+      "epicurean:super_jelly_make_scratch",
+      "epicureany:super_jelly_make_jelly"
     ]
   },
   "criteria": {
@@ -12,7 +12,7 @@
       "conditions": {
         "items": [
           {
-            "item": "epicurean-gastronomy:jelly"
+            "item": "epicurean:jelly"
           }
         ]
       }
@@ -20,13 +20,13 @@
     "has_the_recipe_scratch": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "epicurean-gastronomy:super_jelly_make_scratch"
+        "recipe": "epicurean:super_jelly_make_scratch"
       }
     },
     "has_the_recipe_jelly": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "epicurean-gastronomy:super_jelly_make_jelly"
+        "recipe": "epicurean:super_jelly_make_jelly"
       }
     }
   },
