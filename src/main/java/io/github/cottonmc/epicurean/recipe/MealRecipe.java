@@ -1,6 +1,5 @@
 package io.github.cottonmc.epicurean.recipe;
 
-import com.google.gson.JsonObject;
 import io.github.cottonmc.epicurean.block.CookingInventory;
 import io.github.cottonmc.epicurean.meal.FlavorGroup;
 import io.github.cottonmc.epicurean.meal.IngredientProfiles;
@@ -16,7 +15,6 @@ import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.crafting.CraftingRecipe;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
@@ -124,7 +122,7 @@ public class MealRecipe implements CraftingRecipe {
 
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return null;
+		return EpicureanRecipes.MEAL_SERIALIZER;
 	}
 
 	public static CompoundTag makeFlavorProfile(FlavorGroup group, int strength, int duration) {
