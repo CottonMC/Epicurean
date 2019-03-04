@@ -32,14 +32,14 @@ public class CookingTableScreen extends ContainerScreen implements RecipeBookPro
 		this.recipeBookGui.initialize(this.width, this.height, this.client, this.isNarrow, (CookingTableContainer)this.container);
 		this.left = this.recipeBookGui.findLeftEdge(this.isNarrow, this.width, this.containerWidth);
 		this.listeners.add(this.recipeBookGui);
-//		this.addButton(new RecipeBookButtonWidget(this.left + 144, this.top + 9, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEX) {
-//			public void onPressed(double double_1, double double_2) {
-//				CookingTableScreen.this.recipeBookGui.reset(CookingTableScreen.this.isNarrow);
-//				CookingTableScreen.this.recipeBookGui.toggleOpen();
-//				CookingTableScreen.this.left = CookingTableScreen.this.recipeBookGui.findLeftEdge(CookingTableScreen.this.isNarrow, CookingTableScreen.this.width, CookingTableScreen.this.containerWidth);
-//				this.setPos(CookingTableScreen.this.left + 5, CookingTableScreen.this.height / 2 - 49);
-//			}
-//		});
+		this.addButton(new RecipeBookButtonWidget(this.left + 144, this.top + 9, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEX) {
+			public void onPressed(double double_1, double double_2) {
+				CookingTableScreen.this.recipeBookGui.reset(CookingTableScreen.this.isNarrow);
+				CookingTableScreen.this.recipeBookGui.toggleOpen();
+				CookingTableScreen.this.left = CookingTableScreen.this.recipeBookGui.findLeftEdge(CookingTableScreen.this.isNarrow, CookingTableScreen.this.width, CookingTableScreen.this.containerWidth);
+				this.setPos(CookingTableScreen.this.left + 5, CookingTableScreen.this.height / 2 - 49);
+			}
+		});
 	}
 
 	public GuiEventListener getFocused() {

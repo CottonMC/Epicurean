@@ -28,7 +28,7 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 	}
 
 	public CookingTableContainer(int syncId, PlayerInventory playerInv, BlockContext ctx) {
-		super(null, syncId); //TODO: register new container type
+		super(null, syncId);
 		this.cookingInv = new CookingInventory(this);
 		this.resultInv = new CraftingResultInventory();
 		this.context = ctx;

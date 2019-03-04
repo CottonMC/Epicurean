@@ -12,6 +12,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeFinder;
 import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.crafting.CraftingRecipe;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Identifier;
@@ -34,6 +35,11 @@ public class MealRecipe implements CraftingRecipe {
 		this.output = output;
 		this.base = base;
 		this.seasonings = seasonings;
+	}
+
+	@Override
+	public RecipeType<?> getType() {
+		return EpicureanRecipes.MEAL;
 	}
 
 	@Override
