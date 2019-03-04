@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 
 public class JellyItem extends FoodItem {
 	public JellyItem(int hunger, float saturation) {
-		super(hunger, saturation, false, new Item.Settings().itemGroup(ItemGroup.FOOD).recipeRemainder(Items.GLASS_BOTTLE));
+		super(hunger, saturation, false, new Item.Settings().itemGroup(EpicureanGastronomy.EPICUREAN_GROUP).recipeRemainder(Items.GLASS_BOTTLE));
 	}
 
 	@Override

@@ -1,11 +1,8 @@
 package io.github.cottonmc.epicurean.meal;
 
-import io.github.cottonmc.cotton.Cotton;
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
-import io.github.cottonmc.epicurean.item.EpicureanItems;
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.item.Item;
-import net.minecraft.item.Items;
 import net.minecraft.resource.ResourceManager;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.Tag;
