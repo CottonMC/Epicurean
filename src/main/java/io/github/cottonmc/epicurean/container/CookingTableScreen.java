@@ -13,7 +13,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.TranslatableTextComponent;
 import net.minecraft.util.Identifier;
 
-public class CookingTableScreen extends ContainerScreen implements RecipeBookProvider {
+public class CookingTableScreen extends ContainerScreen /*implements RecipeBookProvider*/ {
 	private static final Identifier TEXTURE = new Identifier(EpicureanGastronomy.MOD_ID, "textures/gui/cooking_table.png");
 	private static final Identifier RECIPE_BUTTON_TEX = new Identifier("textures/gui/recipe_button.png");
 	private final RecipeBookGui recipeBookGui = new RecipeBookGui();
@@ -28,28 +28,28 @@ public class CookingTableScreen extends ContainerScreen implements RecipeBookPro
 		super.onInitialized();
 		this.containerWidth = 176;
 		this.containerHeight = 165;
-		this.isNarrow = this.width < 379;
-		this.recipeBookGui.initialize(this.width, this.height, this.client, this.isNarrow, (CookingTableContainer)this.container);
-		this.left = this.recipeBookGui.findLeftEdge(this.isNarrow, this.width, this.containerWidth);
-		this.listeners.add(this.recipeBookGui);
+//		this.isNarrow = this.width < 379;
 		//TODO: reimpl once the recipe book is easily extendable
-		this.addButton(new RecipeBookButtonWidget(this.left + 144, this.top + 9, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEX) {
-			public void onPressed(double double_1, double double_2) {
-				CookingTableScreen.this.recipeBookGui.reset(CookingTableScreen.this.isNarrow);
-				CookingTableScreen.this.recipeBookGui.toggleOpen();
-				CookingTableScreen.this.left = CookingTableScreen.this.recipeBookGui.findLeftEdge(CookingTableScreen.this.isNarrow, CookingTableScreen.this.width, CookingTableScreen.this.containerWidth);
-				this.setPos(CookingTableScreen.this.left + 5, CookingTableScreen.this.height / 2 - 49);
-			}
-		});
+//		this.recipeBookGui.initialize(this.width, this.height, this.client, this.isNarrow, (CookingTableContainer)this.container);
+//		this.left = this.recipeBookGui.findLeftEdge(this.isNarrow, this.width, this.containerWidth);
+//		this.listeners.add(this.recipeBookGui);
+//		this.addButton(new RecipeBookButtonWidget(this.left + 144, this.top + 9, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEX) {
+//			public void onPressed(double double_1, double double_2) {
+//				CookingTableScreen.this.recipeBookGui.reset(CookingTableScreen.this.isNarrow);
+//				CookingTableScreen.this.recipeBookGui.toggleOpen();
+//				CookingTableScreen.this.left = CookingTableScreen.this.recipeBookGui.findLeftEdge(CookingTableScreen.this.isNarrow, CookingTableScreen.this.width, CookingTableScreen.this.containerWidth);
+//				this.setPos(CookingTableScreen.this.left + 5, CookingTableScreen.this.height / 2 - 49);
+//			}
+//		});
 	}
 
-	public GuiEventListener getFocused() {
-		return this.recipeBookGui;
-	}
+//	public GuiEventListener getFocused() {
+//		return this.recipeBookGui;
+//	}
 
 	public void update() {
 		super.update();
-		this.recipeBookGui.update();
+//		this.recipeBookGui.update();
 	}
 
 	@Override
@@ -64,36 +64,36 @@ public class CookingTableScreen extends ContainerScreen implements RecipeBookPro
 	@Override
 	public void method_18326(int mouseX, int mouseY, float partialTicks) {
 		this.drawBackground();
-		if (this.recipeBookGui.isOpen() && this.isNarrow) {
-			this.drawBackground(partialTicks, mouseX, mouseY);
-			this.recipeBookGui.method_18326(mouseX, mouseY, partialTicks);
-		} else {
-			this.recipeBookGui.method_18326(mouseX, mouseY, partialTicks);
+//		if (this.recipeBookGui.isOpen() && this.isNarrow) {
+//			this.drawBackground(partialTicks, mouseX, mouseY);
+//			this.recipeBookGui.method_18326(mouseX, mouseY, partialTicks);
+//		} else {
+//			this.recipeBookGui.method_18326(mouseX, mouseY, partialTicks);
 			super.method_18326(mouseX, mouseY, partialTicks);
-			this.recipeBookGui.drawGhostSlots(this.left, this.top, true, partialTicks);
-		}
+//			this.recipeBookGui.drawGhostSlots(this.left, this.top, true, partialTicks);
+//		}
 
 		this.drawMouseoverTooltip(mouseX, mouseY);
-		this.recipeBookGui.drawTooltip(this.left, this.top, mouseX, mouseY);
+//		this.recipeBookGui.drawTooltip(this.left, this.top, mouseX, mouseY);
 	}
 
 	@Override
 	protected void onMouseClick(Slot slot, int x, int y, SlotActionType action) {
 		super.onMouseClick(slot, x, y, action);
-		this.recipeBookGui.slotClicked(slot);
+//		this.recipeBookGui.slotClicked(slot);
 	}
 
-	public void refreshRecipeBook() {
-		this.recipeBookGui.refresh();
-	}
+//	public void refreshRecipeBook() {
+//		this.recipeBookGui.refresh();
+//	}
 
 	public void onClosed() {
-		this.recipeBookGui.close();
+//		this.recipeBookGui.close();
 		super.onClosed();
 	}
 
-	@Override
-	public RecipeBookGui getRecipeBookGui() {
-		return this.recipeBookGui;
-	}
+//	@Override
+//	public RecipeBookGui getRecipeBookGui() {
+//		return this.recipeBookGui;
+//	}
 }

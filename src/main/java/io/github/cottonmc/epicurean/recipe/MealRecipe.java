@@ -99,16 +99,26 @@ public class MealRecipe implements CraftingRecipe {
 		for (int i = CookingInventory.SECTION_SIZE; i < inv.getInvSize(); i++) {
 			if (!inv.getInvStack(i).isEmpty()) seasonings.add(inv.getInvStack(i));
 		}
+		List<StatusEffectInstance> effects = new ArrayList<>();
 		for (ItemStack ingredient : ingredients) {
 			Item item = ingredient.getItem();
 			if (IngredientProfiles.MEAL_INGREDIENTS.containsKey(item)) {
 				prominence = Math.max(prominence, IngredientProfiles.MEAL_INGREDIENTS.get(item).getImpact());
 			}
 		}
+		for (ItemStack seasoning : seasonings) {
+			Item item = seasoning.getItem();
+			if (IngredientProfiles.MEAL_INGREDIENTS.containsKey(item)) {
+				prominence = Math.max(prominence, IngredientProfiles.MEAL_INGREDIENTS.get(item).getImpact());
+			} else if (IngredientProfiles.DRESSINGS.containsKey(item)) {
+				//TODO: figure out how we want to calculate strength + duration
+				effects.add(new StatusEffectInstance(IngredientProfiles.DRESSINGS.get(item).getEffect(), 0, 200));
+			}
+		}
 
-		meal.getTag().put("FlavorProfile", makeFlavorProfile(FlavorGroup.forImpact(prominence), makeIngredientList(seasonings)));
+		meal.getTag().put("FlavorProfile", makeFlavorProfile(FlavorGroup.forImpact(prominence), seasonings));
 //		meal.getTag().put("Seasonings", makeIngredientList(seasonings));
-		List<StatusEffectInstance> effects = new ArrayList<>();
+
 		//TODO: figure out how we want to calculate strength + duration
 		effects.add(new StatusEffectInstance(FlavorGroup.forImpact(prominence).getEffect(), 0, 200));
 		PotionUtil.setCustomPotionEffects(meal, effects);
@@ -140,10 +150,10 @@ public class MealRecipe implements CraftingRecipe {
 		return EpicureanRecipes.MEAL_SERIALIZER;
 	}
 
-	public static CompoundTag makeFlavorProfile(FlavorGroup group, CompoundTag seasonings) {
+	public static CompoundTag makeFlavorProfile(FlavorGroup group, List<ItemStack> seasonings) {
 		CompoundTag tag = new CompoundTag();
 		tag.putString("ProminentFlavor", group.toString());
-		tag.put("Seasonings", seasonings);
+		if (!seasonings.isEmpty()) tag.put("Seasonings", makeIngredientList(seasonings));
 		return tag;
 	}
 
