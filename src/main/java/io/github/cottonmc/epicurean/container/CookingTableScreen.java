@@ -27,7 +27,7 @@ public class CookingTableScreen extends ContainerScreen /*implements RecipeBookP
 	protected void onInitialized() {
 		super.onInitialized();
 		this.containerWidth = 176;
-		this.containerHeight = 165;
+		this.containerHeight = 166;
 //		this.isNarrow = this.width < 379;
 		//TODO: reimpl once the recipe book is easily extendable
 //		this.recipeBookGui.initialize(this.width, this.height, this.client, this.isNarrow, (CookingTableContainer)this.container);

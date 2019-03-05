@@ -5,6 +5,9 @@
   "tooltip.epicurean.jellied": "Jellied",
   "tooltip.epicurean.super_jellied": "Super-Jellied",
 
+  "block.epicurean.cooking_table": "Cooking Table",
+  "item.epicurean.noodles": "Noodles",
+
   "tooltip.epicurean.ingredient.spicy": "Ingredient - spicy",
   "tooltip.epicurean.ingredient.umami": "Ingredient - umami",
   "tooltip.epicurean.ingredient.acidic": "Ingredient - acidic",
