@@ -1,6 +1,6 @@
 package io.github.cottonmc.epicurean;
 
-import io.github.cottonmc.epicurean.block.CookingTableScreen;
+import io.github.cottonmc.epicurean.container.CookingTableScreen;
 import io.github.cottonmc.epicurean.block.EpicureanBlocks;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.screen.ScreenProviderRegistry;

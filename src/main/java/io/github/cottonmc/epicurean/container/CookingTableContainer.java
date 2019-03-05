@@ -1,5 +1,6 @@
-package io.github.cottonmc.epicurean.block;
+package io.github.cottonmc.epicurean.container;
 
+import io.github.cottonmc.epicurean.block.EpicureanBlocks;
 import io.github.cottonmc.epicurean.recipe.EpicureanRecipes;
 import io.github.cottonmc.epicurean.recipe.MealRecipe;
 import net.minecraft.client.network.packet.GuiSlotUpdateS2CPacket;
@@ -34,12 +35,14 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 		this.player = playerInv.player;
 		this.addSlot(new CraftingResultSlot(playerInv.player, this.cookingInv, this.resultInv, 0, 146, 40));
 
+		//base slots
 		for (int i = 0; i < 2; ++i) {
 			for (int j = 0; j < 3; ++j) {
 				this.addSlot(new Slot(this.cookingInv, j + i * 3, 10 + j * 18, 31 + i * 18));
 			}
 		}
 
+		//seasoning slots
 		for (int i = 0; i < 2; ++i) {
 			for (int j = 0; j < 3; ++j) {
 				this.addSlot(new Slot(this.cookingInv, 6 + j + i * 3, 76 + j * 18, 31 + i * 18));
@@ -97,12 +100,19 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 
 	@Override
 	public boolean canUse(PlayerEntity player) {
-		return true;
+		return canUse(this.context, player, EpicureanBlocks.COOKING_TABLE);
 	}
 
 	public void onContentChanged(Inventory inv) {
 		this.context.run((world, pos) -> {
 			syncCraft(this.syncId, world, this.player, this.cookingInv, this.resultInv);
+		});
+	}
+
+	public void close(PlayerEntity player) {
+		super.close(player);
+		this.context.run((world, pos) -> {
+			this.dropInventory(player, world, this.cookingInv);
 		});
 	}
 

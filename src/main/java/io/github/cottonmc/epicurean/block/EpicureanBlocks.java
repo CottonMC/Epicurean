@@ -1,9 +1,11 @@
 package io.github.cottonmc.epicurean.block;
 
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
+import io.github.cottonmc.epicurean.container.CookingTableContainer;
 import io.github.cottonmc.epicurean.item.EpicureanItems;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.container.BlockContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.block.BlockItem;
 import net.minecraft.util.Identifier;
@@ -22,6 +24,6 @@ public class EpicureanBlocks {
 	}
 
 	public static void init() {
-		ContainerProviderRegistry.INSTANCE.registerFactory(COOKING_CONTAINER, (syncId, id, player, buf) -> new CookingTableContainer(syncId, player.inventory));
+		ContainerProviderRegistry.INSTANCE.registerFactory(COOKING_CONTAINER, (syncId, id, player, buf) -> new CookingTableContainer(syncId, player.inventory, BlockContext.create(player.world, buf.readBlockPos())));
 	}
 }

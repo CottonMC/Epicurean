@@ -1,14 +1,17 @@
 package io.github.cottonmc.epicurean.recipe;
 
-import io.github.cottonmc.epicurean.block.CookingInventory;
+import io.github.cottonmc.epicurean.container.CookingInventory;
 import io.github.cottonmc.epicurean.meal.FlavorGroup;
 import io.github.cottonmc.epicurean.meal.IngredientProfiles;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionUtil;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.RecipeFinder;
 import net.minecraft.recipe.RecipeSerializer;
@@ -20,6 +23,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class MealRecipe implements CraftingRecipe {
@@ -101,15 +105,19 @@ public class MealRecipe implements CraftingRecipe {
 				prominence = Math.max(prominence, IngredientProfiles.MEAL_INGREDIENTS.get(item).getImpact());
 			}
 		}
+
+		meal.getTag().put("FlavorProfile", makeFlavorProfile(FlavorGroup.forImpact(prominence), makeIngredientList(seasonings)));
+//		meal.getTag().put("Seasonings", makeIngredientList(seasonings));
+		List<StatusEffectInstance> effects = new ArrayList<>();
 		//TODO: figure out how we want to calculate strength + duration
-		meal.getTag().put("FlavorProfile", makeFlavorProfile(FlavorGroup.forImpact(prominence), 0, 200));
-		meal.getTag().put("Seasonings", makeIngredientList(seasonings));
+		effects.add(new StatusEffectInstance(FlavorGroup.forImpact(prominence).getEffect(), 0, 200));
+		PotionUtil.setCustomPotionEffects(meal, effects);
 		return meal;
 	}
 
 	@Override
 	public boolean fits(int x, int y) {
-		return true;
+		return x * y <= CookingInventory.SECTION_SIZE * 2;
 	}
 
 	@Override
@@ -132,11 +140,10 @@ public class MealRecipe implements CraftingRecipe {
 		return EpicureanRecipes.MEAL_SERIALIZER;
 	}
 
-	public static CompoundTag makeFlavorProfile(FlavorGroup group, int strength, int duration) {
+	public static CompoundTag makeFlavorProfile(FlavorGroup group, CompoundTag seasonings) {
 		CompoundTag tag = new CompoundTag();
 		tag.putString("ProminentFlavor", group.toString());
-		tag.putInt("Strength", strength);
-		tag.putInt("Duration", duration);
+		tag.put("Seasonings", seasonings);
 		return tag;
 	}
 

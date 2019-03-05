@@ -1,4 +1,4 @@
-package io.github.cottonmc.epicurean.block;
+package io.github.cottonmc.epicurean.container;
 
 import net.minecraft.container.Container;
 import net.minecraft.inventory.CraftingInventory;

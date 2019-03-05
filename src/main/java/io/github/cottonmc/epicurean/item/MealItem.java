@@ -2,6 +2,7 @@ package io.github.cottonmc.epicurean.item;
 
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import io.github.cottonmc.epicurean.meal.FlavorGroup;
+import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
@@ -9,7 +10,12 @@ import net.minecraft.item.FoodItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.potion.PotionUtil;
+import net.minecraft.text.TextComponent;
+import net.minecraft.text.TranslatableTextComponent;
 import net.minecraft.world.World;
+
+import java.util.List;
 
 public class MealItem extends FoodItem {
 
@@ -22,7 +28,6 @@ public class MealItem extends FoodItem {
 	protected void onConsumed(ItemStack stack, World world, PlayerEntity player) {
 		this.setStatusEffect(getMealEffect(stack), 1);
 		super.onConsumed(stack, world, player);
-
 	}
 
 	public static StatusEffectInstance getMealEffect(ItemStack stack) {
@@ -32,5 +37,13 @@ public class MealItem extends FoodItem {
 		int strength = profile.getInt("Strength");
 		int duration = profile.getInt("Duration");
 		return new StatusEffectInstance(group.getEffect(), duration, strength);
+	}
+
+	@Override
+	public void buildTooltip(ItemStack stack, World world, List<TextComponent> tooltip, TooltipContext ctx) {
+		super.buildTooltip(stack, world, tooltip, ctx);
+		CompoundTag profile = stack.getTag().getCompound("FlavorProfile");
+		tooltip.add(new TranslatableTextComponent("tooltip.epicurean.meal."+profile.getString("ProminentFlavor")));
+		PotionUtil.buildTooltip(stack, tooltip, 1.0F);
 	}
 }

@@ -1,4 +1,4 @@
-package io.github.cottonmc.epicurean.block;
+package io.github.cottonmc.epicurean.container;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
@@ -32,6 +32,7 @@ public class CookingTableScreen extends ContainerScreen implements RecipeBookPro
 		this.recipeBookGui.initialize(this.width, this.height, this.client, this.isNarrow, (CookingTableContainer)this.container);
 		this.left = this.recipeBookGui.findLeftEdge(this.isNarrow, this.width, this.containerWidth);
 		this.listeners.add(this.recipeBookGui);
+		//TODO: reimpl once the recipe book is easily extendable
 		this.addButton(new RecipeBookButtonWidget(this.left + 144, this.top + 9, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEX) {
 			public void onPressed(double double_1, double double_2) {
 				CookingTableScreen.this.recipeBookGui.reset(CookingTableScreen.this.isNarrow);

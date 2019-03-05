@@ -24,7 +24,9 @@ public class CookingTableBlock extends Block {
 
 	public boolean activate(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		if (world.isClient) return true;
-		ContainerProviderRegistry.INSTANCE.openContainer(EpicureanBlocks.COOKING_CONTAINER, player, buf -> buf.writeBlockPos(pos));
+		ContainerProviderRegistry.INSTANCE.openContainer(EpicureanBlocks.COOKING_CONTAINER, player, buf -> {
+			buf.writeBlockPos(pos);
+		});
 //		player.increaseStat(new Identifier(EpicureanGastronomy.MOD_ID, "open_cooking_table"));
 		return true;
 	}
