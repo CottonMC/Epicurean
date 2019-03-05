@@ -1,5 +1,7 @@
 package io.github.cottonmc.epicurean.block;
 
+import io.github.cottonmc.epicurean.recipe.EpicureanRecipes;
+import io.github.cottonmc.epicurean.recipe.MealRecipe;
 import net.minecraft.client.network.packet.GuiSlotUpdateS2CPacket;
 import net.minecraft.container.*;
 import net.minecraft.entity.player.PlayerEntity;
@@ -9,8 +11,6 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeFinder;
-import net.minecraft.recipe.RecipeType;
-import net.minecraft.recipe.crafting.CraftingRecipe;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
 
@@ -110,9 +110,9 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 		if (!world.isClient) {
 			ServerPlayerEntity serverPlayer = (ServerPlayerEntity)player;
 			ItemStack stack = ItemStack.EMPTY;
-			Optional<CraftingRecipe> optional = world.getServer().getRecipeManager().get(RecipeType.CRAFTING, cookingInv, world);
+			Optional<MealRecipe> optional = world.getServer().getRecipeManager().get(EpicureanRecipes.MEAL, cookingInv, world);
 			if (optional.isPresent()) {
-				CraftingRecipe recipe = optional.get();
+				MealRecipe recipe = optional.get();
 				if (resultInv.shouldCraftRecipe(world, serverPlayer, recipe)) {
 					stack = recipe.craft(cookingInv);
 				}
