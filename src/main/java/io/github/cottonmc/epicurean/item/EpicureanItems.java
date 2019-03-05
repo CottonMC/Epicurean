@@ -4,6 +4,7 @@ import io.github.cottonmc.cotton.Cotton;
 import io.github.cottonmc.cotton.tags.TagEntryManager;
 import io.github.cottonmc.cotton.tags.TagType;
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
+import net.minecraft.item.FoodItem;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -14,6 +15,8 @@ public class EpicureanItems {
 
 	public static final Item DEP_JELLY = Registry.register(Registry.ITEM, "edibles:jelly", new DeprecatedItem());
 	public static final Item DEP_SUPER_JELLY = Registry.register(Registry.ITEM, "edibles:super_jelly", new DeprecatedItem());
+
+	public static final Item NOODLES = register("noodles", new FoodItem(1, 0.1f, false, new Item.Settings().itemGroup(EpicureanGastronomy.EPICUREAN_GROUP)));
 
 	public static Item register(String name, Item item) {
 		Registry.register(Registry.ITEM, new Identifier(EpicureanGastronomy.MOD_ID, name), item);

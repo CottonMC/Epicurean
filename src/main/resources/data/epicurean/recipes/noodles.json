@@ -1,0 +1,23 @@
+{
+  "type": "epicurean:meal",
+  "ingredients": [
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "item": "minecraft:wheat"
+    }
+  ],
+  "seasonings": [
+    {
+      "item": "minecraft:egg"
+    }
+  ],
+  "result": {
+    "item": "epicurean:noodles",
+    "count": 1
+  }
+}

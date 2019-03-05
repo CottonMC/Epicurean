@@ -12,8 +12,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.PacketByteBuf;
 
-import java.util.Iterator;
-
 public class MealRecipeSerializer implements RecipeSerializer<MealRecipe> {
 
 	@Override

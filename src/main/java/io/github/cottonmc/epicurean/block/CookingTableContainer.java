@@ -1,6 +1,5 @@
 package io.github.cottonmc.epicurean.block;
 
-import io.github.cottonmc.epicurean.block.CookingInventory;
 import net.minecraft.client.network.packet.GuiSlotUpdateS2CPacket;
 import net.minecraft.container.*;
 import net.minecraft.entity.player.PlayerEntity;

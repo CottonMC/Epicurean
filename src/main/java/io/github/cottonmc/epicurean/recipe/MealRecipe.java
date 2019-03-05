@@ -59,6 +59,7 @@ public class MealRecipe implements CraftingRecipe {
 		//make sure the seasonings fit on the meal
 		for (int i = CookingInventory.SECTION_SIZE; i < inv.getInvSize(); i++) {
 			ItemStack stack = inv.getInvStack(i);
+			if (stack.isEmpty()) continue;
 			boolean seasoningFound = false;
 			for (Ingredient ing : seasonings) {
 				ItemStack[] stacks = ing.getStackArray();
