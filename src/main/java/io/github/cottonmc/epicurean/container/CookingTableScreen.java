@@ -82,11 +82,11 @@ public class CookingTableScreen extends ContainerScreen /*implements RecipeBookP
 		super.drawMouseoverTooltip(mouseX, mouseY);
 		if (mouseX >= this.left + 26 && mouseY >= this.top+11
 				&& mouseX <= this.left + 43 && mouseY <= this.top + 26) {
-			drawTooltip(new TranslatableTextComponent("tooltip.epicurean.base").getText(), mouseX, mouseY);
+			drawTooltip(new TranslatableTextComponent("tooltip.epicurean.table.base").getText(), mouseX, mouseY);
 		}
 		if (mouseX >= this.left + 94 && mouseY >= this.top+11
 				&& mouseX <= this.left + 109 && mouseY <= this.top + 26) {
-			drawTooltip(new TranslatableTextComponent("tooltip.epicurean.seasoning").getText(), mouseX, mouseY);
+			drawTooltip(new TranslatableTextComponent("tooltip.epicurean.table.seasoning").getText(), mouseX, mouseY);
 		}
 	}
 

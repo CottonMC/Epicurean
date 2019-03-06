@@ -35,8 +35,8 @@
   "tooltip.epicurean.meal.hunger": " hunger, ",
   "tooltip.epicurean.meal.saturation": "%% saturation",
 
-  "tooltip.epicurean.base": "Base ingredients",
-  "tooltip.epicurean.seasoning": "Additional seasonings",
+  "tooltip.epicurean.table.base": "Base ingredients",
+  "tooltip.epicurean.table.seasoning": "Additional seasonings",
   "tooltip.epicurean.readmore": "Press SHIFT to read seasoning notes",
 
   "item.edibles.jelly": "Jelly (Moldy)",

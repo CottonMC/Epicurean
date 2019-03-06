@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "epicurean:block/cooking_table_front",
+    "down": "epicurean:block/cooking_table_bottom",
+    "up": "epicurean:block/cooking_table_top",
+    "north": "epicurean:block/cooking_table_side",
+    "east": "epicurean:block/cooking_table_front",
+    "south": "epicurean:block/cooking_table_side",
+    "west": "epicurean:block/cooking_table_front"
+  }
+}
