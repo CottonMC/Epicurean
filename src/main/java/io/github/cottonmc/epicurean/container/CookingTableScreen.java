@@ -78,6 +78,19 @@ public class CookingTableScreen extends ContainerScreen /*implements RecipeBookP
 	}
 
 	@Override
+	protected void drawMouseoverTooltip(int mouseX, int mouseY) {
+		super.drawMouseoverTooltip(mouseX, mouseY);
+		if (mouseX >= this.left + 26 && mouseY >= this.top+11
+				&& mouseX <= this.left + 43 && mouseY <= this.top + 26) {
+			drawTooltip(new TranslatableTextComponent("tooltip.epicurean.base").getText(), mouseX, mouseY);
+		}
+		if (mouseX >= this.left + 94 && mouseY >= this.top+11
+				&& mouseX <= this.left + 109 && mouseY <= this.top + 26) {
+			drawTooltip(new TranslatableTextComponent("tooltip.epicurean.seasoning").getText(), mouseX, mouseY);
+		}
+	}
+
+	@Override
 	protected void onMouseClick(Slot slot, int x, int y, SlotActionType action) {
 		super.onMouseClick(slot, x, y, action);
 //		this.recipeBookGui.slotClicked(slot);

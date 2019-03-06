@@ -30,11 +30,14 @@
   "tooltip.epicurean.meal.bitter": "Prominent trait: bitter",
   "tooltip.epicurean.meal.filling": "Prominent trait: filling",
   "tooltip.epicurean.meal.seasonings": "Added seasonings:",
-  "tooltip.epicurean.readmore": "Press SHIFT to read seasoning notes",
 
   "tooltip.epicurean.meal.restores": "Bonus restoration: ",
   "tooltip.epicurean.meal.hunger": " hunger, ",
   "tooltip.epicurean.meal.saturation": "%% saturation",
+
+  "tooltip.epicurean.base": "Base ingredients",
+  "tooltip.epicurean.seasoning": "Additional seasonings",
+  "tooltip.epicurean.readmore": "Press SHIFT to read seasoning notes",
 
   "item.edibles.jelly": "Jelly (Moldy)",
   "item.edibles.super_jelly": "Super-Jelly (Moldy)",
