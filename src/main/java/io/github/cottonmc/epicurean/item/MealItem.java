@@ -2,6 +2,7 @@ package io.github.cottonmc.epicurean.item;
 
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import io.github.cottonmc.epicurean.meal.FlavorGroup;
+import io.github.cottonmc.epicurean.meal.IngredientProfiles;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.Screen;
 import net.minecraft.client.item.TooltipContext;
@@ -61,7 +62,10 @@ public class MealItem extends FoodItem {
 		if (stack.getTag().containsKey("FlavorProfile")) {
 			if (Screen.isShiftPressed()) {
 				CompoundTag profile = stack.getTag().getCompound("FlavorProfile");
-				tooltip.add(new TranslatableTextComponent("tooltip.epicurean.meal." + profile.getString("ProminentFlavor").toLowerCase()).applyFormat(TextFormat.GRAY));
+				tooltip.add(new StringTextComponent(
+						new TranslatableTextComponent("tooltip.epicurean.meal.flavor").getText() +
+								new TranslatableTextComponent("tooltip.epicurean.flavor." + profile.getString("ProminentFlavor").toLowerCase()).getText())
+						.applyFormat(TextFormat.GRAY));
 				int hunger = 0;
 				float saturation = 0;
 				if (profile.containsKey("Hunger")) hunger = profile.getInt("Hunger");
