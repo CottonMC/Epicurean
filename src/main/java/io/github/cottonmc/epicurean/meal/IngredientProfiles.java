@@ -48,8 +48,7 @@ public class IngredientProfiles implements SimpleSynchronousResourceReloadListen
 		for (Item ingredient : tag.values()) {
 			if (DRESSING_TAG != null && DRESSING_TAG.contains(ingredient)) {
 				DRESSINGS.put(ingredient, flavor);
-			}
-			MEAL_INGREDIENTS.put(ingredient, flavor);
+			} else MEAL_INGREDIENTS.put(ingredient, flavor);
 		}
 	}
 

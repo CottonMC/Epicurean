@@ -15,6 +15,9 @@ public class EpicureanRecipes {
 	public static RecipeType<MealRecipe> MEAL = register("meal");
 	public static RecipeSerializer<MealRecipe> MEAL_SERIALIZER = register("meal", new MealRecipeSerializer());
 
+	public static RecipeType<DressingMealRecipe> DRESSING_MEAL = register("add_dressing");
+	public static RecipeSerializer<DressingMealRecipe> DRESSING_MEAL_SERIALIZER = register("add_dressing", new DressingMealSerializer<>(DressingMealRecipe::new));
+
 	public static RecipeType<RemakeJellyRecipe> REMAKE_JELLY = register("remake_jelly");
 	public static RecipeSerializer<RemakeJellyRecipe> REMAKE_JELLY_SERIALIZER = register("remake_jelly", new SpecialRecipeSerializer<>(RemakeJellyRecipe::new));
 

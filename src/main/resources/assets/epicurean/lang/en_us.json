@@ -1,4 +1,11 @@
 {
+  "itemGroup.epicurean.epicurean_group": "Epicurean Gastronomy",
+
+  "item.epicurean.tomato": "Tomato",
+  "item.epicurean.pepper": "Pepper",
+  "item.epicurean.onion": "Onion",
+  "item.epicurean.dashi": "Dashi",
+
   "item.epicurean.jelly": "Jelly",
   "item.epicurean.super_jelly": "Super-Jelly",
 
@@ -29,8 +36,8 @@
   "tooltip.epicurean.meal.sweet": "Prominent trait: sweet",
   "tooltip.epicurean.meal.bitter": "Prominent trait: bitter",
   "tooltip.epicurean.meal.filling": "Prominent trait: filling",
-  "tooltip.epicurean.meal.seasonings": "Added seasonings:",
 
+  "tooltip.epicurean.meal.seasonings": "Added seasonings:",
   "tooltip.epicurean.meal.restores": "Bonus restoration: ",
   "tooltip.epicurean.meal.hunger": " hunger, ",
   "tooltip.epicurean.meal.saturation": "%% saturation",

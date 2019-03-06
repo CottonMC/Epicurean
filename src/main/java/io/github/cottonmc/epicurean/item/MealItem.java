@@ -28,7 +28,7 @@ import java.util.List;
 public class MealItem extends FoodItem {
 
 	public MealItem(int hunger, float saturation, boolean wolfFood) {
-		super(hunger, saturation, wolfFood, new Item.Settings().itemGroup(EpicureanGastronomy.EPICUREAN_GROUP));
+		super(hunger, saturation, wolfFood, EpicureanItems.DEFAULT_SETTINGS);
 	}
 
 	@Override

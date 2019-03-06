@@ -4,6 +4,9 @@
     "minecraft:wheat",
     "minecraft:carrot",
     "minecraft:potato",
-    "minecraft:bread"
+    "minecraft:bread",
+    "minecraft:egg",
+    "epicurean:dashi",
+    "epicurean:noodles"
   ]
 }

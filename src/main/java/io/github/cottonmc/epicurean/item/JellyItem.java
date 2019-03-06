@@ -1,6 +1,5 @@
 package io.github.cottonmc.epicurean.item;
 
-import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
@@ -8,7 +7,7 @@ import net.minecraft.world.World;
 
 public class JellyItem extends FoodItem {
 	public JellyItem(int hunger, float saturation) {
-		super(hunger, saturation, false, new Item.Settings().itemGroup(EpicureanGastronomy.EPICUREAN_GROUP).recipeRemainder(Items.GLASS_BOTTLE));
+		super(hunger, saturation, false, EpicureanItems.DEFAULT_SETTINGS.recipeRemainder(Items.GLASS_BOTTLE));
 	}
 
 	@Override

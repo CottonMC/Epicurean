@@ -6,14 +6,20 @@
     },
     {
       "item": "minecraft:egg"
+    },
+    {
+      "item": "minecraft:sugar"
     }
   ],
   "seasonings": [
     {
-      "item": "minecraft:sugar"
+      "tag": "c:cooked_meat"
     },
     {
-      "tag": "c:cooked_meat"
+      "item": "epicurean:pepper"
+    },
+    {
+      "item": "epicurean:onion"
     }
   ],
   "result": {
