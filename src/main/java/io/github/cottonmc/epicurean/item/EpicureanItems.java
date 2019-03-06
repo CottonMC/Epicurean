@@ -10,13 +10,17 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class EpicureanItems {
+	//jelly and super-jelly, with deprecated forms
 	public static final Item JELLY = register("jelly", new JellyItem(1, 0.25f));
 	public static final Item SUPER_JELLY = register("super_jelly", new JellyItem(2, 0.3f));
-
 	public static final Item DEP_JELLY = Registry.register(Registry.ITEM, "edibles:jelly", new DeprecatedItem());
 	public static final Item DEP_SUPER_JELLY = Registry.register(Registry.ITEM, "edibles:super_jelly", new DeprecatedItem());
 
+	//snacks
 	public static final Item NOODLES = register("noodles", new MealItem(1, 0.1f, false));
+
+	//meals
+	public static final Item PAD_THAI = register("pad_thai", new MealItem(10, 0.5f, false));
 
 	public static Item register(String name, Item item) {
 		Registry.register(Registry.ITEM, new Identifier(EpicureanGastronomy.MOD_ID, name), item);

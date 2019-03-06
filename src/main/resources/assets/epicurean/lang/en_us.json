@@ -7,6 +7,7 @@
 
   "block.epicurean.cooking_table": "Cooking Table",
   "item.epicurean.noodles": "Noodles",
+  "item.epicurean.pad_thai": "Pad Thai",
 
   "tooltip.epicurean.ingredient.spicy": "Ingredient - spicy",
   "tooltip.epicurean.ingredient.umami": "Ingredient - umami",
@@ -29,7 +30,11 @@
   "tooltip.epicurean.meal.bitter": "Prominent trait: bitter",
   "tooltip.epicurean.meal.filling": "Prominent trait: filling",
   "tooltip.epicurean.meal.seasonings": "Added seasonings:",
-  "tooltip.epicurean.readmore": "Press SHIFT to read more",
+  "tooltip.epicurean.readmore": "Press SHIFT to read seasoning notes",
+
+  "tooltip.epicurean.meal.restores": "Bonus restoration: ",
+  "tooltip.epicurean.meal.hunger": " hunger, ",
+  "tooltip.epicurean.meal.saturation": "%% saturation",
 
   "item.edibles.jelly": "Jelly (Moldy)",
   "item.edibles.super_jelly": "Super-Jelly (Moldy)",

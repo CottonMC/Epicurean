@@ -1,5 +1,6 @@
 package io.github.cottonmc.epicurean.recipe;
 
+import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import io.github.cottonmc.epicurean.container.CookingInventory;
 import io.github.cottonmc.epicurean.meal.FlavorGroup;
 import io.github.cottonmc.epicurean.meal.IngredientProfiles;
@@ -7,6 +8,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.inventory.CraftingInventory;
+import net.minecraft.item.FoodItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
@@ -151,7 +153,11 @@ public class MealRecipe implements CraftingRecipe {
 	public static CompoundTag makeFlavorProfile(FlavorGroup group, List<ItemStack> seasonings) {
 		CompoundTag tag = new CompoundTag();
 		tag.putString("ProminentFlavor", group.toString());
-		if (!seasonings.isEmpty()) tag.put("Seasonings", makeIngredientList(seasonings));
+		if (!seasonings.isEmpty()) {
+			tag.put("Seasonings", makeIngredientList(seasonings));
+			tag.putInt("Hunger", getHungerAmount(seasonings));
+			tag.putFloat("Saturation", getSaturationAmount(seasonings));
+		}
 		return tag;
 	}
 
@@ -166,5 +172,26 @@ public class MealRecipe implements CraftingRecipe {
 			}
 		}
 		return tag;
+	}
+
+	public static int getHungerAmount(List<ItemStack> ingredients) {
+		int hunger = 0;
+		for (ItemStack stack : ingredients) {
+			if (stack.getItem() instanceof FoodItem) {
+				hunger += ((FoodItem) stack.getItem()).getHungerRestored(stack);
+			}
+		}
+		hunger = (int)Math.floor(hunger * EpicureanGastronomy.config.seasoningEfficiency);
+		return hunger;
+	}
+
+	public static float getSaturationAmount(List<ItemStack> ingredients) {
+		float saturation = 0;
+		for (ItemStack stack : ingredients) {
+			if (stack.getItem() instanceof FoodItem) {
+				saturation += ((FoodItem) stack.getItem()).getSaturationModifier(stack);
+			}
+		}
+		return (float)(saturation * EpicureanGastronomy.config.seasoningEfficiency);
 	}
 }

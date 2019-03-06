@@ -39,4 +39,8 @@ public class EpicureanConfig {
 			"Vanilla value is 10.")
 	public int naturalRegenSpeed = 15;
 
+	@Comment(value = "How much bonus hunger and saturation you get from meal seasonings.\n" +
+			"Should be a percentae formatted as a decimal.")
+	public double seasoningEfficiency = 0.5f;
+
 }

@@ -37,6 +37,15 @@ public class MealItem extends FoodItem {
 		for (StatusEffectInstance effect : getMealEffects(stack)) {
 			player.addPotionEffect(effect);
 		}
+		if (!stack.hasTag()) return;
+		if (stack.getTag().containsKey("FlavorProfile")) {
+			CompoundTag profile = stack.getTag().getCompound("FlavorProfile");
+			int addHunger = 0;
+			float addSaturation = 0;
+			if (profile.containsKey("Hunger")) addHunger = profile.getInt("Hunger");
+			if (profile.containsKey("Saturation")) addSaturation = profile.getFloat("Saturation");
+			player.getHungerManager().add(addHunger, addSaturation);
+		}
 	}
 
 	public static List<StatusEffectInstance> getMealEffects(ItemStack stack) {
@@ -53,6 +62,26 @@ public class MealItem extends FoodItem {
 			if (Screen.isShiftPressed()) {
 				CompoundTag profile = stack.getTag().getCompound("FlavorProfile");
 				tooltip.add(new TranslatableTextComponent("tooltip.epicurean.meal." + profile.getString("ProminentFlavor").toLowerCase()).applyFormat(TextFormat.GRAY));
+				int hunger = 0;
+				float saturation = 0;
+				if (profile.containsKey("Hunger")) hunger = profile.getInt("Hunger");
+				if (profile.containsKey("Saturation")) saturation = profile.getFloat("Saturation");
+				float percentage = Math.round(saturation*100.0);
+				TranslatableTextComponent restores = new TranslatableTextComponent("tooltip.epicurean.meal.restores");
+				TranslatableTextComponent restHunger = new TranslatableTextComponent("tooltip.epicurean.meal.hunger");
+				TranslatableTextComponent restSaturation = new TranslatableTextComponent("tooltip.epicurean.meal.saturation");
+				TextComponent restoration;
+				if (EpicureanGastronomy.config.useSaturationOnly) {
+					restoration = new StringTextComponent(restores.getText()
+							+ percentage + restSaturation.getText())
+							.applyFormat(TextFormat.GRAY);
+				} else {
+					restoration = new StringTextComponent(restores.getText()
+							+ hunger + restHunger.getText()
+							+ percentage + restSaturation.getText())
+							.applyFormat(TextFormat.GRAY);
+				}
+				if (hunger != 0 && saturation != 0) tooltip.add(restoration);
 				if (profile.containsKey("Seasonings")) {
 					tooltip.add(new TranslatableTextComponent("tooltip.epicurean.meal.seasonings").applyFormat(TextFormat.GRAY));
 					CompoundTag seasonings = profile.getCompound("Seasonings");

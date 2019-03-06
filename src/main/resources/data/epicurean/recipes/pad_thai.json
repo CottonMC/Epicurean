@@ -1,0 +1,23 @@
+{
+  "type": "epicurean:meal",
+  "ingredients": [
+    {
+      "item": "epicurean:noodles"
+    },
+    {
+      "item": "minecraft:egg"
+    }
+  ],
+  "seasonings": [
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "tag": "c:cooked_meat"
+    }
+  ],
+  "result": {
+    "item": "epicurean:pad_thai",
+    "count": 1
+  }
+}
