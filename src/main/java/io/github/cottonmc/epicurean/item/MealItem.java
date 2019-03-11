@@ -1,17 +1,12 @@
 package io.github.cottonmc.epicurean.item;
 
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
-import io.github.cottonmc.epicurean.meal.FlavorGroup;
-import io.github.cottonmc.epicurean.meal.IngredientProfiles;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.Screen;
 import net.minecraft.client.item.TooltipContext;
-import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FoodItem;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.potion.PotionUtil;

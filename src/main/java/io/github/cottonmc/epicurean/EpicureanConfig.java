@@ -41,6 +41,6 @@ public class EpicureanConfig {
 
 	@Comment(value = "How much bonus hunger and saturation you get from meal seasonings.\n" +
 			"Should be a percentae formatted as a decimal.")
-	public double seasoningEfficiency = 0.5f;
+	public double seasoningEfficiency = 0.1f;
 
 }

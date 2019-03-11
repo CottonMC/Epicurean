@@ -1,0 +1,26 @@
+{
+  "type": "epicurean:meal",
+  "ingredients": [
+    {
+      "item": "epicurean:noodles"
+    },
+    {
+      "item": "epicurean:dashi"
+    }
+  ],
+  "seasonings": [
+    {
+      "tag": "c:cooked_meat"
+    },
+    {
+      "item": "minecraft:egg"
+    },
+    {
+      "item": "minecraft:dried_kelp"
+    }
+  ],
+  "result": {
+    "item": "epicurean:ramen",
+    "count": 1
+  }
+}

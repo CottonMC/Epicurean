@@ -1,8 +1,5 @@
 package io.github.cottonmc.epicurean.item;
 
-import io.github.cottonmc.cotton.Cotton;
-import io.github.cottonmc.cotton.tags.TagEntryManager;
-import io.github.cottonmc.cotton.tags.TagType;
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import io.github.cottonmc.epicurean.block.EpicureanCrops;
 import net.minecraft.item.FoodCropItem;
@@ -40,6 +37,7 @@ public class EpicureanItems {
 	//meals
 	public static final Item PAD_THAI = register("pad_thai", new MealItem(10, 0.5f, false));
 	public static final Item SPAGHETTI = register("spaghetti", new MealItem(10, 0.5f, false));
+	public static final Item RAMEN = register("ramen", new MealItem(10, 0.5f, false));
 
 	public static Item register(String name, Item item) {
 		Registry.register(Registry.ITEM, new Identifier(EpicureanGastronomy.MOD_ID, name), item);
@@ -52,9 +50,5 @@ public class EpicureanItems {
 	}
 
 	public static void init() {
-		// add cooked meats to a tag
-		TagEntryManager.registerToTag(TagType.ITEM, new Identifier(Cotton.SHARED_NAMESPACE, "cooked_meat"),
-				"minecraft:cooked_beef", "minecraft:cooked_chicken", "minecraft:cooked_cod", "minecraft:cooked_mutton",
-				"minecraft:cooked_porkchop", "minecraft:cooked_rabbit", "minecraft:cooked_salmon");
 	}
 }

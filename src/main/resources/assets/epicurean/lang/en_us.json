@@ -9,6 +9,10 @@
   "item.epicurean.pepper": "Pepper",
   "item.epicurean.onion": "Onion",
   "item.epicurean.dashi": "Dashi",
+  "item.epicurean.butter": "Butter",
+
+  "item.epicurean.tomato_seeds": "Tomato Seeds",
+  "item.epicurean.pepper_seeds": "Pepper Seeds",
 
   "item.epicurean.jelly": "Jelly",
   "item.epicurean.super_jelly": "Super-Jelly",
@@ -19,6 +23,8 @@
   "block.epicurean.cooking_table": "Cooking Table",
   "item.epicurean.noodles": "Noodles",
   "item.epicurean.pad_thai": "Pad Thai",
+  "item.epicurean.spaghetti": "Spaghetti",
+  "item.epicurean.ramen": "Ramen",
 
   "tooltip.epicurean.flavor.spicy": "spicy",
   "tooltip.epicurean.flavor.umami": "umami",

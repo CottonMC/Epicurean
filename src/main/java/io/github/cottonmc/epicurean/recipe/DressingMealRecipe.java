@@ -74,7 +74,7 @@ public class DressingMealRecipe extends MealRecipe {
 			for (ItemStack seasoning : seasonings) {
 				Item item = seasoning.getItem();
 				//TODO: figure out how we want to calculate strength + duration
-				effects.add(new StatusEffectInstance(IngredientProfiles.DRESSINGS.get(item).getEffect(), 0, 200));
+				MealRecipe.addEffect(effects, new StatusEffectInstance(IngredientProfiles.DRESSINGS.get(item).getEffect(), 200));
 			}
 			for (String ingredient : ingredients.getKeys()) {
 				for (int i = 0; i < ingredients.getInt(ingredient); i++) {

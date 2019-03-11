@@ -7,6 +7,7 @@ import io.github.cottonmc.epicurean.meal.FlavorGroup;
 import io.github.cottonmc.epicurean.meal.IngredientProfiles;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.FoodItem;
@@ -113,7 +114,8 @@ public class MealRecipe implements CraftingRecipe {
 				prominence = Math.max(prominence, IngredientProfiles.MEAL_INGREDIENTS.get(item).getImpact());
 			} else if (IngredientProfiles.DRESSINGS.containsKey(item)) {
 				//TODO: figure out how we want to calculate strength + duration
-				effects.add(new StatusEffectInstance(IngredientProfiles.DRESSINGS.get(item).getEffect(), 0, 200));
+
+				addEffect(effects, new StatusEffectInstance(IngredientProfiles.DRESSINGS.get(item).getEffect(), 200));
 			}
 		}
 
@@ -121,7 +123,7 @@ public class MealRecipe implements CraftingRecipe {
 //		meal.getTag().put("Seasonings", makeIngredientList(seasonings));
 
 		//TODO: figure out how we want to calculate strength + duration
-		effects.add(new StatusEffectInstance(FlavorGroup.forImpact(prominence).getEffect(), 0, 200));
+		addEffect(effects, new StatusEffectInstance(FlavorGroup.forImpact(prominence).getEffect(), 200));
 		PotionUtil.setCustomPotionEffects(meal, effects);
 		return meal;
 	}
@@ -200,5 +202,23 @@ public class MealRecipe implements CraftingRecipe {
 			}
 		}
 		return (float)((saturation * EpicureanGastronomy.config.seasoningEfficiency) + seasoningBonus);
+	}
+
+	public static List<StatusEffectInstance> addEffect(List<StatusEffectInstance> currentEffects, StatusEffectInstance effectToAdd) {
+		StatusEffect effect = effectToAdd.getEffectType();
+		boolean replaced = false;
+		for (StatusEffectInstance inst : currentEffects) {
+			if (inst.getEffectType() == effect) {
+				StatusEffectInstance instCopy = new StatusEffectInstance(inst.getEffectType(), inst.getAmplifier(), inst.getDuration());
+				currentEffects.remove(inst);
+				StatusEffectInstance newInst = new StatusEffectInstance(instCopy.getEffectType(),
+						inst.getDuration() + (effectToAdd.getDuration() / 2),
+						Math.max(inst.getAmplifier(), effectToAdd.getAmplifier()));
+				currentEffects.add(newInst);
+				replaced = true;
+			}
+		}
+		if (!replaced) currentEffects.add(effectToAdd);
+		return currentEffects;
 	}
 }
