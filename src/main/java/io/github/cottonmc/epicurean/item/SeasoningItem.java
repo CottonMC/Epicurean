@@ -3,7 +3,7 @@ package io.github.cottonmc.epicurean.item;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-public class SeasoningItem extends Item {
+public class SeasoningItem extends Item implements Seasoning {
 	private int hungerRestored;
 	private float saturationModifier;
 

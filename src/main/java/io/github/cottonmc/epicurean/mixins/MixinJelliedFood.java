@@ -44,7 +44,7 @@ public class MixinJelliedFood extends Item {
 				player.getHungerManager().add(2, 0.5f);
 			} else if (stack.getTag().containsKey("super_jellied")) {
 				player.getHungerManager().add(4, 0.6f);
-				player.addPotionEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 1200, 1));
+				player.addPotionEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 1200));
 			}
 		}
 	}

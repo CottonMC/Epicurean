@@ -9,7 +9,8 @@
     "MixinOmnivore",
     "MixinHopperHarvesting",
     "MixinFertilizableNetherWart",
-    "MixinHungerManager"
+    "MixinHungerManager",
+    "MixinEggSeasoning"
   ],
   "injectors": {
     "defaultRequire": 1

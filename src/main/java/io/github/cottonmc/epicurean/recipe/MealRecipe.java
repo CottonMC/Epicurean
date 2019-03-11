@@ -2,7 +2,7 @@ package io.github.cottonmc.epicurean.recipe;
 
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import io.github.cottonmc.epicurean.container.CookingInventory;
-import io.github.cottonmc.epicurean.item.SeasoningItem;
+import io.github.cottonmc.epicurean.item.Seasoning;
 import io.github.cottonmc.epicurean.meal.FlavorGroup;
 import io.github.cottonmc.epicurean.meal.IngredientProfiles;
 import net.fabricmc.api.EnvType;
@@ -110,17 +110,18 @@ public class MealRecipe implements CraftingRecipe {
 		}
 		for (ItemStack seasoning : seasonings) {
 			Item item = seasoning.getItem();
-			if (IngredientProfiles.MEAL_INGREDIENTS.containsKey(item)) {
+			if (item instanceof Seasoning) {
+				if (IngredientProfiles.MEAL_INGREDIENTS.containsKey(item)) prominence = Math.max(prominence, IngredientProfiles.MEAL_INGREDIENTS.get(item).getImpact());
+				if (((Seasoning) item).getBonusEffect(seasoning) != null) addEffect(effects, ((Seasoning) item).getBonusEffect(seasoning));
+			} else if (IngredientProfiles.MEAL_INGREDIENTS.containsKey(item)) {
 				prominence = Math.max(prominence, IngredientProfiles.MEAL_INGREDIENTS.get(item).getImpact());
 			} else if (IngredientProfiles.DRESSINGS.containsKey(item)) {
 				//TODO: figure out how we want to calculate strength + duration
-
 				addEffect(effects, new StatusEffectInstance(IngredientProfiles.DRESSINGS.get(item).getEffect(), 200));
 			}
 		}
 
 		meal.getTag().put("FlavorProfile", makeFlavorProfile(FlavorGroup.forImpact(prominence), seasonings));
-//		meal.getTag().put("Seasonings", makeIngredientList(seasonings));
 
 		//TODO: figure out how we want to calculate strength + duration
 		addEffect(effects, new StatusEffectInstance(FlavorGroup.forImpact(prominence).getEffect(), 200));
@@ -183,8 +184,8 @@ public class MealRecipe implements CraftingRecipe {
 		for (ItemStack stack : ingredients) {
 			if (stack.getItem() instanceof FoodItem) {
 				hunger += ((FoodItem) stack.getItem()).getHungerRestored(stack);
-			} else if (stack.getItem() instanceof SeasoningItem) {
-				seasoningBonus += ((SeasoningItem) stack.getItem()).getHungerRestored(stack);
+			} else if (stack.getItem() instanceof Seasoning) {
+				seasoningBonus += ((Seasoning) stack.getItem()).getHungerRestored(stack);
 			}
 		}
 		hunger = (int)Math.floor((hunger * EpicureanGastronomy.config.seasoningEfficiency) + seasoningBonus);
@@ -197,8 +198,8 @@ public class MealRecipe implements CraftingRecipe {
 		for (ItemStack stack : ingredients) {
 			if (stack.getItem() instanceof FoodItem) {
 				saturation += ((FoodItem) stack.getItem()).getSaturationModifier(stack);
-			} else if (stack.getItem() instanceof SeasoningItem) {
-				seasoningBonus += ((SeasoningItem) stack.getItem()).getSaturationModifier(stack);
+			} else if (stack.getItem() instanceof Seasoning) {
+				seasoningBonus += ((Seasoning) stack.getItem()).getSaturationModifier(stack);
 			}
 		}
 		return (float)((saturation * EpicureanGastronomy.config.seasoningEfficiency) + seasoningBonus);
