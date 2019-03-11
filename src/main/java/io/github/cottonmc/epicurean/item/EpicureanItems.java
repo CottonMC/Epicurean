@@ -14,8 +14,8 @@ public class EpicureanItems {
 	public static final Item.Settings DEFAULT_SETTINGS = new Item.Settings().itemGroup(EpicureanGastronomy.EPICUREAN_GROUP);
 
 	//jelly and super-jelly, with deprecated forms
-	public static final Item JELLY = register("jelly", new JellyItem(1, 0.25f));
-	public static final Item SUPER_JELLY = register("super_jelly", new JellyItem(2, 0.3f));
+	public static final Item JELLY = register("jelly", new JellyItem(2, 0.25f));
+	public static final Item SUPER_JELLY = register("super_jelly", new JellyItem(4, 0.3f));
 	public static final Item DEP_JELLY = Registry.register(Registry.ITEM, "edibles:jelly", new DeprecatedItem());
 	public static final Item DEP_SUPER_JELLY = Registry.register(Registry.ITEM, "edibles:super_jelly", new DeprecatedItem());
 
