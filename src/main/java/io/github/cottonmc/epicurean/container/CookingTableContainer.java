@@ -132,4 +132,29 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 			serverPlayer.networkHandler.sendPacket(new GuiSlotUpdateS2CPacket(syncId, 0, stack));
 		}
 	}
+
+	@Override
+	public ItemStack transferSlot(PlayerEntity player, int slotNum) {
+		ItemStack stack = ItemStack.EMPTY;
+		Slot slot = this.slotList.get(slotNum);
+		if (slot != null && slot.hasStack()) {
+			ItemStack slotStack = slot.getStack();
+			stack = slotStack.copy();
+			if (slotNum < this.cookingInv.getInvSize()) {
+				if (!this.insertItem(slotStack, this.cookingInv.getInvSize(), this.slotList.size(), true)) {
+					return ItemStack.EMPTY;
+				}
+			} else if (!this.insertItem(slotStack, 0, this.cookingInv.getInvSize(), false)) {
+				return ItemStack.EMPTY;
+			}
+
+			if (slotStack.isEmpty()) {
+				slot.setStack(ItemStack.EMPTY);
+			} else {
+				slot.markDirty();
+			}
+		}
+
+		return stack;
+	}
 }
