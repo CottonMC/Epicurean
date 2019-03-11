@@ -1,24 +1,11 @@
 package io.github.cottonmc.epicurean.item;
 
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.*;
-import net.minecraft.world.World;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 
-public class JellyItem extends FoodItem {
+public class JellyItem extends SeasoningItem {
 	public JellyItem(int hunger, float saturation) {
-		super(hunger, saturation, false, EpicureanItems.DEFAULT_SETTINGS.recipeRemainder(Items.GLASS_BOTTLE));
-	}
-
-	@Override
-	public ItemStack onItemFinishedUsing(ItemStack stack, World world, LivingEntity entity) {
-		super.onItemFinishedUsing(stack, world, entity);
-		if (stack.getAmount() >= 1 && entity instanceof PlayerEntity) {
-			PlayerEntity player = (PlayerEntity)entity;
-			player.inventory.insertStack(new ItemStack(Items.GLASS_BOTTLE));
-			return stack;
-		}
-		else return new ItemStack(Items.GLASS_BOTTLE);
+		super(hunger, saturation, EpicureanItems.DEFAULT_SETTINGS.recipeRemainder(Items.GLASS_BOTTLE));
 	}
 
 	@Override

@@ -1,0 +1,23 @@
+{
+  "type": "epicurean:meal",
+  "ingredients": [
+    {
+      "item": "epicurean:noodles"
+    },
+    {
+      "item": "epicurean:tomato"
+    }
+  ],
+  "seasonings": [
+    {
+      "tag": "c:cooked_meat"
+    },
+    {
+      "item": "epicurean:butter"
+    }
+  ],
+  "result": {
+    "item": "epicurean:spaghetti",
+    "count": 1
+  }
+}

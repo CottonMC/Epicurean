@@ -2,6 +2,7 @@ package io.github.cottonmc.epicurean.recipe;
 
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import io.github.cottonmc.epicurean.container.CookingInventory;
+import io.github.cottonmc.epicurean.item.SeasoningItem;
 import io.github.cottonmc.epicurean.meal.FlavorGroup;
 import io.github.cottonmc.epicurean.meal.IngredientProfiles;
 import net.fabricmc.api.EnvType;
@@ -176,22 +177,28 @@ public class MealRecipe implements CraftingRecipe {
 
 	public static int getHungerAmount(List<ItemStack> ingredients) {
 		int hunger = 0;
+		int seasoningBonus = 0;
 		for (ItemStack stack : ingredients) {
 			if (stack.getItem() instanceof FoodItem) {
 				hunger += ((FoodItem) stack.getItem()).getHungerRestored(stack);
+			} else if (stack.getItem() instanceof SeasoningItem) {
+				seasoningBonus += ((SeasoningItem) stack.getItem()).getHungerRestored(stack);
 			}
 		}
-		hunger = (int)Math.floor(hunger * EpicureanGastronomy.config.seasoningEfficiency);
+		hunger = (int)Math.floor((hunger * EpicureanGastronomy.config.seasoningEfficiency) + seasoningBonus);
 		return hunger;
 	}
 
 	public static float getSaturationAmount(List<ItemStack> ingredients) {
 		float saturation = 0;
+		float seasoningBonus = 0;
 		for (ItemStack stack : ingredients) {
 			if (stack.getItem() instanceof FoodItem) {
 				saturation += ((FoodItem) stack.getItem()).getSaturationModifier(stack);
+			} else if (stack.getItem() instanceof SeasoningItem) {
+				seasoningBonus += ((SeasoningItem) stack.getItem()).getSaturationModifier(stack);
 			}
 		}
-		return (float)(saturation * EpicureanGastronomy.config.seasoningEfficiency);
+		return (float)((saturation * EpicureanGastronomy.config.seasoningEfficiency) + seasoningBonus);
 	}
 }

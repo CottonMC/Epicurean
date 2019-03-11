@@ -1,6 +1,10 @@
 {
   "itemGroup.epicurean.epicurean_group": "Epicurean Gastronomy",
 
+  "block.epicurean.tomato": "Tomato Vine",
+  "block.epicurean.pepper": "Pepper Bush",
+  "block.epicurean.onion": "Onions",
+
   "item.epicurean.tomato": "Tomato",
   "item.epicurean.pepper": "Pepper",
   "item.epicurean.onion": "Onion",
