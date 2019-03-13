@@ -38,6 +38,7 @@ public class EpicureanItems {
 	public static final Item PAD_THAI = register("pad_thai", new MealItem(10, 0.5f, false));
 	public static final Item SPAGHETTI = register("spaghetti", new MealItem(10, 0.5f, false));
 	public static final Item RAMEN = register("ramen", new MealItem(10, 0.5f, false));
+	public static final Item BEEF_STEW = register("beef_stew", new MealItem(10, 0.5f, false));
 
 	public static Item register(String name, Item item) {
 		Registry.register(Registry.ITEM, new Identifier(EpicureanGastronomy.MOD_ID, name), item);

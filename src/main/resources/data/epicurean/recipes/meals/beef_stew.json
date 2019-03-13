@@ -1,0 +1,32 @@
+{
+  "type": "epicurean:meal",
+  "ingredients": [
+    {
+      "item": "minecraft:raw_beef"
+    },
+    {
+      "item": "minecraft:carrot"
+    },
+    {
+      "tag": "c:mushrooms"
+    },
+    {
+      "item": "epicurean:onion"
+    }
+  ],
+  "seasonings": [
+    {
+      "item": "epicurean:tomato"
+    },
+    {
+      "item": "epicurean:butter"
+    },
+    {
+      "item": "minecraft:cooked_porkchop"
+    }
+  ],
+  "result": {
+    "item": "epicurean:beef_stew",
+    "count": 1
+  }
+}
