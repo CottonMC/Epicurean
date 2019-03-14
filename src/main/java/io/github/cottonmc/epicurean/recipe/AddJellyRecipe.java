@@ -5,7 +5,6 @@ import io.github.cottonmc.epicurean.item.EpicureanItems;
 import io.github.cottonmc.epicurean.item.JellyItem;
 import io.github.cottonmc.epicurean.item.SpecialFoodItem;
 import net.minecraft.inventory.CraftingInventory;
-import net.minecraft.item.FoodItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.recipe.RecipeSerializer;
@@ -31,7 +30,7 @@ public class AddJellyRecipe extends SpecialCraftingRecipe {
 			for (int i = 0; i < inv.getInvSize(); i++) {
 				ItemStack stack = inv.getInvStack(i);
 				if (!stack.isEmpty()) {
-					if (stack.getItem() instanceof FoodItem && !(stack.getItem() instanceof JellyItem)) {
+					if (stack.getItem().method_19263() && !(stack.getItem() instanceof JellyItem)) {
 						if (!targetFood.isEmpty()) return false;
 						targetFood = stack;
 						foodSlot = i;

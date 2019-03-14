@@ -38,10 +38,10 @@ repositories {
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:19w08a"
-	mappings "net.fabricmc:yarn:19w08a.4"
-	modCompile "net.fabricmc:fabric-loader:0.3.7.108"
-	modCompile "net.fabricmc:fabric:0.2.2.103"
+	minecraft "com.mojang:minecraft:19w11b"
+	mappings "net.fabricmc:yarn:19w11b.2"
+	modCompile "net.fabricmc:fabric-loader:0.3.7.109"
+	modCompile "net.fabricmc:fabric:0.2.3.110"
 
 	modCompile "io.github.cottonmc:cotton:0.0.4+19w08a-SNAPSHOT"
 

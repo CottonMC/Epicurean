@@ -3,7 +3,6 @@ package io.github.cottonmc.epicurean.container;
 import com.mojang.blaze3d.platform.GlStateManager;
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import net.minecraft.client.gui.ContainerScreen;
-import net.minecraft.client.gui.GuiEventListener;
 import net.minecraft.client.gui.ingame.RecipeBookProvider;
 import net.minecraft.client.gui.recipebook.RecipeBookGui;
 import net.minecraft.client.gui.widget.RecipeBookButtonWidget;
@@ -26,18 +25,18 @@ public class CookingTableScreen extends ContainerScreen /*implements RecipeBookP
 	@Override
 	protected void onInitialized() {
 		super.onInitialized();
-		this.containerWidth = 176;
-		this.containerHeight = 166;
+		this.width = 176;
+		this.height = 166;
 //		this.isNarrow = this.width < 379;
 		//TODO: reimpl once the recipe book is easily extendable
 //		this.recipeBookGui.initialize(this.width, this.height, this.client, this.isNarrow, (CookingTableContainer)this.container);
-//		this.left = this.recipeBookGui.findLeftEdge(this.isNarrow, this.width, this.containerWidth);
+//		this.left = this.recipeBookGui.findLeftEdge(this.isNarrow, this.width, this.width);
 //		this.listeners.add(this.recipeBookGui);
 //		this.addButton(new RecipeBookButtonWidget(this.left + 144, this.top + 9, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEX) {
 //			public void onPressed(double double_1, double double_2) {
 //				CookingTableScreen.this.recipeBookGui.reset(CookingTableScreen.this.isNarrow);
 //				CookingTableScreen.this.recipeBookGui.toggleOpen();
-//				CookingTableScreen.this.left = CookingTableScreen.this.recipeBookGui.findLeftEdge(CookingTableScreen.this.isNarrow, CookingTableScreen.this.width, CookingTableScreen.this.containerWidth);
+//				CookingTableScreen.this.left = CookingTableScreen.this.recipeBookGui.findLeftEdge(CookingTableScreen.this.isNarrow, CookingTableScreen.this.width, CookingTableScreen.this.width);
 //				this.setPos(CookingTableScreen.this.left + 5, CookingTableScreen.this.height / 2 - 49);
 //			}
 //		});
@@ -56,20 +55,20 @@ public class CookingTableScreen extends ContainerScreen /*implements RecipeBookP
 	protected void drawBackground(float var1, int var2, int var3) {
 		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
 		this.client.getTextureManager().bindTexture(TEXTURE);
-		int guiX = (this.width - this.containerWidth) / 2;
-		int guiY = (this.height - this.containerHeight) / 2;
-		this.drawTexturedRect(guiX, guiY, 0, 0, this.containerWidth, this.containerHeight);
+		int guiX = (this.screenWidth - this.width) / 2;
+		int guiY = (this.screenHeight - this.height) / 2;
+		this.drawTexturedRect(guiX, guiY, 0, 0, this.width, this.height);
 	}
 
 	@Override
-	public void method_18326(int mouseX, int mouseY, float partialTicks) {
+	public void draw(int mouseX, int mouseY, float partialTicks) {
 		this.drawBackground();
 //		if (this.recipeBookGui.isOpen() && this.isNarrow) {
 //			this.drawBackground(partialTicks, mouseX, mouseY);
 //			this.recipeBookGui.method_18326(mouseX, mouseY, partialTicks);
 //		} else {
 //			this.recipeBookGui.method_18326(mouseX, mouseY, partialTicks);
-			super.method_18326(mouseX, mouseY, partialTicks);
+			super.draw(mouseX, mouseY, partialTicks);
 //			this.recipeBookGui.drawGhostSlots(this.left, this.top, true, partialTicks);
 //		}
 

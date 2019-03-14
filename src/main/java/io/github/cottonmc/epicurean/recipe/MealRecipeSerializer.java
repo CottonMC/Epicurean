@@ -23,7 +23,7 @@ public class MealRecipeSerializer implements RecipeSerializer<MealRecipe> {
 		else if (base.size() > 6) throw new JsonParseException("Too many base ingredients for meal!");
 		else if (seasoning.size() > 6) throw new JsonParseException("Too many seasoning ingredients for meal!");
 		else {
-			ItemStack result = ShapedRecipe.deserializeItemStack(JsonHelper.getObject(json, "result"));
+			ItemStack result = ShapedRecipe.getItemStack(JsonHelper.getObject(json, "result"));
 			return new MealRecipe(id, group, result, base, seasoning);
 		}
 	}

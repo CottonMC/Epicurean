@@ -16,6 +16,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.TypedActionResult;
 import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
+import net.minecraft.world.explosion.Explosion;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -49,7 +50,7 @@ public class MixinOmnivore {
 
 	@Inject(method = "onItemFinishedUsing", at = @At("HEAD"), cancellable = true)
 	public void getOmnivoreOnItemFinishedUsing(ItemStack stack, World world, LivingEntity entity, CallbackInfoReturnable cir) {
-		if (stack.getItem() == Items.field_17534) { // cake
+		if (stack.getItem() == Items.CAKE) {
 			if (entity instanceof PlayerEntity) {
 				PlayerEntity player = (PlayerEntity) entity;
 				player.getHungerManager().add(14, 2.8f);
@@ -71,8 +72,8 @@ public class MixinOmnivore {
 					Criterions.CONSUME_ITEM.handle((ServerPlayerEntity) player, stack);
 				}
 			}
-			if (stack.getItem() == Items.field_8626 || stack.getItem() == Items.TNT_MINECART) { // TNT/TNT minecart
-				world.createExplosion(null, entity.x, entity.y+1, entity.z, 1.5f, false);
+			if (stack.getItem() == Items.TNT || stack.getItem() == Items.TNT_MINECART) { // TNT/TNT minecart
+				world.createExplosion(null, entity.x, entity.y+1, entity.z, 1.5f, Explosion.class_4179.NONE);
 			}
 
 			double damageConf = EpicureanGastronomy.config.omnivoreItemDamage;

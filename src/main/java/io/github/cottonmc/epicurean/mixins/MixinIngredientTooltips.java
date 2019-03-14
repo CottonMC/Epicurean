@@ -32,5 +32,14 @@ public class MixinIngredientTooltips {
 							new TranslatableTextComponent("tooltip.epicurean.flavor." + IngredientProfiles.DRESSINGS.get(stack.getItem()).asString()).getText())
 					.applyFormat(TextFormat.GRAY, TextFormat.ITALIC));
 		}
+		if (stack.getItem().method_19263()) {
+			if (stack.hasTag())  {
+				if (stack.getTag().containsKey("jellied")) {
+					tooltips.add(new TranslatableTextComponent("tooltip.epicurean.jellied").applyFormat(TextFormat.DARK_RED));
+				} else if (stack.getTag().containsKey("super_jellied")) {
+					tooltips.add(new TranslatableTextComponent("tooltip.epicurean.super_jellied").applyFormat(TextFormat.GREEN));
+				}
+			}
+		}
 	}
 }

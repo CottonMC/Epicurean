@@ -10,7 +10,6 @@ import net.fabricmc.api.Environment;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.inventory.CraftingInventory;
-import net.minecraft.item.FoodItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
@@ -182,8 +181,8 @@ public class MealRecipe implements CraftingRecipe {
 		int hunger = 0;
 		int seasoningBonus = 0;
 		for (ItemStack stack : ingredients) {
-			if (stack.getItem() instanceof FoodItem) {
-				hunger += ((FoodItem) stack.getItem()).getHungerRestored(stack);
+			if (stack.getItem().method_19263()) {
+				hunger += stack.getItem().method_19264().method_19230();
 			} else if (stack.getItem() instanceof Seasoning) {
 				seasoningBonus += ((Seasoning) stack.getItem()).getHungerRestored(stack);
 			}
@@ -196,8 +195,8 @@ public class MealRecipe implements CraftingRecipe {
 		float saturation = 0;
 		float seasoningBonus = 0;
 		for (ItemStack stack : ingredients) {
-			if (stack.getItem() instanceof FoodItem) {
-				saturation += ((FoodItem) stack.getItem()).getSaturationModifier(stack);
+			if (stack.getItem().method_19263()) {
+				saturation += stack.getItem().method_19264().method_19231();
 			} else if (stack.getItem() instanceof Seasoning) {
 				seasoningBonus += ((Seasoning) stack.getItem()).getSaturationModifier(stack);
 			}

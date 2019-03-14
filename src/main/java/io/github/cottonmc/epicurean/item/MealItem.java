@@ -1,12 +1,14 @@
 package io.github.cottonmc.epicurean.item;
 
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
+import net.minecraft.class_4174;
 import net.minecraft.client.gui.Screen;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.FoodItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.potion.PotionUtil;
@@ -21,27 +23,32 @@ import net.minecraft.world.World;
 import java.util.Collections;
 import java.util.List;
 
-public class MealItem extends FoodItem {
+public class MealItem extends Item {
 
-	public MealItem(int hunger, float saturation, boolean wolfFood) {
-		super(hunger, saturation, wolfFood, EpicureanItems.DEFAULT_SETTINGS);
+	public MealItem(int hunger, float saturation) {
+		super(EpicureanItems.DEFAULT_SETTINGS.method_19265(new class_4174.class_4175().method_19238(hunger).method_19237(saturation).method_19242()));
 	}
 
 	@Override
-	protected void onConsumed(ItemStack stack, World world, PlayerEntity player) {
-		super.onConsumed(stack, world, player);
-		for (StatusEffectInstance effect : getMealEffects(stack)) {
-			player.addPotionEffect(effect);
+	public ItemStack onItemFinishedUsing(ItemStack stack, World world, LivingEntity entity) {
+		super.onItemFinishedUsing(stack, world, entity);
+		if (entity instanceof PlayerEntity) {
+			PlayerEntity player = (PlayerEntity)entity;
+			for (StatusEffectInstance effect : getMealEffects(stack)) {
+				player.addPotionEffect(effect);
+			}
+			if (!stack.hasTag()) return stack;
+			if (stack.getTag().containsKey("FlavorProfile")) {
+				CompoundTag profile = stack.getTag().getCompound("FlavorProfile");
+				int addHunger = 0;
+				float addSaturation = 0;
+				if (profile.containsKey("Hunger")) addHunger = profile.getInt("Hunger");
+				if (profile.containsKey("Saturation")) addSaturation = profile.getFloat("Saturation");
+				player.getHungerManager().add(addHunger, addSaturation);
+			}
+			stack.subtractAmount(1);
 		}
-		if (!stack.hasTag()) return;
-		if (stack.getTag().containsKey("FlavorProfile")) {
-			CompoundTag profile = stack.getTag().getCompound("FlavorProfile");
-			int addHunger = 0;
-			float addSaturation = 0;
-			if (profile.containsKey("Hunger")) addHunger = profile.getInt("Hunger");
-			if (profile.containsKey("Saturation")) addSaturation = profile.getFloat("Saturation");
-			player.getHungerManager().add(addHunger, addSaturation);
-		}
+		return stack;
 	}
 
 	public static List<StatusEffectInstance> getMealEffects(ItemStack stack) {
