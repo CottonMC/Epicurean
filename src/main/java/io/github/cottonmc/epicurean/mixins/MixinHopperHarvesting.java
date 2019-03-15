@@ -48,7 +48,6 @@ public class MixinHopperHarvesting {
 	private static boolean harvestCrop(World world, BlockPos pos, BlockState state) {
 		CropBlock crop = (CropBlock) state.getBlock();
 		if (crop.getCropAgeMaximum() == state.get(crop.getAgeProperty())) {
-			System.out.println("Collection:");
 			Inventory inv = HopperBlockEntity.getInventoryAt(world, pos);
 			List<ItemStack> results = state.getDroppedStacks(getLootContext(world, pos));
 			List<ItemStack> dropped = deepCopy(results);

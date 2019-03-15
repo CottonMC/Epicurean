@@ -2,7 +2,7 @@
   "type": "epicurean:meal",
   "ingredients": [
     {
-      "item": "minecraft:raw_beef"
+      "item": "minecraft:beef"
     },
     {
       "item": "minecraft:carrot"

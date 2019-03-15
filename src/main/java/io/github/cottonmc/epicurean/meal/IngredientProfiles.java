@@ -27,19 +27,16 @@ public class IngredientProfiles implements SimpleSynchronousResourceReloadListen
 
 		// Highest impact: add spicy foods
 		if (SPICY != null) putTag(SPICY, FlavorGroup.SPICY);
-//		to add: pepper
 		// Second-highest impact: add umami foods
 		if (UMAMI != null) putTag(UMAMI, FlavorGroup.UMAMI);
 		// Third-highest impact: add acidic foods
 		if (ACIDIC != null) putTag(ACIDIC, FlavorGroup.ACIDIC);
-//		to add: tomato
 		// Fourth-highest impact: add sweet foods
 		if (SWEET != null) putTag(SWEET, FlavorGroup.SWEET);
 		// Fifth-highest impact: add bitter foods
 		if (BITTER != null) putTag(BITTER, FlavorGroup.BITTER);
 		// Lowest impact: add filling foods
 		if (FILLING != null) putTag(FILLING, FlavorGroup.FILLING);
-//		to add: dashi
 		EpicureanGastronomy.LOGGER.info("Ingredient profiles set!");
 	}
 

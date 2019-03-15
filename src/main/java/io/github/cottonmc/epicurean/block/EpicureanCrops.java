@@ -8,8 +8,8 @@ import net.minecraft.util.registry.Registry;
 
 public class EpicureanCrops {
 
-	public static final Block TOMATO_PLANT = register("tomato", new HarvestableCropBlock(EpicureanItems.TOMATO, 4));
-	public static final Block PEPPER_PLANT = register("pepper", new HarvestableCropBlock(EpicureanItems.PEPPER, 4));
+	public static final Block TOMATO_PLANT = register("tomato", new PickableCropBlock(EpicureanItems.TOMATO, 1));
+	public static final Block PEPPER_PLANT = register("pepper", new PickableCropBlock(EpicureanItems.PEPPER, 1));
 	public static final Block ONION_PLANT = register("onion", new HarvestableCropBlock(EpicureanItems.ONION, 0));
 
 	public static Block register(String name, Block block) {

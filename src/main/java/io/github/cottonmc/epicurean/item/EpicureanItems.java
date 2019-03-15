@@ -20,14 +20,13 @@ public class EpicureanItems {
 	//ingredients
 	public static final Item TOMATO = register("tomato", new Item(DEFAULT_SETTINGS));
 	public static final Item PEPPER = register("pepper", new Item(DEFAULT_SETTINGS));
-	//TODO: figure out what category onions are most needed in
-	public static final Item ONION = register("onion", new StringItem(EpicureanCrops.ONION_PLANT, DEFAULT_SETTINGS.method_19265(new class_4174.class_4175().method_19238(2).method_19237(0.2F).method_19242())));
+	public static final Item ONION = register("onion", new PlantableItem(EpicureanCrops.ONION_PLANT, EpicureanItems.DEFAULT_SETTINGS.method_19265(new class_4174.class_4175().method_19238(2).method_19237(0.2F).method_19242())));
 	public static final Item DASHI = register("dashi", new Item(DEFAULT_SETTINGS));
 	public static final Item BUTTER = register("butter", new SeasoningItem(1, 0.25f, DEFAULT_SETTINGS));
 
 	//seeds
-	public static final Item TOMATO_SEEDS = register("tomato_seeds", new StringItem(EpicureanCrops.TOMATO_PLANT, DEFAULT_SETTINGS));
-	public static final Item PEPPER_SEEDS = register("pepper_seeds", new StringItem(EpicureanCrops.PEPPER_PLANT, DEFAULT_SETTINGS));
+	public static final Item TOMATO_SEEDS = register("tomato_seeds", new PlantableItem(EpicureanCrops.TOMATO_PLANT, EpicureanItems.DEFAULT_SETTINGS));
+	public static final Item PEPPER_SEEDS = register("pepper_seeds", new PlantableItem(EpicureanCrops.PEPPER_PLANT, EpicureanItems.DEFAULT_SETTINGS));
 
 	//snacks
 	public static final Item NOODLES = register("noodles", new MealItem(1, 0.1f));

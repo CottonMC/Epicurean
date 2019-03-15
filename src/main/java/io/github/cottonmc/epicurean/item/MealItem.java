@@ -31,7 +31,6 @@ public class MealItem extends Item {
 
 	@Override
 	public ItemStack onItemFinishedUsing(ItemStack stack, World world, LivingEntity entity) {
-		super.onItemFinishedUsing(stack, world, entity);
 		if (entity instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity)entity;
 			for (StatusEffectInstance effect : getMealEffects(stack)) {
@@ -46,13 +45,13 @@ public class MealItem extends Item {
 				if (profile.containsKey("Saturation")) addSaturation = profile.getFloat("Saturation");
 				player.getHungerManager().add(addHunger, addSaturation);
 			}
-			stack.subtractAmount(1);
 		}
+		super.onItemFinishedUsing(stack, world, entity);
 		return stack;
 	}
 
 	public static List<StatusEffectInstance> getMealEffects(ItemStack stack) {
-		if (!stack.hasTag() || stack.getTag().containsKey("Potion")) return Collections.singletonList(new StatusEffectInstance(StatusEffects.SATURATION, 200));
+		if (!stack.hasTag() || !stack.getTag().containsKey("CustomPotionEffects")) return Collections.singletonList(new StatusEffectInstance(StatusEffects.ABSORPTION, 200));
 		return PotionUtil.getPotionEffects(stack);
 	}
 

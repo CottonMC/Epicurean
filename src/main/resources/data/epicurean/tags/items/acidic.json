@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "epicurean:tomato"
+    "epicurean:tomato",
+    "epicurean:onion"
   ]
 }

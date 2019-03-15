@@ -24,7 +24,7 @@ public class HarvestableCropBlock extends CropBlock {
 	private final int resetGrowthTo;
 
 	public HarvestableCropBlock(Item cropItem, int resetGrowthTo) {
-		super(FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.CROP).ticksRandomly().breakInstantly().build());
+		super(FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.CROP).ticksRandomly().breakInstantly().build().noCollision());
 		this.cropItem = cropItem;
 		this.resetGrowthTo = resetGrowthTo;
 	}
@@ -37,7 +37,7 @@ public class HarvestableCropBlock extends CropBlock {
 	@Override
 	public boolean activate(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		if (world.isClient) return true;
-		if (state.get(CropBlock.AGE) == 7) {
+		if (getCropAge(state) >= getCropAgeMaximum()) {
 			LootContext.Builder ctx = new LootContext
 					.Builder(world.getServer().getWorld(world.dimension.getType()))
 					.put(LootContextParameters.POSITION, pos).put(LootContextParameters.TOOL, ItemStack.EMPTY);

@@ -2,8 +2,7 @@
   "replace": false,
   "values": [
     "#c:cooked_meat",
-    "minecraft:red_mushroom",
-    "minecraft:brown_mushroom",
+    "#c:mushrooms",
     "minecraft:dried_kelp",
     "epicurean:dashi"
   ]
