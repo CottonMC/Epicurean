@@ -25,10 +25,10 @@ targetCompatibility = 1.8
 
 archivesBaseName = "epicurean-gastronomy"
 group = "io.github.cottonmc"
-version = "2.0.0+19w08a"
+version = "2.0.0+19w11b"
 
 minecraft {
-	refmapName = 'mixins.epigast.refmap.json'
+	refmapName = 'mixins.epicurean.refmap.json'
 }
 
 repositories {
@@ -43,7 +43,7 @@ dependencies {
 	modCompile "net.fabricmc:fabric-loader:0.3.7.109"
 	modCompile "net.fabricmc:fabric:0.2.3.111"
 
-	modCompile "io.github.cottonmc:cotton:0.0.4+19w08a-SNAPSHOT"
+	modCompile "io.github.cottonmc:cotton:0.0.5+19w11b-SNAPSHOT"
 
 	shadow "blue.endless:jankson:1.1.1-SNAPSHOT"
 	implementation "blue.endless:jankson:1.1.1-SNAPSHOT"
