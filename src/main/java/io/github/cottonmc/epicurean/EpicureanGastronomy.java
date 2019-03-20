@@ -19,7 +19,7 @@ public class EpicureanGastronomy implements ModInitializer {
     public static String MOD_ID = "epicurean";
     public static final ItemGroup EPICUREAN_GROUP = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "epicurean_group"), () -> new ItemStack(EpicureanItems.JELLY));
 
-    public static final ModLogger LOGGER = new ModLogger("Epicurean Gastronomy");
+    public static final ModLogger LOGGER = new ModLogger(MOD_ID, "Epicurean Gastronomy");
 
     @Override
     public void onInitialize() {
@@ -27,6 +27,9 @@ public class EpicureanGastronomy implements ModInitializer {
         if (config.omnivoreEnabled) {
             LOGGER.info("You're feeling hungry...");
             LOGGER.info("Be warned, this might cause weird behavior!");
+        }
+        if (config.useSaturationOnly) {
+            LOGGER.info("Saturation-only mode activated.");
         }
         EpicureanItems.init();
         EpicureanBlocks.init();

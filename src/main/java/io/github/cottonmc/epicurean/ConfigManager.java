@@ -1,8 +1,8 @@
 package io.github.cottonmc.epicurean;
 
-import blue.endless.jankson.Jankson;
-import blue.endless.jankson.JsonObject;
-import blue.endless.jankson.impl.SyntaxError;
+import io.github.cottonmc.repackage.blue.endless.jankson.Jankson;
+import io.github.cottonmc.repackage.blue.endless.jankson.JsonObject;
+import io.github.cottonmc.repackage.blue.endless.jankson.impl.SyntaxError;
 import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.File;
@@ -20,6 +20,7 @@ public class ConfigManager {
 
 			//Carry old Edibles config over to new mod Id
 			if (oldConfig.exists() && !file.exists()) {
+				EpicureanGastronomy.LOGGER.info("Updating Edibles config!");
 				try {
 					JsonObject json = jankson.load(oldConfig);
 
@@ -54,6 +55,7 @@ public class ConfigManager {
 		} catch (SyntaxError | InstantiationException | IllegalAccessException e) {
 			EpicureanGastronomy.LOGGER.warn("Failed to load config file: ", e);
 		}
+		EpicureanGastronomy.LOGGER.error("Config not loaded!");
 		return null;
 	}
 

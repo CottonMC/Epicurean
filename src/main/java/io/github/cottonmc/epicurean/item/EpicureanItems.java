@@ -4,7 +4,6 @@ import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import io.github.cottonmc.epicurean.block.EpicureanCrops;
 import net.minecraft.class_4174;
 import net.minecraft.item.Item;
-import net.minecraft.item.StringItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 

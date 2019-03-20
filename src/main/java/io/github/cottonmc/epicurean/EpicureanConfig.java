@@ -1,6 +1,6 @@
 package io.github.cottonmc.epicurean;
 
-import blue.endless.jankson.Comment;
+import io.github.cottonmc.repackage.blue.endless.jankson.Comment;
 
 public class EpicureanConfig {
 
