@@ -23,6 +23,11 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 	private final BlockContext context;
 	private final PlayerEntity player;
 
+	public static final int RESULT_SLOT = 0;
+	public static final int FIRST_PLAYER_SLOT = 13;
+	public static final int FIRST_HOTBAR_SLOT = 40;
+	public static final int SLOT_COUNT = 49;
+
 	public CookingTableContainer(int syncId, PlayerInventory playerInv) {
 		this(syncId, playerInv, BlockContext.EMPTY);
 	}
@@ -135,26 +140,48 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 
 	@Override
 	public ItemStack transferSlot(PlayerEntity player, int slotNum) {
-		ItemStack stack = ItemStack.EMPTY;
+		ItemStack stackToTransfer = ItemStack.EMPTY;
 		Slot slot = this.slotList.get(slotNum);
 		if (slot != null && slot.hasStack()) {
-			ItemStack slotStack = slot.getStack();
-			stack = slotStack.copy();
-			if (slotNum < this.cookingInv.getInvSize()) {
-				if (!this.insertItem(slotStack, this.cookingInv.getInvSize(), this.slotList.size(), true)) {
+			ItemStack stackInSlot = slot.getStack();
+			stackToTransfer = stackInSlot.copy();
+			if (slotNum == RESULT_SLOT) {
+				this.context.run((world, pos) -> {
+					stackInSlot.getItem().onCrafted(stackInSlot, world, player);
+				});
+				if (!this.insertItem(stackInSlot, 10, 46, true)) {
 					return ItemStack.EMPTY;
 				}
-			} else if (!this.insertItem(slotStack, 0, this.cookingInv.getInvSize(), false)) {
+
+				slot.onStackChanged(stackInSlot, stackToTransfer);
+			} else if (slotNum >= FIRST_PLAYER_SLOT && slotNum < FIRST_HOTBAR_SLOT) {
+				if (!this.insertItem(stackInSlot, FIRST_HOTBAR_SLOT, SLOT_COUNT, false)) {
+					return ItemStack.EMPTY;
+				}
+			} else if (slotNum >= FIRST_HOTBAR_SLOT && slotNum < SLOT_COUNT) {
+				if (!this.insertItem(stackInSlot, FIRST_PLAYER_SLOT, FIRST_HOTBAR_SLOT, false)) {
+					return ItemStack.EMPTY;
+				}
+			} else if (!this.insertItem(stackInSlot, FIRST_PLAYER_SLOT, SLOT_COUNT, false)) {
 				return ItemStack.EMPTY;
 			}
 
-			if (slotStack.isEmpty()) {
+			if (stackInSlot.isEmpty()) {
 				slot.setStack(ItemStack.EMPTY);
 			} else {
 				slot.markDirty();
 			}
+
+			if (stackInSlot.getAmount() == stackToTransfer.getAmount()) {
+				return ItemStack.EMPTY;
+			}
+
+			ItemStack slotToTake = slot.onTakeItem(player, stackInSlot);
+			if (slotNum == RESULT_SLOT) {
+				player.dropItem(slotToTake, false);
+			}
 		}
 
-		return stack;
+		return stackToTransfer;
 	}
 }
