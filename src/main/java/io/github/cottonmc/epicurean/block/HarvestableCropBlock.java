@@ -46,7 +46,7 @@ public class HarvestableCropBlock extends CropBlock {
 				ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);
 				world.spawnEntity(entity);
 			}
-			world.setBlockState(pos, state.with(CropBlock.AGE, resetGrowthTo));
+			world.setBlockState(pos, state.with(getAgeProperty(), resetGrowthTo));
 			return true;
 		}
 		return false;
