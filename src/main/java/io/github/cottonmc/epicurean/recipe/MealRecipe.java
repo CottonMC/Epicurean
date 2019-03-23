@@ -116,14 +116,16 @@ public class MealRecipe implements CraftingRecipe {
 				prominence = Math.max(prominence, IngredientProfiles.MEAL_INGREDIENTS.get(item).getImpact());
 			} else if (IngredientProfiles.DRESSINGS.containsKey(item)) {
 				//TODO: figure out how we want to calculate strength + duration
-				addEffect(effects, new StatusEffectInstance(IngredientProfiles.DRESSINGS.get(item).getEffect(), 200));
+				StatusEffect effectToAdd = IngredientProfiles.DRESSINGS.get(item).getEffect();
+				int timeToAdd = IngredientProfiles.EFFECT_TIMES.getOrDefault(effectToAdd, 200);
+				addEffect(effects, new StatusEffectInstance(effectToAdd, timeToAdd));
 			}
 		}
 
 		meal.getTag().put("FlavorProfile", makeFlavorProfile(FlavorGroup.forImpact(prominence), seasonings));
-
-		//TODO: figure out how we want to calculate strength + duration
-		addEffect(effects, new StatusEffectInstance(FlavorGroup.forImpact(prominence).getEffect(), 200));
+		StatusEffect effectToAdd = FlavorGroup.forImpact(prominence).getEffect();
+		int timeToAdd = IngredientProfiles.EFFECT_TIMES.getOrDefault(effectToAdd, 200);
+		addEffect(effects, new StatusEffectInstance(effectToAdd, timeToAdd));
 		PotionUtil.setCustomPotionEffects(meal, effects);
 		return meal;
 	}
@@ -211,9 +213,13 @@ public class MealRecipe implements CraftingRecipe {
 			if (inst.getEffectType() == effect) {
 				StatusEffectInstance instCopy = new StatusEffectInstance(inst.getEffectType(), inst.getAmplifier(), inst.getDuration());
 				currentEffects.remove(inst);
-				StatusEffectInstance newInst = new StatusEffectInstance(instCopy.getEffectType(),
-						inst.getDuration() + (effectToAdd.getDuration() / 2),
-						Math.max(inst.getAmplifier(), effectToAdd.getAmplifier()));
+				int newDuration = inst.getDuration() + (effectToAdd.getDuration() / 2);
+				int newAmp = Math.max(inst.getAmplifier(), effectToAdd.getAmplifier());
+				if (newDuration >= 2*IngredientProfiles.EFFECT_TIMES.getOrDefault(inst.getEffectType(), 200)) {
+					newAmp++;
+					newDuration /= 2;
+				}
+				StatusEffectInstance newInst = new StatusEffectInstance(instCopy.getEffectType(), newDuration, newAmp);
 				currentEffects.add(newInst);
 				replaced = true;
 			}

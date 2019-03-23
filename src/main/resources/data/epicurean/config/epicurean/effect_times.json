@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "minecraft:resistance": 200,
+  "minecraft:saturation": 200,
+  "minecrat:fire_resistance": 200,
+  "minecraft:speed": 200,
+  "minecraft:haste": 200,
+  "minecraft:absorption": 200,
+  "minecraft:jump_boost": 200
+}
