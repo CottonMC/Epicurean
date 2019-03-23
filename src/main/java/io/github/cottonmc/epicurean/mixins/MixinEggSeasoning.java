@@ -1,6 +1,7 @@
 package io.github.cottonmc.epicurean.mixins;
 
 import io.github.cottonmc.epicurean.item.Seasoning;
+import io.github.cottonmc.epicurean.meal.IngredientProfiles;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.EggItem;
@@ -21,6 +22,6 @@ public class MixinEggSeasoning implements Seasoning {
 
 	@Override
 	public StatusEffectInstance getBonusEffect(ItemStack stack) {
-		return new StatusEffectInstance(StatusEffects.ABSORPTION, 1200);
+		return new StatusEffectInstance(StatusEffects.ABSORPTION, IngredientProfiles.EFFECT_TIMES.getOrDefault(StatusEffects.ABSORPTION, 1800));
 	}
 }

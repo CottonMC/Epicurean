@@ -115,16 +115,15 @@ public class MealRecipe implements CraftingRecipe {
 			} else if (IngredientProfiles.MEAL_INGREDIENTS.containsKey(item)) {
 				prominence = Math.max(prominence, IngredientProfiles.MEAL_INGREDIENTS.get(item).getImpact());
 			} else if (IngredientProfiles.DRESSINGS.containsKey(item)) {
-				//TODO: figure out how we want to calculate strength + duration
 				StatusEffect effectToAdd = IngredientProfiles.DRESSINGS.get(item).getEffect();
-				int timeToAdd = IngredientProfiles.EFFECT_TIMES.getOrDefault(effectToAdd, 200);
+				int timeToAdd = IngredientProfiles.EFFECT_TIMES.getOrDefault(effectToAdd, 1800);
 				addEffect(effects, new StatusEffectInstance(effectToAdd, timeToAdd));
 			}
 		}
 
 		meal.getTag().put("FlavorProfile", makeFlavorProfile(FlavorGroup.forImpact(prominence), seasonings));
 		StatusEffect effectToAdd = FlavorGroup.forImpact(prominence).getEffect();
-		int timeToAdd = IngredientProfiles.EFFECT_TIMES.getOrDefault(effectToAdd, 200);
+		int timeToAdd = IngredientProfiles.EFFECT_TIMES.getOrDefault(effectToAdd, 1800);
 		addEffect(effects, new StatusEffectInstance(effectToAdd, timeToAdd));
 		PotionUtil.setCustomPotionEffects(meal, effects);
 		return meal;

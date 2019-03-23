@@ -5,7 +5,6 @@ import io.github.cottonmc.repackage.blue.endless.jankson.Jankson;
 import io.github.cottonmc.repackage.blue.endless.jankson.JsonObject;
 import io.github.cottonmc.repackage.blue.endless.jankson.impl.SyntaxError;
 import net.fabricmc.fabric.api.resource.SimpleResourceReloadListener;
-import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.Item;
 import net.minecraft.resource.Resource;
@@ -27,21 +26,17 @@ public class IngredientProfiles implements SimpleResourceReloadListener {
 	public static Map<Item, FlavorGroup> DRESSINGS = new HashMap<>();
 	public static Map<StatusEffect, Integer> EFFECT_TIMES = new HashMap<>();
 
-	private static final int JSON_EXTENSION_LENGTH = ".json".length();
-
 	@Override
 	public CompletableFuture load(ResourceManager manager, Profiler profiler, Executor executor) {
 		return CompletableFuture.supplyAsync(() -> {
 			Jankson jankson = Jankson.builder().build();
-			String path = "epicurean/config";
+			String path = "config/epicurean";
 			Collection<Identifier> resources = manager.findResources(path, (name) -> name.equals("effect_times.json"));
-			if (resources.isEmpty()) EpicureanGastronomy.LOGGER.error("Couldn't find any effect time entries!");
+			if (resources.size() == 0) EpicureanGastronomy.LOGGER.error("Couldn't find any effect time entries!");
 			for (Identifier fileId : resources) {
 				String filePath = fileId.getPath();
-				Identifier trueId = new Identifier(fileId.getNamespace(), filePath.substring(path.length() + 1, filePath.length() - JSON_EXTENSION_LENGTH));
-				System.out.println(trueId);
 				try {
-					for (Resource res : manager.getAllResources(trueId)) {
+					for (Resource res : manager.getAllResources(fileId)) {
 						JsonObject json = jankson.load(IOUtils.toString(res.getInputStream()));
 						Set<String> keys = json.keySet();
 						boolean replace = false;
@@ -60,7 +55,7 @@ public class IngredientProfiles implements SimpleResourceReloadListener {
 						}
 					}
 				} catch (IOException | SyntaxError | NullPointerException e) {
-					EpicureanGastronomy.LOGGER.error("Couldn't load effect times!", e);
+					EpicureanGastronomy.LOGGER.error("Couldn't load effect times: %s", e);
 				}
 			}
 			return EFFECT_TIMES;
