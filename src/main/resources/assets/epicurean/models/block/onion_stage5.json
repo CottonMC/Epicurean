@@ -1,0 +1,6 @@
+{
+  "parent": "block/crop",
+  "textures": {
+    "crop": "epicurean:block/onion_stage5"
+  }
+}
