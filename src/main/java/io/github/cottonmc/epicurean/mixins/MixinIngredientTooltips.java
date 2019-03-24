@@ -32,7 +32,7 @@ public class MixinIngredientTooltips {
 							new TranslatableTextComponent("tooltip.epicurean.flavor." + IngredientProfiles.DRESSINGS.get(stack.getItem()).asString()).getText())
 					.applyFormat(TextFormat.GRAY, TextFormat.ITALIC));
 		}
-		if (stack.getItem().method_19263()) {
+		if (stack.getItem().isFood()) {
 			if (stack.hasTag())  {
 				if (stack.getTag().containsKey("jellied")) {
 					tooltips.add(new TranslatableTextComponent("tooltip.epicurean.jellied").applyFormat(TextFormat.DARK_RED));

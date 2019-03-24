@@ -1,13 +1,13 @@
 package io.github.cottonmc.epicurean.item;
 
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
-import net.minecraft.class_4174;
 import net.minecraft.client.gui.Screen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.FoodItemSetting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
@@ -26,7 +26,7 @@ import java.util.List;
 public class MealItem extends Item {
 
 	public MealItem(int hunger, float saturation) {
-		super(EpicureanItems.DEFAULT_SETTINGS.method_19265(new class_4174.class_4175().method_19238(hunger).method_19237(saturation).method_19242()));
+		super(EpicureanItems.DEFAULT_SETTINGS.food(new FoodItemSetting.Builder().hunger(hunger).saturationModifier(saturation).build()));
 	}
 
 	@Override

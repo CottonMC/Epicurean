@@ -30,7 +30,7 @@ public class AddJellyRecipe extends SpecialCraftingRecipe {
 			for (int i = 0; i < inv.getInvSize(); i++) {
 				ItemStack stack = inv.getInvStack(i);
 				if (!stack.isEmpty()) {
-					if (stack.getItem().method_19263() && !(stack.getItem() instanceof JellyItem)) {
+					if (stack.getItem().isFood() && !(stack.getItem() instanceof JellyItem)) {
 						if (!targetFood.isEmpty()) return false;
 						targetFood = stack;
 						foodSlot = i;

@@ -61,14 +61,14 @@ public class CookingTableScreen extends ContainerScreen /*implements RecipeBookP
 	}
 
 	@Override
-	public void draw(int mouseX, int mouseY, float partialTicks) {
+	public void render(int mouseX, int mouseY, float partialTicks) {
 		this.drawBackground();
 //		if (this.recipeBookGui.isOpen() && this.isNarrow) {
 //			this.drawBackground(partialTicks, mouseX, mouseY);
 //			this.recipeBookGui.method_18326(mouseX, mouseY, partialTicks);
 //		} else {
 //			this.recipeBookGui.method_18326(mouseX, mouseY, partialTicks);
-			super.draw(mouseX, mouseY, partialTicks);
+			super.render(mouseX, mouseY, partialTicks);
 //			this.recipeBookGui.drawGhostSlots(this.left, this.top, true, partialTicks);
 //		}
 

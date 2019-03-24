@@ -12,12 +12,10 @@ buildscript {
 
 	}
 	dependencies {
-		classpath "com.github.jengelman.gradle.plugins:shadow:2.0.0"
 		classpath "net.fabricmc:fabric-loom:0.2.0-SNAPSHOT"
 	}
 }
 
-apply plugin: "com.github.johnrengelman.shadow"
 apply plugin: net.fabricmc.loom.LoomGradlePlugin
 
 sourceCompatibility = 1.8
@@ -25,7 +23,7 @@ targetCompatibility = 1.8
 
 archivesBaseName = "epicurean-gastronomy"
 group = "io.github.cottonmc"
-version = "2.0.0+19w11b"
+version = "2.0.0+19w12b"
 
 minecraft {
 	refmapName = 'mixins.epicurean.refmap.json'
@@ -37,10 +35,10 @@ repositories {
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:19w11b"
-	mappings "net.fabricmc:yarn:19w11b.4"
+	minecraft "com.mojang:minecraft:19w12b"
+	mappings "net.fabricmc:yarn:19w12b.5"
 	modCompile "net.fabricmc:fabric-loader:0.3.7.109"
-	modCompile "net.fabricmc:fabric:0.2.3.111"
+	modCompile "net.fabricmc:fabric:0.2.5.114"
 
 	modCompile "io.github.cottonmc:cotton:0.0.6+19w11b-SNAPSHOT"
 }

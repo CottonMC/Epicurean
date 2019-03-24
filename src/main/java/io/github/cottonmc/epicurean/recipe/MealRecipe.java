@@ -182,8 +182,8 @@ public class MealRecipe implements CraftingRecipe {
 		int hunger = 0;
 		int seasoningBonus = 0;
 		for (ItemStack stack : ingredients) {
-			if (stack.getItem().method_19263()) {
-				hunger += stack.getItem().method_19264().method_19230();
+			if (stack.getItem().isFood()) {
+				hunger += stack.getItem().getFoodSetting().getHunger();
 			} else if (stack.getItem() instanceof Seasoning) {
 				seasoningBonus += ((Seasoning) stack.getItem()).getHungerRestored(stack);
 			}
@@ -196,8 +196,8 @@ public class MealRecipe implements CraftingRecipe {
 		float saturation = 0;
 		float seasoningBonus = 0;
 		for (ItemStack stack : ingredients) {
-			if (stack.getItem().method_19263()) {
-				saturation += stack.getItem().method_19264().method_19231();
+			if (stack.getItem().isFood()) {
+				saturation += stack.getItem().getFoodSetting().getSaturationModifier();
 			} else if (stack.getItem() instanceof Seasoning) {
 				seasoningBonus += ((Seasoning) stack.getItem()).getSaturationModifier(stack);
 			}

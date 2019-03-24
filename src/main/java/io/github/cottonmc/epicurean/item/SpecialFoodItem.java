@@ -2,9 +2,9 @@ package io.github.cottonmc.epicurean.item;
 
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import net.minecraft.advancement.criterion.Criterions;
-import net.minecraft.class_4174;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.FoodItemSetting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 public class SpecialFoodItem extends Item {
 
 	public SpecialFoodItem(int hunger, float saturation, Item.Settings settings) {
-		super(settings.method_19265(new class_4174.class_4175().method_19238(hunger).method_19237(saturation).method_19242()));
+		super(settings.food(new FoodItemSetting.Builder().hunger(hunger).saturationModifier(saturation).build()));
 	}
 
 	@Override
