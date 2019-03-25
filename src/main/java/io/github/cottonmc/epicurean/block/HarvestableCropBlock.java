@@ -2,6 +2,7 @@ package io.github.cottonmc.epicurean.block;
 
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.CropBlock;
 import net.minecraft.block.Material;
 import net.minecraft.entity.ItemEntity;
@@ -13,6 +14,7 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 import net.minecraft.world.loot.context.LootContext;
 import net.minecraft.world.loot.context.LootContextParameters;
@@ -38,17 +40,23 @@ public class HarvestableCropBlock extends CropBlock {
 	public boolean activate(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		if (world.isClient) return true;
 		if (getCropAge(state) >= getCropAgeMaximum()) {
-			LootContext.Builder ctx = new LootContext
-					.Builder(world.getServer().getWorld(world.dimension.getType()))
-					.put(LootContextParameters.POSITION, pos).put(LootContextParameters.TOOL, ItemStack.EMPTY);
-			List<ItemStack> results = state.getDroppedStacks(ctx);
-			for (ItemStack stack : results) {
-				ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);
-				world.spawnEntity(entity);
+			if (world.getBlockState(pos.offset(Direction.DOWN)).getBlock() == Blocks.FARMLAND) {
+				LootContext.Builder ctx = new LootContext
+						.Builder(world.getServer().getWorld(world.dimension.getType()))
+						.put(LootContextParameters.POSITION, pos).put(LootContextParameters.TOOL, ItemStack.EMPTY);
+				List<ItemStack> results = state.getDroppedStacks(ctx);
+				for (ItemStack stack : results) {
+					ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);
+					world.spawnEntity(entity);
+				}
+				world.setBlockState(pos, state.with(getAgeProperty(), resetGrowthTo));
+			} else {
+				world.breakBlock(pos, true);
 			}
-			world.setBlockState(pos, state.with(getAgeProperty(), resetGrowthTo));
 			return true;
 		}
 		return false;
 	}
+
+
 }

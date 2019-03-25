@@ -1,6 +1,7 @@
 package io.github.cottonmc.epicurean;
 
 import io.github.cottonmc.cotton.logging.ModLogger;
+import io.github.cottonmc.epicurean.block.CropGeneration;
 import io.github.cottonmc.epicurean.block.EpicureanBlocks;
 import io.github.cottonmc.epicurean.block.EpicureanCrops;
 import io.github.cottonmc.epicurean.item.EpicureanItems;
@@ -35,6 +36,7 @@ public class EpicureanGastronomy implements ModInitializer {
         EpicureanBlocks.init();
         EpicureanCrops.init();
         EpicureanRecipes.init();
+        CropGeneration.registerCrops();
         ResourceManagerHelper.get(ResourceType.DATA).registerReloadListener(new IngredientProfiles());
     }
 

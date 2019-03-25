@@ -25,7 +25,7 @@ public abstract class MixinPlayerEating extends LivingEntity {
 		if (EpicureanGastronomy.config.useSaturationOnly) cir.setReturnValue(true);
 	}
 
-	@Inject(method = "method_18866", at = @At("HEAD"))
+	@Inject(method = "eatFood", at = @At("HEAD"))
 	public void eatJelliedFood(World world, ItemStack stack, CallbackInfoReturnable cir) {
 		PlayerEntity player = (PlayerEntity)(Object)this;
 		if (stack.hasTag()) {
