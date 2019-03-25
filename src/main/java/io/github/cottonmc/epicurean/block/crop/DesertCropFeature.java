@@ -24,7 +24,7 @@ public class DesertCropFeature extends PumpkinFeature {
 
 		for(int i = 0; i < 64; i++) {
 			BlockPos placePos = pos.add(random.nextInt(8) - random.nextInt(8), random.nextInt(4) - random.nextInt(4), random.nextInt(8) - random.nextInt(8));
-			if (world.isAir(placePos) && world.getBlockState(placePos.down()).getBlock() == Blocks.SAND) {
+			if (world.isAir(placePos) && (world.getBlockState(placePos.down()).getBlock() == Blocks.SAND || world.getBlockState(placePos.down()).getBlock() == Blocks.GRASS_BLOCK)) {
 				world.setBlockState(placePos, this.pumpkin, 2);
 				placed++;
 			}
