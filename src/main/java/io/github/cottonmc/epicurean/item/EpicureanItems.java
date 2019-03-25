@@ -1,7 +1,7 @@
 package io.github.cottonmc.epicurean.item;
 
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
-import io.github.cottonmc.epicurean.block.EpicureanCrops;
+import io.github.cottonmc.epicurean.block.crop.EpicureanCrops;
 import net.minecraft.item.FoodItemSetting;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;

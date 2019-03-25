@@ -1,6 +1,5 @@
-package io.github.cottonmc.epicurean.block;
+package io.github.cottonmc.epicurean.block.crop;
 
-import net.minecraft.block.CropBlock;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
@@ -15,13 +14,13 @@ public class CropGeneration {
 		for (Biome biome : Registry.BIOME) {
 			if (biome.getTemperatureGroup() == Biome.TemperatureGroup.WARM) {
 				biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(
-						new PumpkinFeature(DefaultFeatureConfig::deserialize, EpicureanCrops.PEPPER_PLANT.getDefaultState().with(PickableCropBlock.AGE, 3)),
+						new DesertCropFeature(DefaultFeatureConfig::deserialize, EpicureanCrops.PEPPER_PLANT.getDefaultState().with(PickableCropBlock.AGE, 3)),
 						FeatureConfig.DEFAULT,
 						Decorator.COUNT_HEIGHTMAP_DOUBLE,
 						new CountDecoratorConfig(1)
 				));
 			}
-			if (biome.getPrecipitation() == Biome.Precipitation.RAIN) {
+			if (biome.getPrecipitation() == Biome.Precipitation.RAIN && biome.getTemperatureGroup() == Biome.TemperatureGroup.MEDIUM) {
 				biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(
 						new PumpkinFeature(DefaultFeatureConfig::deserialize, EpicureanCrops.ONION_PLANT.getDefaultState().with(HarvestableCropBlock.AGE, 7)),
 						FeatureConfig.DEFAULT,

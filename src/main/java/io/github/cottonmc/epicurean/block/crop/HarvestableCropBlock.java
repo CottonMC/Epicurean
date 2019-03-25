@@ -1,4 +1,4 @@
-package io.github.cottonmc.epicurean.block;
+package io.github.cottonmc.epicurean.block.crop;
 
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.minecraft.block.BlockState;

@@ -1,4 +1,4 @@
-package io.github.cottonmc.epicurean.block;
+package io.github.cottonmc.epicurean.block.crop;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

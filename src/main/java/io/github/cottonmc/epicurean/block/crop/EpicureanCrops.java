@@ -1,4 +1,4 @@
-package io.github.cottonmc.epicurean.block;
+package io.github.cottonmc.epicurean.block.crop;
 
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import io.github.cottonmc.epicurean.item.EpicureanItems;
