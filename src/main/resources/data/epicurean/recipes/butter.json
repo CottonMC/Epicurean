@@ -1,0 +1,15 @@
+{
+  "type": "crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:milk_bucket"
+    },
+    {
+      "item": "minecraft:sugar"
+    }
+  ],
+  "result": {
+    "item": "epicurean:butter",
+    "count": 1
+  }
+}

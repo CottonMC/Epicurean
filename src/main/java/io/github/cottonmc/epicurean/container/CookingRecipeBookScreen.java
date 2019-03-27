@@ -12,7 +12,6 @@ import java.util.Iterator;
 import java.util.List;
 
 public class CookingRecipeBookScreen extends RecipeBookGui {
-	private Slot outputSlot;
 
 	public CookingRecipeBookScreen() {
 
@@ -23,7 +22,6 @@ public class CookingRecipeBookScreen extends RecipeBookGui {
 		this.ghostSlots.setRecipe(recipe);
 		this.ghostSlots.addSlot(Ingredient.ofStacks(out), slots.get(0).xPosition, slots.get(0).yPosition);
 		DefaultedList<Ingredient> inputs = recipe.getPreviewInputs();
-		this.outputSlot = slots.get(1);
 
 		Iterator<Ingredient> itr = inputs.iterator();
 
@@ -40,11 +38,4 @@ public class CookingRecipeBookScreen extends RecipeBookGui {
 		}
 	}
 
-	public void slotClicked(@Nullable Slot slot) {
-		super.slotClicked(slot);
-		if (slot != null && slot.id < this.craftingContainer.getCraftingSlotCount()) {
-			this.outputSlot = null;
-		}
-
-	}
 }

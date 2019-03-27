@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "epicurean:meals/beef_stew",
+      "epicurean:meals/noodles",
+      "epicurean:meals/pad_thai",
+      "epicurean:meals/ramen",
+      "epicurean:meals/spaghetti",
+      "epicurean:butter",
+      "epicurean:dashi"
+    ]
+  },
+  "criteria": {
+    "has_table": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "epicurean:cooking_table"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "epicurean:cooking_table"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_table",
+      "has_the_recipe"
+    ]
+  ]
+}

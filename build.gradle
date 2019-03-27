@@ -40,5 +40,5 @@ dependencies {
 	modCompile "net.fabricmc:fabric-loader:0.3.7.109"
 	modCompile "net.fabricmc:fabric:0.2.5.114"
 
-	modCompile "io.github.cottonmc:cotton:0.0.6+19w11b-SNAPSHOT"
+	modCompile "io.github.cottonmc:cotton:0.0.7+19w12b-SNAPSHOT"
 }
