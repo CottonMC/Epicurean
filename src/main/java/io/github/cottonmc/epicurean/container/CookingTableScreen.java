@@ -28,7 +28,8 @@ public class CookingTableScreen extends ContainerScreen<CookingTableContainer> /
 		this.isNarrow = this.screenWidth < 379;
 		//TODO: uncomment when there's a better way to make new recipe book groups
 //		this.recipeBookGui.initialize(this.screenWidth, this.screenHeight, this.client, this.isNarrow, this.container);
-		this.left = this.recipeBookGui.findLeftEdge(this.isNarrow, this.screenWidth, this.width);
+//		this.left = this.recipeBookGui.findLeftEdge(this.isNarrow, this.screenWidth, this.width);
+		this.left = (this.screenWidth - this.width) / 2;
 //		this.listeners.add(this.recipeBookGui);
 //		this.focusOn(this.recipeBookGui);
 //		this.addButton(new RecipeBookButtonWidget(this.left + 144, this.top + 9, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEX, (buttonWidget_1) -> {

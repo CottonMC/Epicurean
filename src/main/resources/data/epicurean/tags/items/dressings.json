@@ -1,9 +1,13 @@
 {
   "replace": false,
   "values": [
+    "minecraft:cocoa_beans",
+    "minecraft:dandelion",
+    "minecraft:dried_kelp",
+    "minecraft:fern",
+    "minecraft:sweet_berries",
     "epicurean:jelly",
     "epicurean:super_jelly",
-    "minecraft:dried_kelp",
     "epicurean:butter"
   ]
 }
