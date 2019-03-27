@@ -22,15 +22,11 @@ public class MixinIngredientTooltips {
 	@Inject(method = "buildTooltip", at = @At("HEAD"))
 	public void addFlavorProfiles(ItemStack stack, World world, List<TextComponent> tooltips, TooltipContext ctx, CallbackInfo ci) {
 		if (IngredientProfiles.MEAL_INGREDIENTS.containsKey(stack.getItem())) {
-			tooltips.add(new StringTextComponent(
-					new TranslatableTextComponent("tooltip.epicurean.ingredient").getText() +
-							new TranslatableTextComponent("tooltip.epicurean.flavor." + IngredientProfiles.MEAL_INGREDIENTS.get(stack.getItem()).asString()).getText())
-					.applyFormat(TextFormat.GRAY, TextFormat.ITALIC));
+			String flavor = new TranslatableTextComponent("tooltip.epicurean.flavor." + IngredientProfiles.MEAL_INGREDIENTS.get(stack.getItem()).asString()).getText();
+			tooltips.add(new TranslatableTextComponent("tooltip.epicurean.ingredient", flavor).applyFormat(TextFormat.GRAY, TextFormat.ITALIC));
 		} else if (IngredientProfiles.DRESSINGS.containsKey(stack.getItem())) {
-			tooltips.add(new StringTextComponent(
-					new TranslatableTextComponent("tooltip.epicurean.dressing").getText() +
-							new TranslatableTextComponent("tooltip.epicurean.flavor." + IngredientProfiles.DRESSINGS.get(stack.getItem()).asString()).getText())
-					.applyFormat(TextFormat.GRAY, TextFormat.ITALIC));
+			String flavor = new TranslatableTextComponent("tooltip.epicurean.flavor." + IngredientProfiles.DRESSINGS.get(stack.getItem()).asString()).getText();
+			tooltips.add(new TranslatableTextComponent("tooltip.epicurean.dressing", flavor).applyFormat(TextFormat.GRAY, TextFormat.ITALIC));
 		}
 		if (stack.getItem().isFood()) {
 			if (stack.hasTag())  {

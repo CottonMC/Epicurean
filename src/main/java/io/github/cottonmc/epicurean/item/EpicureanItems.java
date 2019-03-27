@@ -2,6 +2,7 @@ package io.github.cottonmc.epicurean.item;
 
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import io.github.cottonmc.epicurean.block.crop.EpicureanCrops;
+import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.FoodItemSetting;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
@@ -21,7 +22,7 @@ public class EpicureanItems {
 	public static final Item PEPPER = register("pepper", new Item(DEFAULT_SETTINGS));
 	public static final Item ONION = register("onion", new PlantableItem(EpicureanCrops.ONION_PLANT, EpicureanItems.DEFAULT_SETTINGS.food(new FoodItemSetting.Builder().hunger(2).saturationModifier(0.2F).build())));
 	public static final Item DASHI = register("dashi", new Item(DEFAULT_SETTINGS));
-	public static final Item BUTTER = register("butter", new SeasoningItem(1, 0.25f, DEFAULT_SETTINGS));
+	public static final Item BUTTER = register("butter", new SeasoningItem(1, 0.25f, StatusEffects.SPEED, DEFAULT_SETTINGS));
 
 	//seeds
 	public static final Item TOMATO_SEEDS = register("tomato_seeds", new PlantableItem(EpicureanCrops.TOMATO_PLANT, EpicureanItems.DEFAULT_SETTINGS));

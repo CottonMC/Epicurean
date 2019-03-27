@@ -34,14 +34,14 @@
   "tooltip.epicurean.flavor.bitter": "bitter",
   "tooltip.epicurean.flavor.filling": "filling",
 
-  "tooltip.epicurean.ingredient": "Ingredient - ",
-  "tooltip.epicurean.dressing": "Dressing - ",
-  "tooltip.epicurean.meal.flavor": "Prominent trait: ",
+  "tooltip.epicurean.ingredient": "Ingredient - %s",
+  "tooltip.epicurean.dressing": "Dressing - %s",
+  "tooltip.epicurean.meal.flavor": "Prominent trait: %s",
 
   "tooltip.epicurean.meal.seasonings": "Added seasonings:",
-  "tooltip.epicurean.meal.restores": "Bonus restoration: ",
-  "tooltip.epicurean.meal.hunger": " hunger, ",
-  "tooltip.epicurean.meal.saturation": "%% saturation",
+  "tooltip.epicurean.meal.restores": "Bonus restoration:",
+  "tooltip.epicurean.meal.hunger": " - %s hunger",
+  "tooltip.epicurean.meal.saturation": " - %s%% saturation",
 
   "tooltip.epicurean.table.base": "Base ingredients",
   "tooltip.epicurean.table.seasoning": "Additional seasonings",

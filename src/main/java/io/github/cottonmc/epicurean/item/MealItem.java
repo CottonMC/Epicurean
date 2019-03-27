@@ -63,41 +63,32 @@ public class MealItem extends Item {
 		if (stack.getTag().containsKey("FlavorProfile")) {
 			if (Screen.isShiftPressed()) {
 				CompoundTag profile = stack.getTag().getCompound("FlavorProfile");
-				tooltip.add(new StringTextComponent(
-						new TranslatableTextComponent("tooltip.epicurean.meal.flavor").getText() +
-								new TranslatableTextComponent("tooltip.epicurean.flavor." + profile.getString("ProminentFlavor").toLowerCase()).getText())
-						.applyFormat(TextFormat.GRAY));
+				String flavor = new TranslatableTextComponent("tooltip.epicurean.flavor." + profile.getString("ProminentFlavor").toLowerCase()).getText();
+				tooltip.add(new TranslatableTextComponent("tooltip.epicurean.meal.flavor", flavor).applyFormat(TextFormat.GRAY));
 				int hunger = 0;
 				float saturation = 0;
 				if (profile.containsKey("Hunger")) hunger = profile.getInt("Hunger");
 				if (profile.containsKey("Saturation")) saturation = profile.getFloat("Saturation");
 				float percentage = Math.round(saturation*100.0);
-				TranslatableTextComponent restores = new TranslatableTextComponent("tooltip.epicurean.meal.restores");
-				TranslatableTextComponent restHunger = new TranslatableTextComponent("tooltip.epicurean.meal.hunger");
-				TranslatableTextComponent restSaturation = new TranslatableTextComponent("tooltip.epicurean.meal.saturation");
-				TextComponent restoration;
-				if (EpicureanGastronomy.config.useSaturationOnly) {
-					restoration = new StringTextComponent(restores.getText()
-							+ percentage + restSaturation.getText())
-							.applyFormat(TextFormat.GRAY);
-				} else {
-					restoration = new StringTextComponent(restores.getText()
-							+ hunger + restHunger.getText()
-							+ percentage + restSaturation.getText())
-							.applyFormat(TextFormat.GRAY);
+				if (hunger != 0 || saturation != 0) {
+					tooltip.add(new TranslatableTextComponent("tooltip.epicurean.meal.restores"));
+					if (hunger != 0 && !EpicureanGastronomy.config.useSaturationOnly) {
+						tooltip.add(new TranslatableTextComponent("tooltip.epicurean.meal.hunger", hunger).applyFormat(TextFormat.GRAY));
+					}
+					if (saturation != 0) {
+						tooltip.add(new TranslatableTextComponent("tooltip.epicurean.meal.saturation", percentage).applyFormat(TextFormat.GRAY));
+					}
 				}
-				if (hunger != 0 && saturation != 0) tooltip.add(restoration);
 				if (profile.containsKey("Seasonings")) {
-					tooltip.add(new TranslatableTextComponent("tooltip.epicurean.meal.seasonings").applyFormat(TextFormat.GRAY));
+					tooltip.add(new TranslatableTextComponent("tooltip.epicurean.meal.seasonings"));
 					CompoundTag seasonings = profile.getCompound("Seasonings");
 					for (String key : seasonings.getKeys()) {
 						String name = Registry.ITEM.get(new Identifier(key)).getTranslationKey();
 						int amount = seasonings.getInt(key);
 						TranslatableTextComponent translation = new TranslatableTextComponent(name);
-						tooltip.add(new StringTextComponent(amount + " x " + translation.getText()).applyFormat(TextFormat.GRAY));
+						tooltip.add(new StringTextComponent(" - "+amount + " x " + translation.getText()).applyFormat(TextFormat.GRAY));
 					}
 				}
-
 			} else {
 				tooltip.add(new TranslatableTextComponent("tooltip.epicurean.readmore").applyFormat(TextFormat.GREEN));
 			}

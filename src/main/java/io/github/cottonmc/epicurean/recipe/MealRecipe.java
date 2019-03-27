@@ -188,7 +188,7 @@ public class MealRecipe implements CraftingRecipe {
 				seasoningBonus += ((Seasoning) stack.getItem()).getHungerRestored(stack);
 			}
 		}
-		hunger = (int)Math.floor((hunger * EpicureanGastronomy.config.seasoningEfficiency) + seasoningBonus);
+		hunger = (int)Math.ceil((hunger * EpicureanGastronomy.config.seasoningEfficiency) + seasoningBonus);
 		return hunger;
 	}
 
