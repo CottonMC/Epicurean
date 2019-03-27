@@ -10,7 +10,8 @@
     "MixinHopperHarvesting",
     "MixinFertilizableNetherWart",
     "MixinHungerManager",
-    "MixinEggSeasoning"
+    "MixinEggSeasoning",
+    "MixinRecipeBookGroups"
   ],
   "injectors": {
     "defaultRequire": 1

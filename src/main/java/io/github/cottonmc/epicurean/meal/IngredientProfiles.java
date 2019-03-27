@@ -34,7 +34,6 @@ public class IngredientProfiles implements SimpleResourceReloadListener {
 			Collection<Identifier> resources = manager.findResources(path, (name) -> name.equals("effect_times.json"));
 			if (resources.size() == 0) EpicureanGastronomy.LOGGER.error("Couldn't find any effect time entries!");
 			for (Identifier fileId : resources) {
-				String filePath = fileId.getPath();
 				try {
 					for (Resource res : manager.getAllResources(fileId)) {
 						JsonObject json = jankson.load(IOUtils.toString(res.getInputStream()));
