@@ -1,6 +1,5 @@
 package io.github.cottonmc.epicurean.container;
 
-import io.github.cottonmc.repackage.blue.endless.jankson.annotation.Nullable;
 import net.minecraft.client.gui.recipebook.RecipeBookGui;
 import net.minecraft.container.Slot;
 import net.minecraft.item.ItemStack;

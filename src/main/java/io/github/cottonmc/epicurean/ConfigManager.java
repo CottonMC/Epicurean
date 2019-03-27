@@ -1,6 +1,7 @@
 package io.github.cottonmc.epicurean;
 
 import io.github.cottonmc.repackage.blue.endless.jankson.Jankson;
+import io.github.cottonmc.repackage.blue.endless.jankson.JsonElement;
 import io.github.cottonmc.repackage.blue.endless.jankson.JsonObject;
 import io.github.cottonmc.repackage.blue.endless.jankson.impl.SyntaxError;
 import net.fabricmc.loader.api.FabricLoader;
@@ -14,7 +15,7 @@ public class ConfigManager {
 	public static <T> T load(Class<T> clazz){
 		EpicureanGastronomy.LOGGER.info("Loading config!");
 		try {
-			File file = new File(FabricLoader.getInstance().getConfigDirectory().toString() + "/" + configName + ".conf");
+			File file = new File(FabricLoader.getInstance().getConfigDirectory().toString() + "/" + configName + ".json5");
 			File oldConfig = new File(FabricLoader.getInstance().getConfigDirectory().toString() + "/Edibles.conf");
 			Jankson jankson = Jankson.builder().build();
 
@@ -24,7 +25,7 @@ public class ConfigManager {
 				try {
 					JsonObject json = jankson.load(oldConfig);
 
-					saveDefault(clazz.newInstance());
+					save(clazz.newInstance());
 					T object = jankson.fromJson(json, clazz);
 					FileOutputStream out = new FileOutputStream(file, false);
 					String result = jankson
@@ -33,6 +34,7 @@ public class ConfigManager {
 					out.write(result.getBytes());
 					out.flush();
 					out.close();
+					oldConfig.delete();
 				}
 				catch (IOException e) {
 					EpicureanGastronomy.LOGGER.warn("Failed to upgrade config file: ", e);
@@ -41,13 +43,22 @@ public class ConfigManager {
 
 			//Generate config file if it doesn't exist
 			if(!file.exists()) {
-				saveDefault(clazz.newInstance());
+				save(clazz.newInstance());
 			}
 
 			try {
 				JsonObject json = jankson.load(file);
+				T result = jankson.fromJson(json, clazz);
 
-				return jankson.fromJson(json, clazz);
+				//check if the config file is outdate. If so add new values
+				JsonElement jsonElementNew = jankson.toJson(clazz.newInstance());
+				if(jsonElementNew instanceof JsonObject){
+					JsonObject jsonNew = (JsonObject) jsonElementNew;
+					if(json.getDelta(jsonNew).size()>= 0){
+						save(result);
+					}
+				}
+				return result;
 			}
 			catch (IOException e) {
 				EpicureanGastronomy.LOGGER.warn("Failed to load config file: ", e);
@@ -59,13 +70,12 @@ public class ConfigManager {
 		return null;
 	}
 
-	public static void saveDefault(Object obj) {
-		File configFile = new File(FabricLoader.getInstance().getConfigDirectory().toString() + "/" + configName + ".conf");
+	public static void save(Object obj) {
+		File configFile = new File(FabricLoader.getInstance().getConfigDirectory().toString() + "/" + configName + ".json5");
 		Jankson jankson = Jankson.builder().build();
 		String result = jankson
-				.toJson(obj) //The first call makes a JsonObject
-				.toJson(true, true, 0);     //The second turns the JsonObject into a String -
-		//in this case, preserving comments and pretty-printing with newlines
+				.toJson(obj)
+				.toJson(true, true, 0);
 		try {
 			if(!configFile.exists()) configFile.createNewFile();
 			FileOutputStream out = new FileOutputStream(configFile, false);
