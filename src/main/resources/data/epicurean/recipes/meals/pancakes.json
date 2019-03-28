@@ -1,0 +1,29 @@
+{
+  "type": "epicurean:meal",
+  "ingredients": [
+    {
+      "item": "minecraft:milk"
+    },
+    {
+      "item": "minecraft:wheat"
+    }
+  ],
+  "seasonings": [
+    {
+      "item": "epicurean:jelly"
+    },
+    {
+      "item": "epicurean:super_jelly"
+    },
+    {
+      "item": "epicurean:butter"
+    },
+    {
+      "item": "minecraft:sweet_berries"
+    }
+  ],
+  "result": {
+    "item": "epicurean:pancake",
+    "count": 2
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "type": "epicurean:meal",
+  "ingredients": [
+    {
+      "item": "minecraft:beef"
+    },
+    {
+      "item": "minecraft:bread"
+    }
+    {
+      "item": "minecraft:bread"
+    }
+  ],
+  "seasonings": [
+    {
+      "item": "epicurean:tomato"
+    },
+    {
+      "item": "epicurean:onion"
+    },
+    {
+      "item": "minecraft:cooked_porkchop"
+    }
+  ],
+  "result": {
+    "item": "epicurean:hamburger",
+    "count": 1
+  }
+}

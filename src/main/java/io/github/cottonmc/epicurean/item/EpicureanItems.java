@@ -36,6 +36,9 @@ public class EpicureanItems {
 	public static final Item SPAGHETTI = register("spaghetti", new MealItem(10, 0.5f));
 	public static final Item RAMEN = register("ramen", new MealItem(10, 0.5f));
 	public static final Item BEEF_STEW = register("beef_stew", new MealItem(10, 0.5f));
+	public static final Item CHICKEN_TENDER = register("chicken_tender", new MealItem(5, 0.3f));
+	public static final Item HAMBURGER = register("hamburger", new MealItem(10, 0.5f));
+	public static final Item PANCAKE = register("pancake", new MealItem(5, 0.3f));
 
 	public static Item register(String name, Item item) {
 		Registry.register(Registry.ITEM, new Identifier(EpicureanGastronomy.MOD_ID, name), item);

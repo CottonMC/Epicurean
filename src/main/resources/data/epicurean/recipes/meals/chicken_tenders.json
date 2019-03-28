@@ -1,0 +1,20 @@
+{
+  "type": "epicurean:meal",
+  "ingredients": [
+    {
+      "item": "minecraft:cooked_chicken"
+    },
+    {
+      "item": "minecraft:bread"
+    }
+  ],
+  "seasonings": [
+    {
+      "item": "epicurean:onion"
+    }
+  ],
+  "result": {
+    "item": "epicurean:cicken_tender",
+    "count": 4
+  }
+}
