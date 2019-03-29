@@ -23,13 +23,13 @@ public class CookingTableScreen extends ContainerScreen<CookingTableContainer> /
 	}
 
 	@Override
-	protected void onInitialized() {
-		super.onInitialized();
-		this.isNarrow = this.screenWidth < 379;
+	protected void init() {
+		super.init();
+		this.isNarrow = this.width < 379;
 		//TODO: uncomment when there's a better way to make new recipe book groups
 //		this.recipeBookGui.initialize(this.screenWidth, this.screenHeight, this.client, this.isNarrow, this.container);
 //		this.left = this.recipeBookGui.findLeftEdge(this.isNarrow, this.screenWidth, this.width);
-		this.left = (this.screenWidth - this.width) / 2;
+		this.left = (this.width - this.containerWidth) / 2;
 //		this.listeners.add(this.recipeBookGui);
 //		this.focusOn(this.recipeBookGui);
 //		this.addButton(new RecipeBookButtonWidget(this.left + 144, this.top + 9, 20, 18, 0, 0, 19, RECIPE_BUTTON_TEX, (buttonWidget_1) -> {
@@ -48,15 +48,15 @@ public class CookingTableScreen extends ContainerScreen<CookingTableContainer> /
 	@Override
 	protected void drawBackground(float var1, int var2, int var3) {
 		GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
-		this.client.getTextureManager().bindTexture(TEXTURE);
+		this.minecraft.getTextureManager().bindTexture(TEXTURE);
 		int guiX = this.left;
-		int guiY = (this.screenHeight - this.height) / 2;
-		this.drawTexturedRect(guiX, guiY, 0, 0, this.width, this.height);
+		int guiY = (this.height - this.containerHeight) / 2;
+		this.blit(guiX, guiY, 0, 0, this.width, this.height);
 	}
 
 	@Override
 	public void render(int mouseX, int mouseY, float partialTicks) {
-		this.drawBackground();
+		this.renderBackground();
 //		if (this.recipeBookGui.isOpen() && this.isNarrow) {
 			this.drawBackground(partialTicks, mouseX, mouseY);
 //			this.recipeBookGui.render(mouseX, mouseY, partialTicks);
@@ -76,11 +76,11 @@ public class CookingTableScreen extends ContainerScreen<CookingTableContainer> /
 		super.drawMouseoverTooltip(mouseX, mouseY);
 		if (mouseX >= this.left + 26 && mouseY >= this.top+11
 				&& mouseX <= this.left + 43 && mouseY <= this.top + 26) {
-			drawTooltip(new TranslatableTextComponent("tooltip.epicurean.table.base").getText(), mouseX, mouseY);
+			renderTooltip(new TranslatableTextComponent("tooltip.epicurean.table.base").getText(), mouseX, mouseY);
 		}
 		if (mouseX >= this.left + 94 && mouseY >= this.top+11
 				&& mouseX <= this.left + 109 && mouseY <= this.top + 26) {
-			drawTooltip(new TranslatableTextComponent("tooltip.epicurean.table.seasoning").getText(), mouseX, mouseY);
+			renderTooltip(new TranslatableTextComponent("tooltip.epicurean.table.seasoning").getText(), mouseX, mouseY);
 		}
 	}
 

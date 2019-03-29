@@ -26,6 +26,9 @@
   "item.epicurean.spaghetti": "Spaghetti",
   "item.epicurean.ramen": "Ramen",
   "item.epicurean.beef_stew": "Beef Stew",
+  "item.epicurean.chicken_tender": "Chicken Tender",
+  "item.epicurean.hamburger": "Hamburger",
+  "item.epicurean.pancake": "Pancake",
 
   "tooltip.epicurean.flavor.spicy": "spicy",
   "tooltip.epicurean.flavor.umami": "umami",

@@ -102,4 +102,11 @@ public class IngredientProfiles implements SimpleResourceReloadListener {
 	public Identifier getFabricId() {
 		return new Identifier(EpicureanGastronomy.MOD_ID, "flavor_profiles");
 	}
+
+	@Override
+	public CompletableFuture<Void> reload(Helper helper, ResourceManager manager, Profiler profiler_load, Profiler profiler_apply, Executor executor_load, Executor executor_apply) {
+		CompletableFuture future = CompletableFuture.supplyAsync(() -> this.load(manager, profiler_load, executor_load), executor_load);
+		helper.getClass();
+		return future.thenCompose(helper::waitForAll).thenAcceptAsync((object) -> this.apply(object, manager, profiler_apply, executor_apply), executor_apply);
+	}
 }

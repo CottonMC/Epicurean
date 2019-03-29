@@ -2,7 +2,7 @@
   "type": "epicurean:meal",
   "ingredients": [
     {
-      "item": "minecraft:milk"
+      "item": "minecraft:milk_bucket"
     },
     {
       "item": "minecraft:wheat"

@@ -8,12 +8,12 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.gen.chunk.ChunkGeneratorConfig;
 import net.minecraft.world.gen.feature.DefaultFeatureConfig;
-import net.minecraft.world.gen.feature.PumpkinFeature;
+import net.minecraft.world.gen.feature.WildCropFeature;
 
 import java.util.Random;
 import java.util.function.Function;
 
-public class DesertCropFeature extends PumpkinFeature {
+public class DesertCropFeature extends WildCropFeature {
 	public DesertCropFeature(Function<Dynamic<?>, ? extends DefaultFeatureConfig> config, BlockState state) {
 		super(config, state);
 	}
@@ -25,7 +25,7 @@ public class DesertCropFeature extends PumpkinFeature {
 		for(int i = 0; i < 64; i++) {
 			BlockPos placePos = pos.add(random.nextInt(8) - random.nextInt(8), random.nextInt(4) - random.nextInt(4), random.nextInt(8) - random.nextInt(8));
 			if (world.isAir(placePos) && (world.getBlockState(placePos.down()).getBlock() == Blocks.SAND || world.getBlockState(placePos.down()).getBlock() == Blocks.GRASS_BLOCK)) {
-				world.setBlockState(placePos, this.pumpkin, 2);
+				world.setBlockState(placePos, this.crop, 2);
 				placed++;
 			}
 		}

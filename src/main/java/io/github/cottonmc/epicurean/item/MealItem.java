@@ -61,7 +61,7 @@ public class MealItem extends Item {
 		PotionUtil.buildTooltip(stack, tooltip, 1.0F);
 		if (!stack.hasTag()) return;
 		if (stack.getTag().containsKey("FlavorProfile")) {
-			if (Screen.isShiftPressed()) {
+			if (Screen.hasShiftDown()) {
 				CompoundTag profile = stack.getTag().getCompound("FlavorProfile");
 				String flavor = new TranslatableTextComponent("tooltip.epicurean.flavor." + profile.getString("ProminentFlavor").toLowerCase()).getText();
 				tooltip.add(new TranslatableTextComponent("tooltip.epicurean.meal.flavor", flavor).applyFormat(TextFormat.GRAY));
