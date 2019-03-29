@@ -29,7 +29,7 @@ public class EpicureanItems {
 	public static final Item PEPPER_SEEDS = register("pepper_seeds", new PlantableItem(EpicureanCrops.PEPPER_PLANT, EpicureanItems.DEFAULT_SETTINGS));
 
 	//snacks
-	public static final Item NOODLES = register("noodles", new MealItem(1, 0.1f));
+	public static final Item NOODLES = register("noodles", new MealItem(3, 0.1f));
 
 	//meals
 	public static final Item PAD_THAI = register("pad_thai", new MealItem(10, 0.5f));

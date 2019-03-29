@@ -105,8 +105,6 @@ public class IngredientProfiles implements SimpleResourceReloadListener {
 
 	@Override
 	public CompletableFuture<Void> reload(Helper helper, ResourceManager manager, Profiler profiler_load, Profiler profiler_apply, Executor executor_load, Executor executor_apply) {
-		CompletableFuture future = CompletableFuture.supplyAsync(() -> this.load(manager, profiler_load, executor_load), executor_load);
-		helper.getClass();
-		return future.thenCompose(helper::waitForAll).thenAcceptAsync((object) -> this.apply(object, manager, profiler_apply, executor_apply), executor_apply);
+		return apply(helper, manager, profiler_load, profiler_apply, executor_load, executor_apply);
 	}
 }
