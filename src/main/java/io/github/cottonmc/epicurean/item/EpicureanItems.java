@@ -18,11 +18,13 @@ public class EpicureanItems {
 	public static final Item DEP_SUPER_JELLY = Registry.register(Registry.ITEM, "edibles:super_jelly", new DeprecatedItem());
 
 	//ingredients
-	public static final Item TOMATO = register("tomato", new Item(DEFAULT_SETTINGS));
-	public static final Item PEPPER = register("pepper", new Item(DEFAULT_SETTINGS));
+	public static final Item TOMATO = register("tomato", new SeasoningItem(2, 0.3f, StatusEffects.HASTE, DEFAULT_SETTINGS));
+	public static final Item PEPPER = register("pepper", new SeasoningItem(2, 0.3f, StatusEffects.RESISTANCE, DEFAULT_SETTINGS));
 	public static final Item ONION = register("onion", new PlantableItem(EpicureanCrops.ONION_PLANT, EpicureanItems.DEFAULT_SETTINGS.food(new FoodItemSetting.Builder().hunger(2).saturationModifier(0.2F).build())));
 	public static final Item DASHI = register("dashi", new Item(DEFAULT_SETTINGS));
-	public static final Item BUTTER = register("butter", new SeasoningItem(1, 0.25f, StatusEffects.SPEED, DEFAULT_SETTINGS));
+	public static final Item BUTTER = register("butter", new SeasoningItem(1, 0.1f, StatusEffects.SPEED, DEFAULT_SETTINGS));
+	public static final Item SOYBEAN = register("soybean", new PlantableItem(EpicureanCrops.SOYBEAN_PLANT, EpicureanItems.DEFAULT_SETTINGS.food(new FoodItemSetting.Builder().hunger(2).saturationModifier(0.2f).build())));
+	public static final Item SALT = register("salt", new SaltItem(DEFAULT_SETTINGS));
 
 	//seeds
 	public static final Item TOMATO_SEEDS = register("tomato_seeds", new PlantableItem(EpicureanCrops.TOMATO_PLANT, EpicureanItems.DEFAULT_SETTINGS));

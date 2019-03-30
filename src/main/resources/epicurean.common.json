@@ -11,7 +11,8 @@
     "MixinFertilizableNetherWart",
     "MixinHungerManager",
     "MixinEggSeasoning",
-    "MixinRecipeBookGroups"
+    "MixinRecipeBookGroups",
+    "MixinCauldron"
   ],
   "injectors": {
     "defaultRequire": 1

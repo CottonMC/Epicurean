@@ -1,6 +1,7 @@
 package io.github.cottonmc.epicurean.recipe;
 
 import io.github.cottonmc.epicurean.container.CookingInventory;
+import io.github.cottonmc.epicurean.item.EpicureanItems;
 import io.github.cottonmc.epicurean.item.MealItem;
 import io.github.cottonmc.epicurean.meal.FlavorGroup;
 import io.github.cottonmc.epicurean.meal.IngredientProfiles;
@@ -49,8 +50,8 @@ public class DressingMealRecipe extends MealRecipe {
 		int dressings = 0;
 		for (int i = CookingInventory.SECTION_SIZE; i < inv.getInvSize(); i++) {
 			if (!inv.getInvStack(i).isEmpty()) {
-				if (!IngredientProfiles.DRESSINGS.containsKey(inv.getInvStack(i).getItem())) return false;
-				else dressings++;
+				if (inv.getInvStack(i).getItem() == EpicureanItems.SALT || IngredientProfiles.DRESSINGS.containsKey(inv.getInvStack(i).getItem())) dressings++;
+				else return false;
 			}
 		}
 		if (!targetMeal.isEmpty()) meal = targetMeal;
@@ -71,16 +72,18 @@ public class DressingMealRecipe extends MealRecipe {
 			CompoundTag ingredients = profile.getCompound("Seasonings");
 			List<StatusEffectInstance> effects = PotionUtil.getCustomPotionEffects(meal);
 			tag.remove("CustomPotionEffects");
+			int saltCount = 0;
 			for (ItemStack seasoning : seasonings) {
 				Item item = seasoning.getItem();
-				//TODO: figure out how we want to calculate strength + duration
-				MealRecipe.addEffect(effects, new StatusEffectInstance(IngredientProfiles.DRESSINGS.get(item).getEffect(), 200));
+				if (item == EpicureanItems.SALT) saltCount++;
+				else effects = MealRecipe.addEffect(effects, new StatusEffectInstance(IngredientProfiles.DRESSINGS.get(item).getEffect(), 200));
 			}
 			for (String ingredient : ingredients.getKeys()) {
 				for (int i = 0; i < ingredients.getInt(ingredient); i++) {
 					seasonings.add(new ItemStack(Registry.ITEM.get(new Identifier(ingredient))));
 				}
 			}
+			effects = MealRecipe.addSalt(effects, saltCount);
 			tag.remove("FlavorProfile");
 			PotionUtil.setCustomPotionEffects(meal, effects);
 			tag.put("FlavorProfile", MealRecipe.makeFlavorProfile(prominent, seasonings));

@@ -7,12 +7,9 @@ import net.minecraft.util.StringRepresentable;
 public enum FlavorGroup implements StringRepresentable {
 	SPICY("spicy", 6, StatusEffects.RESISTANCE),
 	UMAMI("umami", 5, StatusEffects.SATURATION),
-	//TODO: decide final effect
 	ACIDIC("acidic", 4, StatusEffects.FIRE_RESISTANCE),
 	SWEET("sweet", 3, StatusEffects.SPEED),
-	//TODO: decide final effect
 	BITTER("bitter", 2, StatusEffects.HASTE),
-	//TODO: decide final effect
 	FILLING("filling", 1, StatusEffects.ABSORPTION);
 
 	private final String name;

@@ -51,7 +51,7 @@ public class CookingTableScreen extends ContainerScreen<CookingTableContainer> /
 		this.minecraft.getTextureManager().bindTexture(TEXTURE);
 		int guiX = this.left;
 		int guiY = (this.height - this.containerHeight) / 2;
-		this.blit(guiX, guiY, 0, 0, this.width, this.height);
+		this.blit(guiX, guiY, 0, 0, this.containerWidth, this.containerHeight);
 	}
 
 	@Override
