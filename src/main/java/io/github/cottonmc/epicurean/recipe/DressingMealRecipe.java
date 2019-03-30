@@ -73,6 +73,7 @@ public class DressingMealRecipe extends MealRecipe {
 			List<StatusEffectInstance> effects = PotionUtil.getCustomPotionEffects(meal);
 			tag.remove("CustomPotionEffects");
 			int saltCount = 0;
+			if (profile.containsKey("Salt")) saltCount += profile.getInt("Salt");
 			for (ItemStack seasoning : seasonings) {
 				Item item = seasoning.getItem();
 				if (item == EpicureanItems.SALT) saltCount++;

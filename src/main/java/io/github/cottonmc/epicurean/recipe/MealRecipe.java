@@ -122,8 +122,6 @@ public class MealRecipe implements CraftingRecipe {
 				StatusEffect effectToAdd = IngredientProfiles.DRESSINGS.get(item).getEffect();
 				int timeToAdd = IngredientProfiles.EFFECT_TIMES.getOrDefault(effectToAdd, 1800);
 				effects = addEffect(effects, new StatusEffectInstance(effectToAdd, timeToAdd));
-			} else if (item == EpicureanItems.SALT) {
-				saltCount++;
 			}
 		}
 
@@ -131,7 +129,7 @@ public class MealRecipe implements CraftingRecipe {
 		StatusEffect effectToAdd = FlavorGroup.forImpact(prominence).getEffect();
 		int timeToAdd = IngredientProfiles.EFFECT_TIMES.getOrDefault(effectToAdd, 1800);
 		effects = addEffect(effects, new StatusEffectInstance(effectToAdd, timeToAdd));
-		effects = addSalt(effects, saltCount);
+		effects = addSalt(effects, countSalt(seasonings));
 		PotionUtil.setCustomPotionEffects(meal, effects);
 		return meal;
 	}
@@ -168,6 +166,7 @@ public class MealRecipe implements CraftingRecipe {
 			tag.put("Seasonings", makeIngredientList(seasonings));
 			tag.putInt("Hunger", getHungerAmount(seasonings));
 			tag.putFloat("Saturation", getSaturationAmount(seasonings));
+			tag.putInt("Salt", countSalt(seasonings));
 		}
 		return tag;
 	}
@@ -212,6 +211,14 @@ public class MealRecipe implements CraftingRecipe {
 		return (float) ((saturation * EpicureanGastronomy.config.seasoningEfficiency) + seasoningBonus);
 	}
 
+	public static int countSalt(List<ItemStack> seasonings) {
+		int salt = 0;
+		for (ItemStack stack : seasonings) {
+			if (stack.getItem() == EpicureanItems.SALT) salt++;
+		}
+		return salt;
+	}
+
 	public static List<StatusEffectInstance> addEffect(List<StatusEffectInstance> currentEffects, StatusEffectInstance effectToAdd) {
 		StatusEffect effect = effectToAdd.getEffectType();
 		boolean replaced = false;
@@ -241,15 +248,15 @@ public class MealRecipe implements CraftingRecipe {
 		if (saltCount == 0) return currentEffects;
 		else if (saltCount == effectCount + 1) {
 			for (StatusEffectInstance effect : currentEffects) {
-				effects = addEffect(effects, new StatusEffectInstance(effect.getEffectType(), effect.getDuration(), effect.getAmplifier() + 1));
+				effects = addEffect(effects, new StatusEffectInstance(effect.getEffectType(), effect.getDuration() / 2, effect.getAmplifier() + 1));
 			}
 		} else if (saltCount == effectCount) {
 			for (StatusEffectInstance effect : currentEffects) {
-				effects = addEffect(effects, new StatusEffectInstance(effect.getEffectType(), effect.getDuration() / 2));
+				effects = addEffect(effects, new StatusEffectInstance(effect.getEffectType(), effect.getDuration() / 4));
 			}
 		} else if (saltCount < effectCount) {
 			for (StatusEffectInstance effect : currentEffects) {
-				effects = addEffect(effects, new StatusEffectInstance(effect.getEffectType(), effect.getDuration() / 4));
+				effects = addEffect(effects, new StatusEffectInstance(effect.getEffectType(), effect.getDuration() / 6));
 			}
 		} else {
 			effects.clear();
