@@ -2,7 +2,7 @@
   "id": "epicurean",
   "name": "Epicurean Gastronomy",
   "description": "Adds a selection of food and food-related tweaks.",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "side": "universal",
   "initializers": [
     "io.github.cottonmc.epicurean.EpicureanGastronomy",

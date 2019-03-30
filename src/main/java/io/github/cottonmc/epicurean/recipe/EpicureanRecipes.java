@@ -1,10 +1,20 @@
 package io.github.cottonmc.epicurean.recipe;
 
+import io.github.cottonmc.cotton.behavior.CauldronBehavior;
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
+import io.github.cottonmc.epicurean.item.EpicureanItems;
+import net.minecraft.block.Blocks;
+import net.minecraft.block.CauldronBlock;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.SpecialRecipeSerializer;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.stat.Stats;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -34,6 +44,26 @@ public class EpicureanRecipes {
 	}
 
 	public static void init() {
-
+		CauldronBehavior.registerBehavior(
+				(ctx) -> ctx.getCauldronLevel() > 0
+						&& ctx.getStack().getItem() == Items.NETHER_WART
+						&& ctx.getWorld().getBlockState(ctx.getPos().down()).getBlock() == Blocks.FIRE
+						&& !ctx.getWorld().isClient,
+				(ctx) -> {
+					PlayerEntity player = ctx.getPlayer();
+					ItemStack stack = ctx.getStack();
+					if (!player.abilities.creativeMode) {
+						ItemStack salt = new ItemStack(EpicureanItems.SALT, 1);
+						player.increaseStat(Stats.USE_CAULDRON);
+						stack.subtractAmount(1);
+						if (stack.isEmpty()) {
+							player.setStackInHand(ctx.getHand(), salt);
+						} else if (!player.inventory.insertStack(salt)) {
+							player.dropItem(salt, false);
+						}
+					}
+					((CauldronBlock)Blocks.CAULDRON).setLevel(ctx.getWorld(), ctx.getPos(), ctx.getState(), ctx.getCauldronLevel() - 1);
+					ctx.getWorld().playSound(null, ctx.getPos(), SoundEvents.BLOCK_NETHER_WART_BREAK, SoundCategory.BLOCK, 1.0f, 1.0f);
+				});
 	}
 }
