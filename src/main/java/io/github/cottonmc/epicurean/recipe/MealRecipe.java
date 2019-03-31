@@ -68,10 +68,7 @@ public class MealRecipe implements CraftingRecipe {
 			if (stack.isEmpty() || stack.getItem() == EpicureanItems.SALT) continue;
 			boolean seasoningFound = false;
 			for (Ingredient ing : seasonings) {
-				ItemStack[] stacks = ing.getStackArray();
-				for (ItemStack ingStack : stacks) {
-					if (ingStack.getItem() == stack.getItem()) seasoningFound = true;
-				}
+				if (ing.method_8093(stack)) seasoningFound = true;
 			}
 			if (!seasoningFound) return false;
 		}
@@ -149,7 +146,6 @@ public class MealRecipe implements CraftingRecipe {
 		return this.id;
 	}
 
-	@Environment(EnvType.CLIENT)
 	public String getGroup() {
 		return this.group;
 	}
