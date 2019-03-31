@@ -64,8 +64,7 @@ public class EpicureanRecipes {
 							player.dropItem(salt, false);
 						}
 					}
-					((CauldronBlock)Blocks.CAULDRON).setLevel(ctx.getWorld(), ctx.getPos(), ctx.getState(), ctx.getCauldronLevel() - 1);
-					CauldronUtils.setFluidFromLevel(ctx.getWorld(), ctx.getPos());
+					CauldronUtils.tryDrainFluid(ctx.getWorld(), ctx.getPos(), ctx.getState());
 					ctx.getWorld().playSound(null, ctx.getPos(), SoundEvents.BLOCK_NETHER_WART_BREAK, SoundCategory.BLOCK, 1.0f, 1.0f);
 				});
 	}
