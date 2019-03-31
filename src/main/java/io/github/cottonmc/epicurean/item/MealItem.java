@@ -30,6 +30,11 @@ public class MealItem extends Item {
 	}
 
 	@Override
+	public boolean hasRecipeRemainder() {
+		return false;
+	}
+
+	@Override
 	public ItemStack onItemFinishedUsing(ItemStack stack, World world, LivingEntity entity) {
 		if (entity instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity)entity;

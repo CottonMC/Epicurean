@@ -38,7 +38,7 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 		this.resultInv = new CraftingResultInventory();
 		this.context = ctx;
 		this.player = playerInv.player;
-		this.addSlot(new CraftingResultSlot(playerInv.player, this.cookingInv, this.resultInv, 0, 146, 40));
+		this.addSlot(new CookingResultSlot(playerInv.player, this.cookingInv, this.resultInv, 0, 146, 40));
 
 		//base slots
 		for (int i = 0; i < 2; ++i) {
