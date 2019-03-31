@@ -123,7 +123,7 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 
 	protected static void syncCraft(int syncId, World world, PlayerEntity player, CookingInventory cookingInv, CraftingResultInventory resultInv) {
 		if (!world.isClient) {
-			ServerPlayerEntity serverPlayer = (ServerPlayerEntity)player;
+			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
 			ItemStack stack = ItemStack.EMPTY;
 			Optional<MealRecipe> optional = world.getServer().getRecipeManager().get(EpicureanRecipes.MEAL, cookingInv, world);
 			if (optional.isPresent()) {
@@ -149,7 +149,7 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 				this.context.run((world, pos) -> {
 					stackInSlot.getItem().onCrafted(stackInSlot, world, player);
 				});
-				if (!this.insertItem(stackInSlot, 10, 46, true)) {
+				if (!this.insertItem(stackInSlot, FIRST_PLAYER_SLOT, SLOT_COUNT, true)) {
 					return ItemStack.EMPTY;
 				}
 
@@ -184,4 +184,5 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 
 		return stackToTransfer;
 	}
+
 }

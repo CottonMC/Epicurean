@@ -6,8 +6,6 @@ import io.github.cottonmc.epicurean.item.EpicureanItems;
 import io.github.cottonmc.epicurean.item.Seasoning;
 import io.github.cottonmc.epicurean.meal.FlavorGroup;
 import io.github.cottonmc.epicurean.meal.IngredientProfiles;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.inventory.CraftingInventory;
@@ -91,7 +89,7 @@ public class MealRecipe implements CraftingRecipe {
 		if (!meal.hasTag()) meal.setTag(new CompoundTag());
 		int prominence = 0;
 		List<ItemStack> ingredients = new ArrayList<>();
-		for (int i = 0; i < inv.getInvSize(); i++) {
+		for (int i = 0; i < CookingInventory.SECTION_SIZE; i++) {
 			if (!inv.getInvStack(i).isEmpty()) ingredients.add(inv.getInvStack(i));
 		}
 		List<ItemStack> seasonings = new ArrayList<>();
@@ -105,7 +103,6 @@ public class MealRecipe implements CraftingRecipe {
 				prominence = Math.max(prominence, IngredientProfiles.MEAL_INGREDIENTS.get(item).getImpact());
 			}
 		}
-		int saltCount = 0;
 		for (ItemStack seasoning : seasonings) {
 			Item item = seasoning.getItem();
 			if (item instanceof Seasoning) {
