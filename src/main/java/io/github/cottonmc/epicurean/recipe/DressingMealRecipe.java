@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -26,6 +27,11 @@ public class DressingMealRecipe extends MealRecipe {
 
 	public DressingMealRecipe(Identifier id) {
 		super(id, "", ItemStack.EMPTY, DefaultedList.create(), DefaultedList.create());
+	}
+
+	@Override
+	public RecipeType<?> getType() {
+		return EpicureanRecipes.MEAL;
 	}
 
 	@Override

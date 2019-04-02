@@ -7,6 +7,7 @@ import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.Recipe;
 import net.minecraft.util.DefaultedList;
 
 public class CookingResultSlot extends CraftingResultSlot {
