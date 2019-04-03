@@ -23,7 +23,7 @@ targetCompatibility = 1.8
 
 archivesBaseName = "epicurean-gastronomy"
 group = "io.github.cottonmc"
-version = "2.1.0+19w13b"
+version = "2.1.0+19w14a"
 
 minecraft {
 	refmapName = 'mixins.epicurean.refmap.json'
