@@ -18,4 +18,9 @@ public class PlantableItem extends StringItem {
 			stacks.add(new ItemStack(this));
 		}
 	}
+
+	@Override
+	public boolean hasRecipeRemainder() {
+		return false;
+	}
 }

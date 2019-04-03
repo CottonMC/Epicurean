@@ -125,7 +125,7 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 		if (!world.isClient) {
 			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
 			ItemStack stack = ItemStack.EMPTY;
-			Optional<MealRecipe> optional = world.getServer().getRecipeManager().get(EpicureanRecipes.MEAL, cookingInv, world);
+			Optional<MealRecipe> optional = world.getServer().getRecipeManager().getFirstMatch(EpicureanRecipes.MEAL, cookingInv, world);
 			if (optional.isPresent()) {
 				MealRecipe recipe = optional.get();
 				if (resultInv.shouldCraftRecipe(world, serverPlayer, recipe)) {

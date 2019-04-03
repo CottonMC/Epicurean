@@ -49,7 +49,7 @@
 
   "tooltip.epicurean.table.base": "Base ingredients",
   "tooltip.epicurean.table.seasoning": "Additional seasonings",
-  "tooltip.epicurean.readmore": "Press SHIFT to read seasoning notes",
+  "tooltip.epicurean.readmore": "Press SHIFT to see notes",
 
   "item.edibles.jelly": "Jelly (Moldy)",
   "item.edibles.super_jelly": "Super-Jelly (Moldy)",

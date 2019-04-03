@@ -73,7 +73,7 @@ public class MixinOmnivore {
 				}
 			}
 			if (stack.getItem() == Items.TNT || stack.getItem() == Items.TNT_MINECART) { // TNT/TNT minecart
-				world.createExplosion(null, entity.x, entity.y+1, entity.z, 1.5f, Explosion.class_4179.NONE);
+				world.createExplosion(null, entity.x, entity.y+1, entity.z, 1.5f, Explosion.DestructionType.NONE);
 			}
 
 			double damageConf = EpicureanGastronomy.config.omnivoreItemDamage;
@@ -81,7 +81,7 @@ public class MixinOmnivore {
 			if (damageConf < 1 && damageConf > 0) {
 				damage = (int)Math.ceil(damageConf*stack.getItem().getDurability());
 			}
-			if (stack.hasDurability() && damage > 0) stack.applyDamage(damage, entity);
+			if (stack.hasDurability() && damage > 0) stack.applyDamage(damage, entity, (user) -> user.method_20236(entity.getActiveHand()));
 			else stack.subtractAmount(1);
 			cir.setReturnValue(stack);
 		}
