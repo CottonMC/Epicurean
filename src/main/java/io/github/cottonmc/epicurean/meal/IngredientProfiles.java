@@ -9,6 +9,7 @@ import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.Item;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
+import net.minecraft.resource.ResourceReloadListener;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
@@ -104,7 +105,9 @@ public class IngredientProfiles implements SimpleResourceReloadListener {
 	}
 
 	@Override
-	public CompletableFuture<Void> reload(Helper helper, ResourceManager manager, Profiler profiler_load, Profiler profiler_apply, Executor executor_load, Executor executor_apply) {
-		return apply(helper, manager, profiler_load, profiler_apply, executor_load, executor_apply);
+	public CompletableFuture<Void> reload(ResourceReloadListener.Helper helper, ResourceManager manager, Profiler loadProfiler, Profiler applyProfiler, Executor loadExecutor, Executor applyExecutor) {
+		CompletableFuture future = this.load(manager, loadProfiler, loadExecutor);
+		helper.getClass();
+		return future.thenCompose(helper::waitForAll).thenCompose((o) -> this.apply(o, manager, applyProfiler, applyExecutor));
 	}
 }

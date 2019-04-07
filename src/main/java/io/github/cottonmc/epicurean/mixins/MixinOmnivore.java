@@ -55,7 +55,7 @@ public class MixinOmnivore {
 				PlayerEntity player = (PlayerEntity) entity;
 				player.getHungerManager().add(14, 2.8f);
 				world.playSound(null, player.x, player.y, player.z, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYER, 0.5F, world.random.nextFloat() * 0.1F + 0.8F);
-				player.incrementStat(Stats.CUSTOM.getOrCreateStat(Stats.EAT_CAKE_SLICE), 7);
+				player.increaseStat(Stats.EAT_CAKE_SLICE, 7);
 				if (player instanceof ServerPlayerEntity) {
 					Criterions.CONSUME_ITEM.handle((ServerPlayerEntity) player, stack);
 				}
@@ -81,7 +81,7 @@ public class MixinOmnivore {
 			if (damageConf < 1 && damageConf > 0) {
 				damage = (int)Math.ceil(damageConf*stack.getItem().getDurability());
 			}
-			if (stack.hasDurability() && damage > 0) stack.applyDamage(damage, entity, (user) -> user.method_20236(entity.getActiveHand()));
+			if (stack.hasDurability() && damage > 0) stack.applyDamage(damage, entity, (user) -> user.sendToolBreakStatus(entity.getActiveHand()));
 			else stack.subtractAmount(1);
 			cir.setReturnValue(stack);
 		}

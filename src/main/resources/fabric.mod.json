@@ -1,19 +1,33 @@
 {
+  "schemaVersion": 1,
   "id": "epicurean",
+  "version": "$version",
+
   "name": "Epicurean Gastronomy",
+  "icon": "assets/epicurean/icon.png",
   "description": "Adds a selection of food and food-related tweaks.",
-  "version": "2.1.0",
-  "side": "universal",
-  "initializers": [
-    "io.github.cottonmc.epicurean.EpicureanGastronomy",
-    "io.github.cottonmc.epicurean.EpicureanClient"
+  "licence": "LGPL v3",
+  "contact": {
+    "sources": "https://github.com/CottonMC/epicureangastronomy"
+  },
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.cottonmc.epicurean.EpicureanGastronomy"
     ],
-    "mixins": {
-      "common": "epicurean.common.json",
-      "client": "epicurean.client.json"
-    },
-    "requires": {
-      "fabric": "*",
-      "cotton": "*"
-    }
+    "client": [
+      "io.github.cottonmc.epicurean.EpicureanClient"
+    ]
+  },
+  "mixins": [
+    "epicurean.common.json",
+    "epicurean.client.json"
+  ],
+  "requires": {
+    "fabricloader": ">=0.4.0",
+    "fabric": "*",
+    "cotton": "*"
+  }
 }
+
