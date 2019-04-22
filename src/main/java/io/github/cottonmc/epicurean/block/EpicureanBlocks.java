@@ -6,7 +6,7 @@ import io.github.cottonmc.epicurean.item.EpicureanItems;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.container.BlockContext;
-import net.minecraft.item.block.BlockItem;
+import net.minecraft.item.BlockItem;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 

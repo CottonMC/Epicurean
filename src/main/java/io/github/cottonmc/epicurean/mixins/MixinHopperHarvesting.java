@@ -2,12 +2,12 @@ package io.github.cottonmc.epicurean.mixins;
 
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import net.minecraft.block.*;
+import net.minecraft.block.entity.Hopper;
 import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.sortme.Hopper;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
@@ -24,7 +24,7 @@ import java.util.List;
 @Mixin(HopperBlockEntity.class)
 public class MixinHopperHarvesting {
 
-	@Inject(method = "extract(Lnet/minecraft/sortme/Hopper;)Z", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "extract(Lnet/minecraft/block/entity/Hopper;)Z", at = @At("HEAD"), cancellable = true)
 	private static void hopperHarvest(Hopper hopper, CallbackInfoReturnable cir) {
 		if (EpicureanGastronomy.config.hopperHarvest) {
 			World world = hopper.getWorld();

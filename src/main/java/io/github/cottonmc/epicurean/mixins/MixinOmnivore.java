@@ -54,7 +54,7 @@ public class MixinOmnivore {
 			if (entity instanceof PlayerEntity) {
 				PlayerEntity player = (PlayerEntity) entity;
 				player.getHungerManager().add(14, 2.8f);
-				world.playSound(null, player.x, player.y, player.z, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYER, 0.5F, world.random.nextFloat() * 0.1F + 0.8F);
+				world.playSound(null, player.x, player.y, player.z, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, world.random.nextFloat() * 0.1F + 0.8F);
 				player.increaseStat(Stats.EAT_CAKE_SLICE, 7);
 				if (player instanceof ServerPlayerEntity) {
 					Criterions.CONSUME_ITEM.handle((ServerPlayerEntity) player, stack);
@@ -66,7 +66,7 @@ public class MixinOmnivore {
 			if (entity instanceof PlayerEntity) {
 				PlayerEntity player = (PlayerEntity) entity;
 				player.getHungerManager().add(EpicureanGastronomy.config.omnivoreFoodRestore, EpicureanGastronomy.config.omnivoreSaturationRestore);
-				world.playSound(null, player.x, player.y, player.z, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYER, 0.5F, world.random.nextFloat() * 0.1F + 0.9F);
+				world.playSound(null, player.x, player.y, player.z, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, world.random.nextFloat() * 0.1F + 0.9F);
 				player.incrementStat(Stats.USED.getOrCreateStat((Item)(Object)this));
 				if (player instanceof ServerPlayerEntity) {
 					Criterions.CONSUME_ITEM.handle((ServerPlayerEntity) player, stack);
