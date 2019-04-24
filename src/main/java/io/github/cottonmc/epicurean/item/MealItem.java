@@ -1,6 +1,8 @@
 package io.github.cottonmc.epicurean.item;
 
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.Screen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
@@ -26,7 +28,7 @@ import java.util.List;
 public class MealItem extends Item {
 
 	public MealItem(int hunger, float saturation) {
-		super(EpicureanItems.DEFAULT_SETTINGS.food(new FoodItemSetting.Builder().hunger(hunger).saturationModifier(saturation).build()));
+		super(EpicureanItems.foodSettings(hunger, saturation));
 	}
 
 	@Override
@@ -60,6 +62,7 @@ public class MealItem extends Item {
 		return PotionUtil.getPotionEffects(stack);
 	}
 
+	@Environment(EnvType.CLIENT)
 	@Override
 	public void buildTooltip(ItemStack stack, World world, List<TextComponent> tooltip, TooltipContext ctx) {
 		super.buildTooltip(stack, world, tooltip, ctx);

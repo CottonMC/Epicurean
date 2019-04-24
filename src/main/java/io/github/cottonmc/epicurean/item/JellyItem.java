@@ -7,7 +7,7 @@ import net.minecraft.item.Items;
 
 public class JellyItem extends SeasoningItem {
 	public JellyItem(int hunger, float saturation) {
-		super(hunger, saturation, EpicureanItems.DEFAULT_SETTINGS.recipeRemainder(Items.GLASS_BOTTLE));
+		super(hunger, saturation, EpicureanItems.defaultSettings().recipeRemainder(Items.GLASS_BOTTLE));
 	}
 
 	@Override

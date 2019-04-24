@@ -18,7 +18,7 @@ public class EpicureanBlocks {
 
 	public static Block register(String name, Block block) {
 		Registry.register(Registry.BLOCK, new Identifier(EpicureanGastronomy.MOD_ID, name), block);
-		BlockItem item = new BlockItem(block, EpicureanItems.DEFAULT_SETTINGS);
+		BlockItem item = new BlockItem(block, EpicureanItems.defaultSettings());
 		EpicureanItems.register(name, item);
 		return block;
 	}
