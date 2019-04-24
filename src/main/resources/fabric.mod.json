@@ -22,7 +22,10 @@
   },
   "mixins": [
     "epicurean.common.json",
-    "epicurean.client.json"
+    {
+      "config": "epicurean.client.json",
+      "environment": "client"
+    }
   ],
   "requires": {
     "fabricloader": ">=0.4.0",

@@ -10,6 +10,7 @@ import io.github.cottonmc.epicurean.recipe.EpicureanRecipes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.resource.ResourceType;
@@ -38,6 +39,10 @@ public class EpicureanGastronomy implements ModInitializer {
         EpicureanRecipes.init();
         CropGeneration.registerCrops();
         ResourceManagerHelper.get(ResourceType.DATA).registerReloadListener(new IngredientProfiles());
+
+        if (FabricLoader.getInstance().isModLoaded("modmenu")) {
+            ConfigManager.getConfigScreen();
+        }
     }
 
 }

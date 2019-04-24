@@ -23,7 +23,7 @@ targetCompatibility = 1.8
 
 archivesBaseName = "epicurean-gastronomy"
 group = "io.github.cottonmc"
-version = "2.1.1+1.14"
+version = "2.1.2+1.14"
 
 minecraft {
 	refmapName = 'mixins.epicurean.refmap.json'
@@ -32,6 +32,7 @@ minecraft {
 repositories {
 	mavenCentral()
 	maven { url 'http://server.bbkr.space:8081/artifactory/libs-snapshot/' }
+	maven { url = "https://minecraft.curseforge.com/api/maven" }
 }
 
 dependencies {
@@ -41,8 +42,11 @@ dependencies {
 	modCompile "net.fabricmc:fabric:0.2.7+build.127"
 	include "net.fabricmc:fabric:0.2.7+build.127"
 
+	modCompile "io.github.prospector.modmenu:ModMenu:1.4.1-74"
 	modCompile "io.github.cottonmc:cotton:0.6.0+1.14-SNAPSHOT"
 	include "io.github.cottonmc:cotton:0.6.0+1.14-SNAPSHOT"
+	modCompile "cloth-config:ClothConfig:0.2.1.14"
+	include "cloth-config:ClothConfig:0.2.1.14"
 }
 
 processResources {
