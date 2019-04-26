@@ -39,10 +39,6 @@ public class EpicureanGastronomy implements ModInitializer {
         EpicureanRecipes.init();
         CropGeneration.registerCrops();
         ResourceManagerHelper.get(ResourceType.DATA).registerReloadListener(new IngredientProfiles());
-
-        if (FabricLoader.getInstance().isModLoaded("modmenu")) {
-            ConfigManager.getConfigScreen();
-        }
     }
 
 }

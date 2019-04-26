@@ -3,9 +3,10 @@
   "package": "io.github.cottonmc.epicurean.mixins",
   "compatibilityLevel": "JAVA_8",
   "refmap": "mixins.epicurean.refmap.json",
-  "mixins": [
+  "client": [
     "MixinHungerHud",
-    "MixinIngredientTooltips"
+    "MixinIngredientTooltips",
+    "MixinRecipeBookGroups"
   ],
   "injectors": {
     "defaultRequire": 1
