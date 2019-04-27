@@ -1,0 +1,58 @@
+{
+  "itemGroup.epicurean.epicurean_group": "伊壁鸠鲁派美食",
+
+  "block.epicurean.tomato": "番茄藤",
+  "block.epicurean.pepper": "辣椒灌丛",
+  "block.epicurean.onion": "洋葱",
+
+  "item.epicurean.tomato": "番茄",
+  "item.epicurean.pepper": "辣椒",
+  "item.epicurean.onion": "洋葱",
+  "item.epicurean.dashi": "鱼汤",
+  "item.epicurean.butter": "黄油",
+  "item.epicurean.salt": "布鲁尔的岩盐",
+
+  "item.epicurean.tomato_seeds": "番茄种子",
+  "item.epicurean.pepper_seeds": "辣椒种子",
+
+  "item.epicurean.jelly": "果冻",
+  "item.epicurean.super_jelly": "超级果冻",
+
+  "tooltip.epicurean.jellied": "凝胶状",
+  "tooltip.epicurean.super_jellied": "超级凝胶状",
+
+  "block.epicurean.cooking_table": "烹饪桌",
+  "item.epicurean.noodles": "面条",
+  "item.epicurean.pad_thai": "泰式炒河粉",
+  "item.epicurean.spaghetti": "意大利式细面条",
+  "item.epicurean.ramen": "拉面",
+  "item.epicurean.beef_stew": "炖牛肉",
+  "item.epicurean.chicken_tender": "鸡柳",
+  "item.epicurean.hamburger": "汉堡包",
+  "item.epicurean.pancake": "薄烤饼",
+
+  "tooltip.epicurean.flavor.spicy": "辣",
+  "tooltip.epicurean.flavor.umami": "鲜",
+  "tooltip.epicurean.flavor.acidic": "酸",
+  "tooltip.epicurean.flavor.sweet": "甜",
+  "tooltip.epicurean.flavor.bitter": "苦",
+  "tooltip.epicurean.flavor.filling": "馅料",
+
+  "tooltip.epicurean.ingredient": "原料 - %s",
+  "tooltip.epicurean.dressing": "调味料 - %s",
+  "tooltip.epicurean.meal.flavor": "显著特点: %s",
+
+  "tooltip.epicurean.meal.seasonings": "已添加调味料:",
+  "tooltip.epicurean.meal.restores": "额外恢复:",
+  "tooltip.epicurean.meal.hunger": " - %s 饱食度",
+  "tooltip.epicurean.meal.saturation": " - %s%% 饱和度",
+
+  "tooltip.epicurean.table.base": "基础原料",
+  "tooltip.epicurean.table.seasoning": "额外调味料",
+  "tooltip.epicurean.readmore": "按SHIFT查看备注",
+
+  "item.edibles.jelly": "果冻 (发霉的)",
+  "item.edibles.super_jelly": "超级果冻 (发霉的)",
+  "tooltip.epicurean.deprecated.0": "这个物品已弃用.",
+  "tooltip.epicurean.deprecated.1": "将其放入合成台进行升级."
+}
