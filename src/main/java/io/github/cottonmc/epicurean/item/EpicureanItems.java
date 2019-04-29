@@ -2,6 +2,7 @@ package io.github.cottonmc.epicurean.item;
 
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import io.github.cottonmc.epicurean.block.crop.EpicureanCrops;
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.FoodItemSetting;
 import net.minecraft.item.Item;
@@ -61,5 +62,25 @@ public class EpicureanItems {
 	}
 
 	public static void init() {
+		CompostingChanceRegistry.INSTANCE.add(JELLY, 0.65f);
+		CompostingChanceRegistry.INSTANCE.add(SUPER_JELLY, 0.65f);
+		CompostingChanceRegistry.INSTANCE.add(PEPPER_SEEDS, 0.3f);
+		CompostingChanceRegistry.INSTANCE.add(TOMATO_SEEDS, 0.3f);
+		CompostingChanceRegistry.INSTANCE.add(SOYBEAN, 0.3f);
+		CompostingChanceRegistry.INSTANCE.add(SOY_SAUCE, 1.0f);
+		CompostingChanceRegistry.INSTANCE.add(PEPPER, 0.65f);
+		CompostingChanceRegistry.INSTANCE.add(TOMATO, 0.65f);
+		CompostingChanceRegistry.INSTANCE.add(ONION, 0.65f);
+		CompostingChanceRegistry.INSTANCE.add(DASHI, 0.65f);
+		CompostingChanceRegistry.INSTANCE.add(BUTTER, 0.65f);
+		CompostingChanceRegistry.INSTANCE.add(NOODLES, 0.65f);
+		CompostingChanceRegistry.INSTANCE.add(TOFU, 0.65f);
+		CompostingChanceRegistry.INSTANCE.add(PANCAKE, 0.85f);
+		CompostingChanceRegistry.INSTANCE.add(CHICKEN_TENDER, 0.85f);
+		CompostingChanceRegistry.INSTANCE.add(PAD_THAI, 1.0f);
+		CompostingChanceRegistry.INSTANCE.add(SPAGHETTI, 1.0f);
+		CompostingChanceRegistry.INSTANCE.add(RAMEN, 1.0f);
+		CompostingChanceRegistry.INSTANCE.add(BEEF_STEW, 1.0f);
+		CompostingChanceRegistry.INSTANCE.add(HAMBURGER, 1.0f);
 	}
 }
