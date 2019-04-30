@@ -42,7 +42,7 @@ dependencies {
 	modCompile "net.fabricmc:fabric:0.2.7+build.127"
 	include "net.fabricmc:fabric:0.2.7+build.127"
 
-	modCompile "io.github.prospector.modmenu:ModMenu:1.4.1-74"
+	modCompile "io.github.prospector.modmenu:ModMenu:1.5.1-81"
 	modCompile "io.github.cottonmc:cotton:0.6.0+1.14-SNAPSHOT"
 	include "io.github.cottonmc:cotton:0.6.0+1.14-SNAPSHOT"
 	modCompile "cloth-config:ClothConfig:0.2.1.14"

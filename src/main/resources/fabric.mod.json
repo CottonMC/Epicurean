@@ -18,6 +18,9 @@
     ],
     "client": [
       "io.github.cottonmc.epicurean.EpicureanClient"
+    ],
+    "modmenu": [
+      "io.github.cottonmc.epicurean.EpicureanClient"
     ]
   },
   "mixins": [
