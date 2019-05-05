@@ -20,8 +20,6 @@ public class EpicureanClient implements ClientModInitializer, ModMenuApi {
 
 	@Override
 	public void onInitializeClient() {
-		ClientSpriteRegistryCallback.EVENT.register(((spriteAtlasTexture, registry) -> registry.register(new Identifier(EpicureanGastronomy.MOD_ID, "gui/cooking_table"))));
-
 		ScreenProviderRegistry.INSTANCE.registerFactory(EpicureanBlocks.COOKING_CONTAINER, (syncId, identifier, player, buf) -> new CookingTableScreen(syncId, player));
 	}
 
