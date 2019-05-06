@@ -21,8 +21,6 @@ public class EpicureanItems {
 	//jelly and super-jelly, with deprecated forms
 	public static final Item JELLY = register("jelly", new JellyItem(2, 0.25f));
 	public static final Item SUPER_JELLY = register("super_jelly", new JellyItem(4, 0.3f));
-	public static final Item DEP_JELLY = Registry.register(Registry.ITEM, "edibles:jelly", new DeprecatedItem());
-	public static final Item DEP_SUPER_JELLY = Registry.register(Registry.ITEM, "edibles:super_jelly", new DeprecatedItem());
 
 	//ingredients
 	public static final Item TOMATO = register("tomato", new SeasoningItem(2, 0.3f, StatusEffects.HASTE, foodSettings(2, 0.2f)));

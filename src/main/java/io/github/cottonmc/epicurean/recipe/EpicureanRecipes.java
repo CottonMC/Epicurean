@@ -29,8 +29,6 @@ public class EpicureanRecipes {
 
 	public static RecipeSerializer<DressingMealRecipe> DRESSING_MEAL_SERIALIZER = register("add_dressing", new DressingMealSerializer<>(DressingMealRecipe::new));
 
-	public static RecipeSerializer<RemakeJellyRecipe> REMAKE_JELLY_SERIALIZER = register("remake_jelly", new SpecialRecipeSerializer<>(RemakeJellyRecipe::new));
-
 	public static <T extends Recipe<?>> RecipeType<T> register(String id) {
 		return Registry.register(Registry.RECIPE_TYPE, new Identifier(id), new RecipeType<T>() {
 			public String toString() {

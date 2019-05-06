@@ -3,6 +3,8 @@ package io.github.cottonmc.epicurean.item;
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.util.NbtType;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.Screen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
@@ -20,11 +22,12 @@ import net.minecraft.text.TranslatableTextComponent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import squeek.appleskin.helpers.DynamicFood;
 
 import java.util.Collections;
 import java.util.List;
 
-public class MealItem extends Item {
+public class MealItem extends Item implements DynamicFood {
 
 	public MealItem(int hunger, float saturation) {
 		super(EpicureanItems.foodSettings(hunger, saturation));
@@ -77,7 +80,7 @@ public class MealItem extends Item {
 				if (profile.containsKey("Hunger")) hunger = profile.getInt("Hunger");
 				if (profile.containsKey("Saturation")) saturation = profile.getFloat("Saturation");
 				float percentage = Math.round(saturation*100.0);
-				if (hunger != 0 || saturation != 0) {
+				if ((hunger != 0 || saturation != 0) && !FabricLoader.getInstance().isModLoaded("appleskin")) {
 					tooltip.add(new TranslatableTextComponent("tooltip.epicurean.meal.restores"));
 					if (hunger != 0 && !EpicureanGastronomy.config.useSaturationOnly) {
 						tooltip.add(new TranslatableTextComponent("tooltip.epicurean.meal.hunger", hunger).applyFormat(TextFormat.GRAY));
@@ -101,5 +104,27 @@ public class MealItem extends Item {
 			}
 		}
 
+	}
+
+	@Override
+	public int getDynamicHunger(ItemStack itemStack, PlayerEntity playerEntity) {
+		int ret = this.getFoodSetting().getHunger();
+		if (itemStack.getOrCreateTag().containsKey("FlavorProfile", NbtType.COMPOUND)) {
+			if (itemStack.getSubCompoundTag("FlavorProfile").containsKey("Hunger", NbtType.INT)) {
+				ret += itemStack.getSubCompoundTag("FlavorProfile").getInt("Hunger");
+			}
+		}
+		return ret;
+	}
+
+	@Override
+	public float getDynamicSaturation(ItemStack itemStack, PlayerEntity playerEntity) {
+		float ret = this.getFoodSetting().getSaturationModifier();
+		if (itemStack.getOrCreateTag().containsKey("FlavorProfile", NbtType.COMPOUND)) {
+			if (itemStack.getSubCompoundTag("FlavorProfile").containsKey("Saturation", NbtType.FLOAT)) {
+				ret += itemStack.getSubCompoundTag("FlavorProfile").getFloat("Saturation");
+			}
+		}
+		return ret;
 	}
 }
