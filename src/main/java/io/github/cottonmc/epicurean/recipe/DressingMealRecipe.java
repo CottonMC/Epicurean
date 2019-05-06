@@ -5,6 +5,7 @@ import io.github.cottonmc.epicurean.item.EpicureanItems;
 import io.github.cottonmc.epicurean.item.MealItem;
 import io.github.cottonmc.epicurean.meal.FlavorGroup;
 import io.github.cottonmc.epicurean.meal.IngredientProfiles;
+import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.Item;
@@ -60,6 +61,15 @@ public class DressingMealRecipe extends MealRecipe {
 				else return false;
 			}
 		}
+		CompoundTag profile = targetMeal.getOrCreateSubCompoundTag("FlavorProfile");
+		if (profile.containsKey("Seasonings")) {
+			CompoundTag seasonings = profile.getCompound("Seasonings");
+			int existingSeasonings = 0;
+			for (String seasoning : seasonings.getKeys()) {
+				existingSeasonings += seasonings.getInt(seasoning);
+			}
+			if (existingSeasonings + dressings > 6) return false;
+		}
 		if (!targetMeal.isEmpty()) meal = targetMeal;
 		return (!targetMeal.isEmpty() && dressings > 0);
 	}
@@ -83,7 +93,10 @@ public class DressingMealRecipe extends MealRecipe {
 			for (ItemStack seasoning : seasonings) {
 				Item item = seasoning.getItem();
 				if (item == EpicureanItems.SALT) saltCount++;
-				else effects = MealRecipe.addEffect(effects, new StatusEffectInstance(IngredientProfiles.DRESSINGS.get(item).getEffect(), 200));
+				else {
+					StatusEffect effect = IngredientProfiles.DRESSINGS.get(item).getEffect();
+					effects = MealRecipe.addEffect(effects, new StatusEffectInstance(effect, IngredientProfiles.EFFECT_TIMES.getOrDefault(effect, 200)));
+				}
 			}
 			for (String ingredient : ingredients.getKeys()) {
 				for (int i = 0; i < ingredients.getInt(ingredient); i++) {
@@ -94,7 +107,6 @@ public class DressingMealRecipe extends MealRecipe {
 			tag.remove("FlavorProfile");
 			PotionUtil.setCustomPotionEffects(meal, effects);
 			tag.put("FlavorProfile", MealRecipe.makeFlavorProfile(prominent, seasonings));
-			tag.putInt("Salt",tag.getCompound("FlavorProfile").getInt("Salt") + saltCount);
 		}
 		return meal;
 	}

@@ -218,16 +218,15 @@ public class MealRecipe implements CraftingRecipe {
 		List<StatusEffectInstance> effects = new ArrayList<>(currentEffects);
 		for (StatusEffectInstance inst : currentEffects) {
 			if (inst.getEffectType() == effect) {
-				StatusEffectInstance instCopy = new StatusEffectInstance(inst.getEffectType(), inst.getAmplifier(), inst.getDuration());
-				effects.remove(inst);
-				int newDuration = inst.getDuration() + (effectToAdd.getDuration() / 2);
+				int index = effects.indexOf(inst);
 				int newAmp = Math.max(inst.getAmplifier(), effectToAdd.getAmplifier());
+				int newDuration = inst.getDuration() + (effectToAdd.getDuration() / (newAmp + 2));
 				if (newDuration >= 2 * IngredientProfiles.EFFECT_TIMES.getOrDefault(inst.getEffectType(), 200)) {
 					newAmp++;
-					newDuration /= 2;
+					newDuration /= 3;
 				}
-				StatusEffectInstance newInst = new StatusEffectInstance(instCopy.getEffectType(), newDuration, newAmp);
-				effects.add(newInst);
+				StatusEffectInstance newInst = new StatusEffectInstance(inst.getEffectType(), newDuration, newAmp);
+				effects.set(index, newInst);
 				replaced = true;
 			}
 		}
