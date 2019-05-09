@@ -49,5 +49,7 @@
 
   "tooltip.epicurean.table.base": "Base ingredients",
   "tooltip.epicurean.table.seasoning": "Additional seasonings",
-  "tooltip.epicurean.readmore": "Press SHIFT to see notes"
+  "tooltip.epicurean.readmore": "Press SHIFT to see notes",
+
+  "desc.class.skillcheck.artisan.1": "[Epicurean] Per lv: +5 sec base to meal effects."
 }

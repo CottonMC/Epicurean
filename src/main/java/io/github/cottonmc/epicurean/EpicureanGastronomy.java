@@ -6,6 +6,8 @@ import io.github.cottonmc.epicurean.block.EpicureanBlocks;
 import io.github.cottonmc.epicurean.block.crop.EpicureanCrops;
 import io.github.cottonmc.epicurean.item.EpicureanItems;
 import io.github.cottonmc.epicurean.meal.IngredientProfiles;
+import io.github.cottonmc.epicurean.meal.MealBooster;
+import io.github.cottonmc.epicurean.meal.SkillCheckMealBooster;
 import io.github.cottonmc.epicurean.recipe.EpicureanRecipes;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
@@ -39,6 +41,8 @@ public class EpicureanGastronomy implements ModInitializer {
         EpicureanRecipes.init();
         CropGeneration.registerCrops();
         ResourceManagerHelper.get(ResourceType.DATA).registerReloadListener(new IngredientProfiles());
+
+        if (FabricLoader.getInstance().isModLoaded("skillcheck")) MealBooster.BOOSTERS.add(new SkillCheckMealBooster());
     }
 
 }

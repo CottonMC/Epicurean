@@ -6,6 +6,7 @@ import io.github.cottonmc.epicurean.item.EpicureanItems;
 import io.github.cottonmc.epicurean.item.Seasoning;
 import io.github.cottonmc.epicurean.meal.FlavorGroup;
 import io.github.cottonmc.epicurean.meal.IngredientProfiles;
+import io.github.cottonmc.epicurean.meal.MealBooster;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.inventory.CraftingInventory;
@@ -85,6 +86,8 @@ public class MealRecipe implements CraftingRecipe {
 
 	@Override
 	public ItemStack craft(CraftingInventory inv) {
+		CookingInventory cooking = null;
+		if (inv instanceof CookingInventory) cooking = (CookingInventory)inv;
 		ItemStack meal = this.output.copy();
 		if (!meal.hasTag()) meal.setTag(new CompoundTag());
 		int prominence = 0;
@@ -119,11 +122,20 @@ public class MealRecipe implements CraftingRecipe {
 			}
 		}
 
-		meal.getTag().put("FlavorProfile", makeFlavorProfile(FlavorGroup.forImpact(prominence), seasonings));
 		StatusEffect effectToAdd = FlavorGroup.forImpact(prominence).getEffect();
 		int timeToAdd = IngredientProfiles.EFFECT_TIMES.getOrDefault(effectToAdd, 1800);
 		effects = addEffect(effects, new StatusEffectInstance(effectToAdd, timeToAdd));
 		effects = addSalt(effects, countSalt(seasonings));
+		int boostedHunger = 0;
+		float boostedSaturation = 0;
+		if (cooking != null) {
+			for (MealBooster booster : MealBooster.BOOSTERS) {
+				effects = booster.addBoostEffects(effects, seasonings, cooking);
+				boostedHunger += booster.addBoostHunger(seasonings, cooking);
+				boostedSaturation += booster.addBoostSaturation(seasonings, cooking);
+			}
+		}
+		meal.getTag().put("FlavorProfile", makeFlavorProfile(FlavorGroup.forImpact(prominence), seasonings, boostedHunger, boostedSaturation));
 		PotionUtil.setCustomPotionEffects(meal, effects);
 		return meal;
 	}
@@ -152,13 +164,13 @@ public class MealRecipe implements CraftingRecipe {
 		return EpicureanRecipes.MEAL_SERIALIZER;
 	}
 
-	public static CompoundTag makeFlavorProfile(FlavorGroup group, List<ItemStack> seasonings) {
+	public static CompoundTag makeFlavorProfile(FlavorGroup group, List<ItemStack> seasonings, int boostHunger, float boostSaturation) {
 		CompoundTag tag = new CompoundTag();
 		tag.putString("ProminentFlavor", group.toString());
 		if (!seasonings.isEmpty()) {
 			tag.put("Seasonings", makeIngredientList(seasonings));
-			tag.putInt("Hunger", getHungerAmount(seasonings));
-			tag.putFloat("Saturation", getSaturationAmount(seasonings));
+			tag.putInt("Hunger", getHungerAmount(seasonings) + boostHunger);
+			tag.putFloat("Saturation", getSaturationAmount(seasonings) + boostSaturation);
 			tag.putInt("Salt", countSalt(seasonings));
 		}
 		return tag;
@@ -220,7 +232,7 @@ public class MealRecipe implements CraftingRecipe {
 			if (inst.getEffectType() == effect) {
 				int index = effects.indexOf(inst);
 				int newAmp = Math.max(inst.getAmplifier(), effectToAdd.getAmplifier());
-				int newDuration = inst.getDuration() + (effectToAdd.getDuration() / (newAmp + 2));
+				int newDuration = inst.getDuration() + (effectToAdd.getDuration() / (newAmp + 1));
 				if (newDuration >= 2 * IngredientProfiles.EFFECT_TIMES.getOrDefault(inst.getEffectType(), 200)) {
 					newAmp++;
 					newDuration /= 3;

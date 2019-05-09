@@ -32,6 +32,7 @@ minecraft {
 repositories {
 	mavenCentral()
 	maven { url 'http://server.bbkr.space:8081/artifactory/libs-snapshot/' }
+	maven { url 'http://server.bbkr.space:8081/artifactory/libs-release/' }
 	maven { url = "https://minecraft.curseforge.com/api/maven" }
 	maven { url 'https://www.jitpack.io' }
 }
@@ -49,6 +50,8 @@ dependencies {
 	modCompile "cloth-config:ClothConfig:0.2.1.14"
 	include "cloth-config:ClothConfig:0.2.1.14"
 	modCompile "com.github.squeek502:AppleSkin:1.14-fabric-SNAPSHOT"
+	modCompile "io.github.cottonmc:SkillCheck:1.0.1+1.14"
+	modCompile "crochet:Crochet:1.0.2"
 }
 
 processResources {

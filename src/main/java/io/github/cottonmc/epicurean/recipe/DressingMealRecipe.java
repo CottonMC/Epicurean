@@ -106,7 +106,7 @@ public class DressingMealRecipe extends MealRecipe {
 			effects = MealRecipe.addSalt(effects, saltCount);
 			tag.remove("FlavorProfile");
 			PotionUtil.setCustomPotionEffects(meal, effects);
-			tag.put("FlavorProfile", MealRecipe.makeFlavorProfile(prominent, seasonings));
+			tag.put("FlavorProfile", MealRecipe.makeFlavorProfile(prominent, seasonings, 0, 0));
 		}
 		return meal;
 	}
