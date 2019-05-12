@@ -28,7 +28,7 @@ public class CropGeneration {
 						new CountDecoratorConfig(1)
 				));
 				biome.addFeature(GenerationStep.Feature.VEGETAL_DECORATION, Biome.configureFeature(
-						new WildCropFeature(DefaultFeatureConfig::deserialize, EpicureanCrops.TOMATO_PLANT.getDefaultState().with(PickableCropBlock.AGE, 3)),
+						new WildCropFeature(DefaultFeatureConfig::deserialize, EpicureanCrops.TOMATO_PLANT.getDefaultState().with(HarvestableCropBlock.AGE, 7)),
 						FeatureConfig.DEFAULT,
 						Decorator.COUNT_HEIGHTMAP_DOUBLE,
 						new CountDecoratorConfig(1)
