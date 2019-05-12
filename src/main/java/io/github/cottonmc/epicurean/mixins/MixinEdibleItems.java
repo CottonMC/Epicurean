@@ -19,12 +19,12 @@ public class MixinEdibleItems {
 	@Shadow
 	@Mutable
 	@Final
-	public static Item IRON_NUGGET = Registry.register(Registry.ITEM, "iron_nugget", new SpecialFoodItem(2, 0.1F, (new Item.Settings()).itemGroup(ItemGroup.MATERIALS)));
+	public static Item IRON_NUGGET = Registry.register(Registry.ITEM, "iron_nugget", new SpecialFoodItem(2, 0.1F, new Item.Settings().itemGroup(ItemGroup.MATERIALS)));
 
 	@Shadow
 	@Mutable
 	@Final
-	public static Item GOLD_NUGGET = Registry.register(Registry.ITEM, "gold_nugget", new SpecialFoodItem(4, 0.3F, (new Item.Settings()).itemGroup(ItemGroup.MATERIALS)));
+	public static Item GOLD_NUGGET = Registry.register(Registry.ITEM, "gold_nugget", new SpecialFoodItem(4, 0.3F, new Item.Settings().itemGroup(ItemGroup.MATERIALS)));
 
 	@Shadow
 	@Mutable

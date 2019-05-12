@@ -1,4 +1,4 @@
-package io.github.cottonmc.epicurean;
+package io.github.cottonmc.epicurean.util;
 
 import io.github.cottonmc.repackage.blue.endless.jankson.Comment;
 

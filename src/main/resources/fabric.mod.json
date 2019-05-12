@@ -20,7 +20,7 @@
       "io.github.cottonmc.epicurean.EpicureanClient"
     ],
     "modmenu": [
-      "io.github.cottonmc.epicurean.EpicureanClient"
+      "io.github.cottonmc.epicurean.util.EpicureanConfMenu"
     ]
   },
   "mixins": [
