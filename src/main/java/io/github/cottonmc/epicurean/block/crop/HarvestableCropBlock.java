@@ -1,16 +1,16 @@
 package io.github.cottonmc.epicurean.block.crop;
 
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.CropBlock;
-import net.minecraft.block.Material;
+import net.minecraft.block.*;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemProvider;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.state.StateFactory;
+import net.minecraft.state.property.IntegerProperty;
+import net.minecraft.state.property.Properties;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -24,11 +24,18 @@ import java.util.List;
 public class HarvestableCropBlock extends CropBlock {
 	public final Item cropItem;
 	private final int resetGrowthTo;
+	public static final IntegerProperty AGE = Properties.AGE_7;
 
 	public HarvestableCropBlock(Item cropItem, int resetGrowthTo) {
 		super(FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.CROP).ticksRandomly().breakInstantly().build().noCollision());
 		this.cropItem = cropItem;
 		this.resetGrowthTo = resetGrowthTo;
+		this.setDefaultState((this.stateFactory.getDefaultState()).with(this.getAgeProperty(), 0));
+	}
+
+	@Override
+	public IntegerProperty getAgeProperty() {
+		return super.getAgeProperty();
 	}
 
 	@Override
@@ -58,5 +65,8 @@ public class HarvestableCropBlock extends CropBlock {
 		return false;
 	}
 
-
+	@Override
+	protected void appendProperties(StateFactory.Builder<Block, BlockState> builder) {
+		builder.with(AGE);
+	}
 }

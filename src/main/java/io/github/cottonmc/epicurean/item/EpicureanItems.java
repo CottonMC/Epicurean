@@ -54,11 +54,6 @@ public class EpicureanItems {
 		return item;
 	}
 
-	public static Item mixRegister(String name, Item item) {
-		Registry.register(Registry.ITEM, "minecraft:" + name, item);
-		return item;
-	}
-
 	public static void init() {
 		CompostingChanceRegistry.INSTANCE.add(JELLY, 0.65f);
 		CompostingChanceRegistry.INSTANCE.add(SUPER_JELLY, 0.65f);
