@@ -42,7 +42,7 @@ dependencies {
 	mappings "net.fabricmc:yarn:1.14.1+build.4"
 	modCompile "net.fabricmc:fabric-loader:0.4.7+build.147"
 	modCompile "net.fabricmc.fabric-api:fabric-api:0.3.0-pre+build.156"
-	
+
 	modCompile "io.github.prospector.modmenu:ModMenu:1.5.3-84"
 	modCompile "io.github.cottonmc:cotton:0.6.6+1.14.1-SNAPSHOT"
 	include "io.github.cottonmc:cotton:0.6.6+1.14.1-SNAPSHOT"
@@ -53,7 +53,7 @@ dependencies {
 	modCompile "crochet:Crochet:1.0.2"
 
 	include "net.fabricmc.fabric-api:fabric-api-base:0.1.0+f1618918"
-	include "net.fabricmc.fabric-api-fabric-containers-v0:0.1.0+f1618918"
+	include "net.fabricmc.fabric-api:fabric-containers-v0:0.1.0+f1618918"
 	include "net.fabricmc.fabric-api:fabric-content-registries-v0:0.1.0+f1618918"
 	include "net.fabricmc.fabric-api:fabric-item-groups-v0:0.1.0+f1618918"
 	include "net.fabricmc.fabric-api:fabric-mining-levels-v0:0.1.0+f1618918"
