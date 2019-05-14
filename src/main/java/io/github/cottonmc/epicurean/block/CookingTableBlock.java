@@ -3,7 +3,7 @@ package io.github.cottonmc.epicurean.block;
 
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
-import net.fabricmc.fabric.api.tag.FabricItemTags;
+import net.fabricmc.fabric.api.tools.FabricToolTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
@@ -18,7 +18,7 @@ public class CookingTableBlock extends Block {
 
 	public CookingTableBlock() {
 		super(FabricBlockSettings.of(Material.WOOD)
-				.breakByTool(FabricItemTags.PICKAXES)
+				.breakByTool(FabricToolTags.PICKAXES)
 				.sounds(BlockSoundGroup.STONE)
 				.strength(2.0f, 6.0f)
 				.build());

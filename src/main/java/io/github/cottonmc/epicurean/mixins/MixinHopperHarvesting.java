@@ -27,7 +27,7 @@ public class MixinHopperHarvesting {
 	@Inject(method = "extract(Lnet/minecraft/block/entity/Hopper;)Z", at = @At("HEAD"), cancellable = true)
 	private static void hopperHarvest(Hopper hopper, CallbackInfoReturnable cir) {
 		if (EpicureanGastronomy.config.hopperHarvest) {
-			World world = hopper.getWorld();
+			World world = hopper.getHopperWorld();
 			BlockPos pos = new BlockPos(hopper.getHopperX(), hopper.getHopperY(), hopper.getHopperZ());
 			BlockState state = world.getBlockState(pos.offset(Direction.UP, 2));
 			if (state.getBlock() instanceof CropBlock) {
@@ -47,7 +47,7 @@ public class MixinHopperHarvesting {
 
 	private static boolean harvestCrop(World world, BlockPos pos, BlockState state) {
 		CropBlock crop = (CropBlock) state.getBlock();
-		if (crop.getCropAgeMaximum() == state.get(crop.getAgeProperty())) {
+		if (crop.getMaxAge() == state.get(crop.getAgeProperty())) {
 			Inventory inv = HopperBlockEntity.getInventoryAt(world, pos);
 			List<ItemStack> results = state.getDroppedStacks(getLootContext(world, pos));
 			List<ItemStack> dropped = deepCopy(results);

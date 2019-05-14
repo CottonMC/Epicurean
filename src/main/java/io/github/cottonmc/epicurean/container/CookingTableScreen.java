@@ -9,7 +9,7 @@ import net.minecraft.client.gui.widget.RecipeBookButtonWidget;
 import net.minecraft.container.Slot;
 import net.minecraft.container.SlotActionType;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.TranslatableTextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.util.Identifier;
 
 public class CookingTableScreen extends ContainerScreen<CookingTableContainer> /*implements RecipeBookProvider*/ {
@@ -19,7 +19,7 @@ public class CookingTableScreen extends ContainerScreen<CookingTableContainer> /
 	private boolean isNarrow;
 
 	public CookingTableScreen(int syncId, PlayerEntity player) {
-		super(new CookingTableContainer(syncId, player.inventory), player.inventory, new TranslatableTextComponent("container.epicurean.cooking_table"));
+		super(new CookingTableContainer(syncId, player.inventory), player.inventory, new TranslatableComponent("container.epicurean.cooking_table"));
 	}
 
 	@Override
@@ -76,11 +76,11 @@ public class CookingTableScreen extends ContainerScreen<CookingTableContainer> /
 		super.drawMouseoverTooltip(mouseX, mouseY);
 		if (mouseX >= this.left + 26 && mouseY >= this.top+11
 				&& mouseX <= this.left + 43 && mouseY <= this.top + 26) {
-			renderTooltip(new TranslatableTextComponent("tooltip.epicurean.table.base").getText(), mouseX, mouseY);
+			renderTooltip(new TranslatableComponent("tooltip.epicurean.table.base").getText(), mouseX, mouseY);
 		}
 		if (mouseX >= this.left + 94 && mouseY >= this.top+11
 				&& mouseX <= this.left + 109 && mouseY <= this.top + 26) {
-			renderTooltip(new TranslatableTextComponent("tooltip.epicurean.table.seasoning").getText(), mouseX, mouseY);
+			renderTooltip(new TranslatableComponent("tooltip.epicurean.table.seasoning").getText(), mouseX, mouseY);
 		}
 	}
 

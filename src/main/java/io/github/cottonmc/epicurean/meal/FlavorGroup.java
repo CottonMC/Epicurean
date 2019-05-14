@@ -2,9 +2,9 @@ package io.github.cottonmc.epicurean.meal;
 
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.util.StringRepresentable;
+import net.minecraft.util.StringIdentifiable;
 
-public enum FlavorGroup implements StringRepresentable {
+public enum FlavorGroup implements StringIdentifiable {
 	SPICY("spicy", 6, StatusEffects.RESISTANCE),
 	UMAMI("umami", 5, StatusEffects.SATURATION),
 	ACIDIC("acidic", 4, StatusEffects.FIRE_RESISTANCE),

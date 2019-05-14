@@ -5,6 +5,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.ChatFormat;
 import net.minecraft.client.gui.Screen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
@@ -14,11 +15,10 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.potion.PotionUtil;
-import net.minecraft.text.StringTextComponent;
-import net.minecraft.text.TextComponent;
-import net.minecraft.text.TextFormat;
-import net.minecraft.text.TranslatableTextComponent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
@@ -66,41 +66,41 @@ public class MealItem extends Item implements DynamicFood {
 
 	@Environment(EnvType.CLIENT)
 	@Override
-	public void buildTooltip(ItemStack stack, World world, List<TextComponent> tooltip, TooltipContext ctx) {
+	public void buildTooltip(ItemStack stack, World world, List<Component> tooltip, TooltipContext ctx) {
 		super.buildTooltip(stack, world, tooltip, ctx);
 		PotionUtil.buildTooltip(stack, tooltip, 1.0F);
 		if (!stack.hasTag()) return;
 		if (stack.getTag().containsKey("FlavorProfile")) {
 			if (Screen.hasShiftDown()) {
 				CompoundTag profile = stack.getTag().getCompound("FlavorProfile");
-				String flavor = new TranslatableTextComponent("tooltip.epicurean.flavor." + profile.getString("ProminentFlavor").toLowerCase()).getText();
-				tooltip.add(new TranslatableTextComponent("tooltip.epicurean.meal.flavor", flavor).applyFormat(TextFormat.GRAY));
+				String flavor = new TranslatableComponent("tooltip.epicurean.flavor." + profile.getString("ProminentFlavor").toLowerCase()).getText();
+				tooltip.add(new TranslatableComponent("tooltip.epicurean.meal.flavor", flavor).applyFormat(ChatFormat.GRAY));
 				int hunger = 0;
 				float saturation = 0;
 				if (profile.containsKey("Hunger")) hunger = profile.getInt("Hunger");
 				if (profile.containsKey("Saturation")) saturation = profile.getFloat("Saturation");
 				float percentage = Math.round(saturation*100.0);
 				if ((hunger != 0 || saturation != 0) && !FabricLoader.getInstance().isModLoaded("appleskin")) {
-					tooltip.add(new TranslatableTextComponent("tooltip.epicurean.meal.restores"));
+					tooltip.add(new TranslatableComponent("tooltip.epicurean.meal.restores"));
 					if (hunger != 0 && !EpicureanGastronomy.config.useSaturationOnly) {
-						tooltip.add(new TranslatableTextComponent("tooltip.epicurean.meal.hunger", hunger).applyFormat(TextFormat.GRAY));
+						tooltip.add(new TranslatableComponent("tooltip.epicurean.meal.hunger", hunger).applyFormat(ChatFormat.GRAY));
 					}
 					if (saturation != 0) {
-						tooltip.add(new TranslatableTextComponent("tooltip.epicurean.meal.saturation", percentage).applyFormat(TextFormat.GRAY));
+						tooltip.add(new TranslatableComponent("tooltip.epicurean.meal.saturation", percentage).applyFormat(ChatFormat.GRAY));
 					}
 				}
 				if (profile.containsKey("Seasonings")) {
-					tooltip.add(new TranslatableTextComponent("tooltip.epicurean.meal.seasonings"));
+					tooltip.add(new TranslatableComponent("tooltip.epicurean.meal.seasonings"));
 					CompoundTag seasonings = profile.getCompound("Seasonings");
 					for (String key : seasonings.getKeys()) {
 						String name = Registry.ITEM.get(new Identifier(key)).getTranslationKey();
 						int amount = seasonings.getInt(key);
-						TranslatableTextComponent translation = new TranslatableTextComponent(name);
-						tooltip.add(new StringTextComponent(" - "+amount + " x " + translation.getText()).applyFormat(TextFormat.GRAY));
+						TranslatableComponent translation = new TranslatableComponent(name);
+						tooltip.add(new TextComponent(" - "+amount + " x " + translation.getText()).applyFormat(ChatFormat.GRAY));
 					}
 				}
 			} else {
-				tooltip.add(new TranslatableTextComponent("tooltip.epicurean.readmore").applyFormat(TextFormat.GREEN));
+				tooltip.add(new TranslatableComponent("tooltip.epicurean.readmore").applyFormat(ChatFormat.GREEN));
 			}
 		}
 

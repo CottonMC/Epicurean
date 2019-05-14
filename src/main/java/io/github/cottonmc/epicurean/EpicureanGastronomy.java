@@ -42,7 +42,7 @@ public class EpicureanGastronomy implements ModInitializer {
         EpicureanCrops.init();
         EpicureanRecipes.init();
         CropGeneration.registerCrops();
-        ResourceManagerHelper.get(ResourceType.DATA).registerReloadListener(new IngredientProfiles());
+        ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new IngredientProfiles());
 
         if (FabricLoader.getInstance().isModLoaded("skillcheck")) MealBooster.BOOSTERS.add(new SkillCheckMealBooster());
     }

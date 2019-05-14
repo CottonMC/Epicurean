@@ -5,7 +5,7 @@ import net.minecraft.block.*;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemProvider;
+import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateFactory;
@@ -39,14 +39,14 @@ public class HarvestableCropBlock extends CropBlock {
 	}
 
 	@Override
-	protected ItemProvider getCropItem() {
+	protected ItemConvertible getSeedsItem() {
 		return cropItem;
 	}
 
 	@Override
 	public boolean activate(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
 		if (world.isClient) return false;
-		if (getCropAge(state) >= getCropAgeMaximum()) {
+		if (getAge(state) >= getMaxAge()) {
 			if (world.getBlockState(pos.offset(Direction.DOWN)).getBlock() == Blocks.FARMLAND) {
 				LootContext.Builder ctx = new LootContext
 						.Builder(world.getServer().getWorld(world.dimension.getType()))
@@ -67,6 +67,6 @@ public class HarvestableCropBlock extends CropBlock {
 
 	@Override
 	protected void appendProperties(StateFactory.Builder<Block, BlockState> builder) {
-		builder.with(AGE);
+		builder.add(AGE);
 	}
 }

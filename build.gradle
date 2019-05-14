@@ -12,7 +12,7 @@ buildscript {
 
 	}
 	dependencies {
-		classpath "net.fabricmc:fabric-loom:0.2.1-SNAPSHOT"
+		classpath "net.fabricmc:fabric-loom:0.2.2-SNAPSHOT"
 	}
 }
 
@@ -23,7 +23,7 @@ targetCompatibility = 1.8
 
 archivesBaseName = "epicurean-gastronomy"
 group = "io.github.cottonmc"
-version = "2.2.0+1.14"
+version = "2.2.0+1.14.1"
 
 minecraft {
 	refmapName = 'mixins.epicurean.refmap.json'
@@ -38,20 +38,29 @@ repositories {
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:1.14"
-	mappings "net.fabricmc:yarn:1.14+build.1"
-	modCompile "net.fabricmc:fabric-loader:0.4.2+build.132"
-	modCompile "net.fabricmc:fabric:0.2.7+build.127"
-	include "net.fabricmc:fabric:0.2.7+build.127"
-
-	modCompile "io.github.prospector.modmenu:ModMenu:1.5.1-81"
-	modCompile "io.github.cottonmc:cotton:0.6.0+1.14-SNAPSHOT"
-	include "io.github.cottonmc:cotton:0.6.0+1.14-SNAPSHOT"
+	minecraft "com.mojang:minecraft:1.14.1"
+	mappings "net.fabricmc:yarn:1.14.1+build.4"
+	modCompile "net.fabricmc:fabric-loader:0.4.7+build.147"
+	modCompile "net.fabricmc.fabric-api:fabric-api:0.3.0-pre+build.156"
+	
+	modCompile "io.github.prospector.modmenu:ModMenu:1.5.3-84"
+	modCompile "io.github.cottonmc:cotton:0.6.6+1.14.1-SNAPSHOT"
+	include "io.github.cottonmc:cotton:0.6.6+1.14.1-SNAPSHOT"
 	modCompile "cloth-config:ClothConfig:0.2.1.14"
 	include "cloth-config:ClothConfig:0.2.1.14"
 	modCompile "com.github.squeek502:AppleSkin:1.14-fabric-SNAPSHOT"
 	modCompile "io.github.cottonmc:SkillCheck:1.0.1+1.14"
 	modCompile "crochet:Crochet:1.0.2"
+
+	include "net.fabricmc.fabric-api:fabric-api-base:0.1.0+f1618918"
+	include "net.fabricmc.fabric-api-fabric-containers-v0:0.1.0+f1618918"
+	include "net.fabricmc.fabric-api:fabric-content-registries-v0:0.1.0+f1618918"
+	include "net.fabricmc.fabric-api:fabric-item-groups-v0:0.1.0+f1618918"
+	include "net.fabricmc.fabric-api:fabric-mining-levels-v0:0.1.0+f1618918"
+	include "net.fabricmc.fabric-api:fabric-object-builders-v0:0.1.0+9232ac87"
+	include "net.fabricmc.fabric-api:fabric-resource-loader-v0:0.1.0+f1618918"
+	include "net.fabricmc.fabric-api:fabric-tag-extensions-v0:0.1.0+f1618918"
+	include "net.fabricmc.fabric-api:fabric-tag-hooks:0.1.0+93af775a"
 }
 
 processResources {

@@ -17,11 +17,11 @@ public class PickableCropBlock extends HarvestableCropBlock {
 
 	@Override
 	protected void appendProperties(StateFactory.Builder<Block, BlockState> builder) {
-		builder.with(AGE);
+		builder.add(AGE);
 	}
 
 	@Override
-	public int getCropAgeMaximum() {
+	public int getMaxAge() {
 		return 3;
 	}
 
