@@ -3,8 +3,8 @@ buildscript {
 		mavenCentral()
 		jcenter()
 		maven {
-			name = 'Fabric'
-			url = 'http://maven.modmuss50.me/'
+			name = "Fabric"
+			url = "http://maven.modmuss50.me/"
 		}
 		maven {
 			url "https://plugins.gradle.org/m2/"
@@ -26,15 +26,15 @@ group = "io.github.cottonmc"
 version = "2.2.0+1.14.1"
 
 minecraft {
-	refmapName = 'mixins.epicurean.refmap.json'
+	refmapName = "mixins.epicurean.refmap.json"
 }
 
 repositories {
 	mavenCentral()
-	maven { url 'http://server.bbkr.space:8081/artifactory/libs-snapshot/' }
-	maven { url 'http://server.bbkr.space:8081/artifactory/libs-release/' }
-	maven { url = "https://minecraft.curseforge.com/api/maven" }
-	maven { url 'https://www.jitpack.io' }
+	maven { url "http://server.bbkr.space:8081/artifactory/libs-snapshot/" }
+	maven { url "http://server.bbkr.space:8081/artifactory/libs-release/" }
+	maven { url "https://minecraft.curseforge.com/api/maven" }
+	maven { url "https://www.jitpack.io" }
 }
 
 dependencies {
@@ -44,13 +44,12 @@ dependencies {
 	modCompile "net.fabricmc.fabric-api:fabric-api:0.3.0-pre+build.156"
 
 	modCompile "io.github.prospector.modmenu:ModMenu:1.5.3-84"
-	modCompile "io.github.cottonmc:cotton:0.6.6+1.14.1-SNAPSHOT"
-	include "io.github.cottonmc:cotton:0.6.6+1.14.1-SNAPSHOT"
+	modCompile "io.github.cottonmc:cotton:0.6.7+1.14.1-SNAPSHOT"
+	include "io.github.cottonmc:cotton:0.6.7+1.14.1-SNAPSHOT"
 	modCompile "cloth-config:ClothConfig:0.2.1.14"
 	include "cloth-config:ClothConfig:0.2.1.14"
 	modCompile "com.github.squeek502:AppleSkin:1.14-fabric-SNAPSHOT"
-	modCompile "io.github.cottonmc:SkillCheck:1.0.1+1.14"
-	modCompile "crochet:Crochet:1.0.2"
+	modCompile "io.github.cottonmc:SkillCheck:1.0.8+1.14.1"
 
 	include "net.fabricmc.fabric-api:fabric-api-base:0.1.0+f1618918"
 	include "net.fabricmc.fabric-api:fabric-containers-v0:0.1.0+f1618918"

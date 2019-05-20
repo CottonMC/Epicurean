@@ -2,7 +2,7 @@
   "type": "epicurean:meal",
   "ingredients": [
     {
-      "item": "minecraft:beef"
+      "item": "minecraft:cooked_beef"
     },
     {
       "item": "minecraft:bread"
