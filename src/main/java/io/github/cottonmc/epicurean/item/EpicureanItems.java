@@ -48,6 +48,7 @@ public class EpicureanItems {
 	public static final Item CHICKEN_TENDER = register("chicken_tender", new MealItem(5, 0.3f));
 	public static final Item HAMBURGER = register("hamburger", new MealItem(10, 0.5f));
 	public static final Item PANCAKE = register("pancake", new MealItem(5, 0.3f));
+	public static final Item SMOKED_SALMON = register("smoked_salmon", new MealItem(8, .6f));
 
 	public static Item register(String name, Item item) {
 		Registry.register(Registry.ITEM, new Identifier(EpicureanGastronomy.MOD_ID, name), item);
@@ -75,5 +76,6 @@ public class EpicureanItems {
 		CompostingChanceRegistry.INSTANCE.add(RAMEN, 1.0f);
 		CompostingChanceRegistry.INSTANCE.add(BEEF_STEW, 1.0f);
 		CompostingChanceRegistry.INSTANCE.add(HAMBURGER, 1.0f);
+		CompostingChanceRegistry.INSTANCE.add(SMOKED_SALMON, 1.0f);
 	}
 }
