@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "minecraft:salmon"
+  },
+  "result": "epicurean:smoked_salmon",
+  "experience": 0.35,
+  "cookingtime": 800
+}
