@@ -18,9 +18,10 @@ public class EpicureanItems {
 		return defaultSettings().food(new FoodItemSetting.Builder().hunger(hunger).saturationModifier(saturation).build());
 	}
 
-	//jelly and super-jelly, with deprecated forms
+	//non-meal-related stuff
 	public static final Item JELLY = register("jelly", new JellyItem(2, 0.25f));
 	public static final Item SUPER_JELLY = register("super_jelly", new JellyItem(4, 0.3f));
+	public static final Item SMOKED_SALMON = register("smoked_salmon", new Item(foodSettings(8, .6f)));
 
 	//ingredients
 	public static final Item TOMATO = register("tomato", new SeasoningItem(2, 0.3f, StatusEffects.HASTE, foodSettings(2, 0.2f)));
@@ -48,7 +49,6 @@ public class EpicureanItems {
 	public static final Item CHICKEN_TENDER = register("chicken_tender", new MealItem(5, 0.3f));
 	public static final Item HAMBURGER = register("hamburger", new MealItem(10, 0.5f));
 	public static final Item PANCAKE = register("pancake", new MealItem(5, 0.3f));
-	public static final Item SMOKED_SALMON = register("smoked_salmon", new Item(foodSettings(8, .6f)));
 
 	public static Item register(String name, Item item) {
 		Registry.register(Registry.ITEM, new Identifier(EpicureanGastronomy.MOD_ID, name), item);

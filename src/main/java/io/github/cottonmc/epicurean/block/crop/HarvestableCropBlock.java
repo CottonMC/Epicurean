@@ -45,7 +45,7 @@ public class HarvestableCropBlock extends CropBlock {
 
 	@Override
 	public boolean activate(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-		if (world.isClient) return false;
+		if (world.isClient) return true;
 		if (getAge(state) >= getMaxAge()) {
 			if (world.getBlockState(pos.offset(Direction.DOWN)).getBlock() == Blocks.FARMLAND) {
 				LootContext.Builder ctx = new LootContext
