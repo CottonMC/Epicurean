@@ -26,16 +26,16 @@ public class EpicureanItems {
 	//ingredients
 	public static final Item TOMATO = register("tomato", new SeasoningItem(2, 0.3f, StatusEffects.HASTE, foodSettings(2, 0.2f)));
 	public static final Item PEPPER = register("pepper", new SeasoningItem(2, 0.3f, StatusEffects.RESISTANCE, foodSettings(2, 0.2f)));
-	public static final Item ONION = register("onion", new PlantableItem(EpicureanCrops.ONION_PLANT, foodSettings(2, 0.2f)));
+	public static Item ONION;
 	public static final Item DASHI = register("dashi", new Item(defaultSettings()));
 	public static final Item BUTTER = register("butter", new SeasoningItem(1, 0.1f, StatusEffects.SPEED, defaultSettings()));
-	public static final Item SOYBEAN = register("soybean", new PlantableItem(EpicureanCrops.SOYBEAN_PLANT, foodSettings(2, 0.2f)));
+	public static Item SOYBEAN;
 	public static final Item SOY_SAUCE = register("soy_sauce", new SeasoningItem(1, 0.1f, StatusEffects.STRENGTH, defaultSettings()));
 	public static final Item SALT = register("salt", new SaltItem(defaultSettings()));
 
 	//seeds
-	public static final Item TOMATO_SEEDS = register("tomato_seeds", new PlantableItem(EpicureanCrops.TOMATO_PLANT, defaultSettings()));
-	public static final Item PEPPER_SEEDS = register("pepper_seeds", new PlantableItem(EpicureanCrops.PEPPER_PLANT, defaultSettings()));
+	public static Item TOMATO_SEEDS;
+	public static Item PEPPER_SEEDS;
 
 	//snacks
 	public static final Item NOODLES = register("noodles", new MealItem(3, 0.2f));
@@ -56,6 +56,10 @@ public class EpicureanItems {
 	}
 
 	public static void init() {
+		ONION = register("onion", new PlantableItem(EpicureanCrops.ONION_PLANT, foodSettings(2, 0.2f)));
+		TOMATO_SEEDS = register("tomato_seeds", new PlantableItem(EpicureanCrops.TOMATO_PLANT, defaultSettings()));
+		PEPPER_SEEDS = register("pepper_seeds", new PlantableItem(EpicureanCrops.PEPPER_PLANT, defaultSettings()));
+		SOYBEAN = register("soybean", new PlantableItem(EpicureanCrops.SOYBEAN_PLANT, foodSettings(2, 0.2f)));
 		CompostingChanceRegistry.INSTANCE.add(JELLY, 0.65f);
 		CompostingChanceRegistry.INSTANCE.add(SUPER_JELLY, 0.65f);
 		CompostingChanceRegistry.INSTANCE.add(PEPPER_SEEDS, 0.3f);
