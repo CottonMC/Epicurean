@@ -38,10 +38,10 @@ repositories {
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:1.14.1"
-	mappings "net.fabricmc:yarn:1.14.1+build.4"
-	modCompile "net.fabricmc:fabric-loader:0.4.7+build.147"
-	modCompile "net.fabricmc.fabric-api:fabric-api:0.3.0-pre+build.156"
+	minecraft "com.mojang:minecraft:1.14.2"
+	mappings "net.fabricmc:yarn:1.14.2+build.2"
+	modCompile "net.fabricmc:fabric-loader:0.4.8+build.154"
+	modCompile "net.fabricmc.fabric-api:fabric-api:0.3.0+build.170"
 
 	modCompile "io.github.prospector.modmenu:ModMenu:1.5.3-84"
 	modCompile "io.github.cottonmc:cotton:0.6.7+1.14.1-SNAPSHOT"
@@ -51,15 +51,14 @@ dependencies {
 	modCompile "com.github.squeek502:AppleSkin:1.14-fabric-SNAPSHOT"
 	modCompile "io.github.cottonmc:SkillCheck:1.0.8+1.14.1"
 
-	include "net.fabricmc.fabric-api:fabric-api-base:0.1.0+f1618918"
-	include "net.fabricmc.fabric-api:fabric-containers-v0:0.1.0+f1618918"
-	include "net.fabricmc.fabric-api:fabric-content-registries-v0:0.1.0+f1618918"
-	include "net.fabricmc.fabric-api:fabric-item-groups-v0:0.1.0+f1618918"
-	include "net.fabricmc.fabric-api:fabric-mining-levels-v0:0.1.0+f1618918"
-	include "net.fabricmc.fabric-api:fabric-object-builders-v0:0.1.0+9232ac87"
-	include "net.fabricmc.fabric-api:fabric-resource-loader-v0:0.1.0+f1618918"
-	include "net.fabricmc.fabric-api:fabric-tag-extensions-v0:0.1.0+f1618918"
-	include "net.fabricmc.fabric-api:fabric-tag-hooks:0.1.0+93af775a"
+	include "net.fabricmc.fabric-api:fabric-api-base:0.1.0+"
+	include "net.fabricmc.fabric-api:fabric-containers-v0:0.1.2+"
+	include "net.fabricmc.fabric-api:fabric-content-registries-v0:0.1.1+"
+	include "net.fabricmc.fabric-api:fabric-item-groups-v0:0.1.0+"
+	include "net.fabricmc.fabric-api:fabric-mining-levels-v0:0.1.0+"
+	include "net.fabricmc.fabric-api:fabric-object-builders-v0:0.1.1+"
+	include "net.fabricmc.fabric-api:fabric-resource-loader-v0:0.1.1+"
+	include "net.fabricmc.fabric-api:fabric-tag-extensions-v0:0.1.0+"
 }
 
 processResources {

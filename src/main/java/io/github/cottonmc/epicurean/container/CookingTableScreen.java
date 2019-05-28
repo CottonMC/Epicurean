@@ -2,17 +2,12 @@ package io.github.cottonmc.epicurean.container;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
-import net.minecraft.client.gui.ContainerScreen;
-import net.minecraft.client.gui.ingame.RecipeBookProvider;
-import net.minecraft.client.gui.recipebook.RecipeBookGui;
-import net.minecraft.client.gui.widget.RecipeBookButtonWidget;
-import net.minecraft.container.Slot;
-import net.minecraft.container.SlotActionType;
+import net.minecraft.client.gui.screen.ingame.AbstractContainerScreen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.util.Identifier;
 
-public class CookingTableScreen extends ContainerScreen<CookingTableContainer> /*implements RecipeBookProvider*/ {
+public class CookingTableScreen extends AbstractContainerScreen<CookingTableContainer> /*implements RecipeBookProvider*/ {
 	private static final Identifier TEXTURE = new Identifier(EpicureanGastronomy.MOD_ID, "textures/gui/cooking_table.png");
 	private static final Identifier RECIPE_BUTTON_TEX = new Identifier("textures/gui/recipe_button.png");
 	private final CookingRecipeBookScreen recipeBookGui = new CookingRecipeBookScreen();

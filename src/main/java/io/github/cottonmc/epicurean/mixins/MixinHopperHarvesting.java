@@ -27,7 +27,7 @@ public class MixinHopperHarvesting {
 	@Inject(method = "extract(Lnet/minecraft/block/entity/Hopper;)Z", at = @At("HEAD"), cancellable = true)
 	private static void hopperHarvest(Hopper hopper, CallbackInfoReturnable cir) {
 		if (EpicureanGastronomy.config.hopperHarvest) {
-			World world = hopper.getHopperWorld();
+			World world = hopper.getWorld();
 			BlockPos pos = new BlockPos(hopper.getHopperX(), hopper.getHopperY(), hopper.getHopperZ());
 			BlockState state = world.getBlockState(pos.offset(Direction.UP, 2));
 			if (state.getBlock() instanceof CropBlock) {

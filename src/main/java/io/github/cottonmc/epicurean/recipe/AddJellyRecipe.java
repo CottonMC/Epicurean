@@ -5,11 +5,10 @@ import io.github.cottonmc.epicurean.item.EpicureanItems;
 import io.github.cottonmc.epicurean.item.JellyItem;
 import io.github.cottonmc.epicurean.item.SpecialFoodItem;
 import net.minecraft.inventory.CraftingInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.crafting.SpecialCraftingRecipe;
+import net.minecraft.recipe.SpecialCraftingRecipe;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
