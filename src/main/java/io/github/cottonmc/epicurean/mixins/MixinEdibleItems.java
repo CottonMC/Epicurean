@@ -1,12 +1,14 @@
 package io.github.cottonmc.epicurean.mixins;
 
-import io.github.cottonmc.epicurean.item.SpecialFoodItem;
+import io.github.cottonmc.cotton.config.ConfigManager;
+import io.github.cottonmc.epicurean.util.EpicureanConfig;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.item.FoodItemSetting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.Items;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -36,13 +38,17 @@ public class MixinEdibleItems {
 
 	@Inject(method = "<clinit>", at = @At("RETURN"))
 	private static void init(CallbackInfo ci) {
-		IRON_NUGGET = reregister("iron_nugget", new SpecialFoodItem(2, 0.1F, new Item.Settings().itemGroup(ItemGroup.MATERIALS)));
-		GOLD_NUGGET = reregister("gold_nugget", new SpecialFoodItem(4, 0.3F, new Item.Settings().itemGroup(ItemGroup.MATERIALS)));
+		EpicureanConfig config = ConfigManager.loadConfig(EpicureanConfig.class);
+		if (config.edibleNuggets) {
+			IRON_NUGGET = reregister("iron_nugget", new Item(new Item.Settings().itemGroup(ItemGroup.MATERIALS).food(new FoodItemSetting.Builder().hunger(2).saturationModifier(0.1f).build())));
+			GOLD_NUGGET = reregister("gold_nugget", new Item(new Item.Settings().itemGroup(ItemGroup.MATERIALS).food(new FoodItemSetting.Builder().hunger(4).saturationModifier(0.3f).build())));
+		}
 		GLISTERING_MELON_SLICE = reregister("glistering_melon_slice", new Item(new Item.Settings().itemGroup(ItemGroup.BREWING).food(new FoodItemSetting.Builder().hunger(4).saturationModifier(0.5F).statusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, 90, 0), 1.0F).alwaysEdible().build())));
 	}
 
 	private static Item reregister(String name, Item item) {
-		Registry.register(Registry.ITEM, name, item);
+		int value = Registry.ITEM.getRawId(Registry.ITEM.get(new Identifier(name)));
+		Registry.register(Registry.ITEM, value, name, item);
 		return item;
 	}
 }
