@@ -19,6 +19,7 @@ import net.minecraft.recipe.RecipeFinder;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.CraftingRecipe;
+import net.minecraft.tag.ItemTags;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -64,7 +65,9 @@ public class MealRecipe implements CraftingRecipe {
 		//make sure the seasonings fit on the meal
 		for (int i = CookingInventory.SECTION_SIZE; i < inv.getInvSize(); i++) {
 			ItemStack stack = inv.getInvStack(i);
-			if (stack.isEmpty() || stack.getItem() == EpicureanItems.SALT) continue;
+			boolean isSalt = EpicureanGastronomy.config.useSaltTag?
+					ItemTags.getContainer().get(new Identifier("c", "salt")).contains(stack.getItem()) : stack.getItem() == EpicureanItems.SALT;
+			if (stack.isEmpty() || isSalt) continue;
 			boolean seasoningFound = false;
 			for (Ingredient ing : seasonings) {
 				if (ing.method_8093(stack)) seasoningFound = true;
@@ -219,7 +222,9 @@ public class MealRecipe implements CraftingRecipe {
 	public static int countSalt(List<ItemStack> seasonings) {
 		int salt = 0;
 		for (ItemStack stack : seasonings) {
-			if (stack.getItem() == EpicureanItems.SALT) salt++;
+			if (EpicureanGastronomy.config.useSaltTag?
+					ItemTags.getContainer().get(new Identifier("c", "salt")).contains(stack.getItem()) : stack.getItem() == EpicureanItems.SALT)
+				salt++;
 		}
 		return salt;
 	}

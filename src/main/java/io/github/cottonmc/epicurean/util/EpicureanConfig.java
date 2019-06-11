@@ -43,4 +43,7 @@ public class EpicureanConfig {
 			"Should be a percentage formatted as a decimal.")
 	public double seasoningEfficiency = 0.3f;
 
+	@Comment(value = "Whether adding salt to meals should use the `c:salt` tag or only support Epicurean's salt item.")
+	public boolean useSaltTag = false;
+
 }

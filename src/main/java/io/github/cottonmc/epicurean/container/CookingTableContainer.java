@@ -29,7 +29,7 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 	public static final int SLOT_COUNT = 49;
 
 	public CookingTableContainer(int syncId, PlayerInventory playerInv) {
-		this(syncId, playerInv, BlockContext.EMPTY);
+		this(syncId, playerInv, BlockContext.create(playerInv.player.world, playerInv.player.getBlockPos()));
 	}
 
 	public CookingTableContainer(int syncId, PlayerInventory playerInv, BlockContext ctx) {
@@ -38,7 +38,7 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 		this.resultInv = new CraftingResultInventory();
 		this.context = ctx;
 		this.player = playerInv.player;
-		this.addSlot(new CookingResultSlot(playerInv.player, this.cookingInv, this.resultInv, 0, 146, 40));
+		this.addSlot(new CraftingResultSlot(playerInv.player, this.cookingInv, this.resultInv, 0, 146, 40));
 
 		//base slots
 		for (int i = 0; i < 2; ++i) {

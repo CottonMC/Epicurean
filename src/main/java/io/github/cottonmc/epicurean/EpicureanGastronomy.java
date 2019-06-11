@@ -29,7 +29,7 @@ public class EpicureanGastronomy implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        if (config == null) config = ConfigManager.loadConfig(EpicureanConfig.class);
+        if (config == null) config = ConfigManager.loadConfig(EpicureanConfig.class, "EpicureanGastronomy.json5");
         if (config.omnivoreEnabled) {
             LOGGER.info("You're feeling hungry...");
             LOGGER.info("Be warned, this might cause weird behavior!");

@@ -23,7 +23,7 @@ targetCompatibility = 1.8
 
 archivesBaseName = "epicurean-gastronomy"
 group = "io.github.cottonmc"
-version = "2.2.0+1.14.2"
+version = "2.2.1+1.14.2"
 
 minecraft {
 	refmapName = "mixins.epicurean.refmap.json"
@@ -34,7 +34,6 @@ repositories {
 	maven { url "http://server.bbkr.space:8081/artifactory/libs-snapshot/" }
 	maven { url "http://server.bbkr.space:8081/artifactory/libs-release/" }
 	maven { url "https://minecraft.curseforge.com/api/maven" }
-	maven { url "https://www.jitpack.io" }
 }
 
 dependencies {
@@ -49,15 +48,6 @@ dependencies {
 	include "cloth-config:ClothConfig2:0.2.0"
 //	modCompile "appleskin:appleskin-mc1.14:fabric:1.0.6"
 	modCompile "io.github.cottonmc:SkillCheck:1.0.9+1.14.1"
-
-	include "net.fabricmc.fabric-api:fabric-api-base:0.1.0+"
-	include "net.fabricmc.fabric-api:fabric-containers-v0:0.1.2+"
-	include "net.fabricmc.fabric-api:fabric-content-registries-v0:0.1.1+"
-	include "net.fabricmc.fabric-api:fabric-item-groups-v0:0.1.0+"
-	include "net.fabricmc.fabric-api:fabric-mining-levels-v0:0.1.0+"
-	include "net.fabricmc.fabric-api:fabric-object-builders-v0:0.1.1+"
-	include "net.fabricmc.fabric-api:fabric-resource-loader-v0:0.1.1+"
-	include "net.fabricmc.fabric-api:fabric-tag-extensions-v0:0.1.0+"
 }
 
 processResources {
