@@ -4,9 +4,11 @@ import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import net.minecraft.advancement.criterion.Criterions;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.FoodItemSetting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -18,12 +20,19 @@ import net.minecraft.util.UseAction;
 import net.minecraft.world.World;
 import net.minecraft.world.explosion.Explosion;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import squeek.appleskin.helpers.DynamicFood;
+
+import javax.annotation.Nullable;
 
 @Mixin(Item.class)
-public class MixinOmnivore {
+public abstract class MixinOmnivore implements DynamicFood {
+
+	@Shadow @Nullable
+	public abstract FoodItemSetting getFoodSetting();
 
 	@Inject(method = "getUseAction", at = @At("RETURN"), cancellable = true)
 	public void getOmnivoreUseAction(ItemStack stack, CallbackInfoReturnable cir) {
@@ -87,4 +96,31 @@ public class MixinOmnivore {
 		}
 	}
 
+	@Override
+	public int getDynamicHunger(ItemStack stack, PlayerEntity player) {
+		if (stack.getItem().isFood()) {
+			int base = this.getFoodSetting().getHunger();
+			CompoundTag tag = stack.getOrCreateTag();
+			if (tag.containsKey("jellied")) return base + 2;
+			else if (tag.containsKey("super_jellied")) return base + 4;
+			else return base;
+		} else if (EpicureanGastronomy.config.omnivoreEnabled) {
+			return EpicureanGastronomy.config.omnivoreFoodRestore;
+		}
+		return 0;
+	}
+
+	@Override
+	public float getDynamicSaturation(ItemStack stack, PlayerEntity player) {
+		if (stack.getItem().isFood()) {
+			float base = this.getFoodSetting().getSaturationModifier();
+			CompoundTag tag = stack.getOrCreateTag();
+			if (tag.containsKey("jellied")) return base + 0.25f;
+			else if (tag.containsKey("super_jellied")) return base + 0.3f;
+			else return base;
+		} else if (EpicureanGastronomy.config.omnivoreEnabled) {
+			return EpicureanGastronomy.config.omnivoreSaturationRestore;
+		}
+		return 0f;
+	}
 }
