@@ -12,7 +12,7 @@ buildscript {
 
 	}
 	dependencies {
-		classpath "net.fabricmc:fabric-loom:0.2.2-SNAPSHOT"
+		classpath "net.fabricmc:fabric-loom:0.2.3-SNAPSHOT"
 	}
 }
 
@@ -44,10 +44,10 @@ dependencies {
 
 	modCompile "io.github.prospector.modmenu:ModMenu:1.6.2-92"
 	modCompile "io.github.cottonmc:cotton:0.8.2+1.14.2"
-	modCompile "cloth-config:ClothConfig2:0.2.0"
-	include "cloth-config:ClothConfig2:0.2.0"
+	modCompile "cloth-config:ClothConfig:0.2.1.14"
+	include "cloth-config:ClothConfig:0.2.1.14"
 //	modCompile "appleskin:appleskin-mc1.14:fabric:1.0.6"
-	modCompile "io.github.cottonmc:SkillCheck:1.0.9+1.14.1"
+	modCompile "io.github.cottonmc:SkillCheck:1.1.0+1.14.2"
 
 	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 	implementation "blue.endless:jankson:1.1.2"
