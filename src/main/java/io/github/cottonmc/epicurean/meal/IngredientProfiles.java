@@ -1,15 +1,14 @@
 package io.github.cottonmc.epicurean.meal;
 
+import blue.endless.jankson.Jankson;
+import blue.endless.jankson.JsonObject;
+import blue.endless.jankson.impl.SyntaxError;
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
-import io.github.cottonmc.repackage.blue.endless.jankson.Jankson;
-import io.github.cottonmc.repackage.blue.endless.jankson.JsonObject;
-import io.github.cottonmc.repackage.blue.endless.jankson.impl.SyntaxError;
 import net.fabricmc.fabric.api.resource.SimpleResourceReloadListener;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.item.Item;
 import net.minecraft.resource.Resource;
 import net.minecraft.resource.ResourceManager;
-import net.minecraft.resource.ResourceReloadListener;
 import net.minecraft.tag.ItemTags;
 import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
