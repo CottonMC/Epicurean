@@ -49,7 +49,7 @@ dependencies {
 //	modCompile "appleskin:appleskin-mc1.14:fabric:1.0.6"
 	modCompile "io.github.cottonmc:SkillCheck:1.0.9+1.14.1"
 
-	compileOnly ("com.google.code.findbugs:jsr305:3.0.2")
+	compileOnly "com.google.code.findbugs:jsr305:3.0.2"
 	implementation "blue.endless:jankson:1.1.2"
 }
 

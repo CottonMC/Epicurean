@@ -1,12 +1,13 @@
 package io.github.cottonmc.epicurean.container;
 
-import io.github.cottonmc.repackage.blue.endless.jankson.annotation.Nullable;
 import net.minecraft.container.Container;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.RecipeFinder;
 import net.minecraft.util.DefaultedList;
+
+import javax.annotation.Nullable;
 
 public class CookingInventory extends CraftingInventory {
 	public static final int SECTION_SIZE = 6;
