@@ -53,7 +53,7 @@ public class EpicureanRecipes {
 					if (player == null || !player.abilities.creativeMode) {
 						ItemStack salt = new ItemStack(EpicureanItems.SALT, 1);
 						if (player != null) player.increaseStat(Stats.USE_CAULDRON, 1);
-						stack.subtractAmount(1);
+						stack.decrement(1);
 						if (player != null) {
 							if (stack.isEmpty()) {
 								player.setStackInHand(ctx.getHand(), salt);

@@ -4,7 +4,7 @@ import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import net.minecraft.advancement.criterion.Criterions;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.FoodItemSetting;
+import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 public class SpecialFoodItem extends Item {
 
 	public SpecialFoodItem(int hunger, float saturation, Item.Settings settings) {
-		super(settings.food(new FoodItemSetting.Builder().hunger(hunger).saturationModifier(saturation).build()));
+		super(settings.food(new FoodComponent.Builder().hunger(hunger).saturationModifier(saturation).build()));
 	}
 
 	@Override
@@ -36,8 +36,8 @@ public class SpecialFoodItem extends Item {
 	}
 
 	@Override
-	public ItemStack onItemFinishedUsing(ItemStack stack, World world, LivingEntity entity) {
-		if (EpicureanGastronomy.config.edibleNuggets) return super.onItemFinishedUsing(stack, world, entity);
+	public ItemStack finishUsing(ItemStack stack, World world, LivingEntity entity) {
+		if (EpicureanGastronomy.config.edibleNuggets) return super.finishUsing(stack, world, entity);
 		else if (EpicureanGastronomy.config.omnivoreEnabled) {
 			if (entity instanceof PlayerEntity) {
 				PlayerEntity player = (PlayerEntity) entity;
@@ -48,7 +48,7 @@ public class SpecialFoodItem extends Item {
 					Criterions.CONSUME_ITEM.handle((ServerPlayerEntity) player, stack);
 				}
 			}
-			stack.subtractAmount(1);
+			stack.decrement(1);
 		}
 		return stack;
 	}

@@ -4,17 +4,18 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import net.minecraft.client.gui.screen.ingame.AbstractContainerScreen;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 public class CookingTableScreen extends AbstractContainerScreen<CookingTableContainer> /*implements RecipeBookProvider*/ {
 	private static final Identifier TEXTURE = new Identifier(EpicureanGastronomy.MOD_ID, "textures/gui/cooking_table.png");
 	private static final Identifier RECIPE_BUTTON_TEX = new Identifier("textures/gui/recipe_button.png");
-	private final CookingRecipeBookScreen recipeBookGui = new CookingRecipeBookScreen();
+	private final CookingRecipeBookWidget recipeBookGui = new CookingRecipeBookWidget();
 	private boolean isNarrow;
 
 	public CookingTableScreen(int syncId, PlayerEntity player) {
-		super(new CookingTableContainer(syncId, player.inventory), player.inventory, new TranslatableComponent("container.epicurean.cooking_table"));
+		super(new CookingTableContainer(syncId, player.inventory), player.inventory, new TranslatableText("container.epicurean.cooking_table"));
 	}
 
 	@Override
@@ -71,11 +72,11 @@ public class CookingTableScreen extends AbstractContainerScreen<CookingTableCont
 		super.drawMouseoverTooltip(mouseX, mouseY);
 		if (mouseX >= this.left + 26 && mouseY >= this.top+11
 				&& mouseX <= this.left + 43 && mouseY <= this.top + 26) {
-			renderTooltip(new TranslatableComponent("tooltip.epicurean.table.base").getText(), mouseX, mouseY);
+			renderTooltip(new LiteralText("tooltip.epicurean.table.base").asString(), mouseX, mouseY);
 		}
 		if (mouseX >= this.left + 94 && mouseY >= this.top+11
 				&& mouseX <= this.left + 109 && mouseY <= this.top + 26) {
-			renderTooltip(new TranslatableComponent("tooltip.epicurean.table.seasoning").getText(), mouseX, mouseY);
+			renderTooltip(new LiteralText("tooltip.epicurean.table.seasoning").asString(), mouseX, mouseY);
 		}
 	}
 

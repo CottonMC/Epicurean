@@ -4,18 +4,19 @@ import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import io.github.cottonmc.epicurean.block.crop.EpicureanCrops;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.item.FoodItemSetting;
+import net.minecraft.item.AliasedBlockItem;
+import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 public class EpicureanItems {
 	public static Item.Settings defaultSettings() {
-		return new Item.Settings().itemGroup(EpicureanGastronomy.EPICUREAN_GROUP);
+		return new Item.Settings().group(EpicureanGastronomy.EPICUREAN_GROUP);
 	}
 
 	public static Item.Settings foodSettings(int hunger, float saturation) {
-		return defaultSettings().food(new FoodItemSetting.Builder().hunger(hunger).saturationModifier(saturation).build());
+		return defaultSettings().food(new FoodComponent.Builder().hunger(hunger).saturationModifier(saturation).build());
 	}
 
 	//non-meal-related stuff
@@ -56,10 +57,10 @@ public class EpicureanItems {
 	}
 
 	public static void init() {
-		ONION = register("onion", new PlantableItem(EpicureanCrops.ONION_PLANT, foodSettings(2, 0.2f)));
-		TOMATO_SEEDS = register("tomato_seeds", new PlantableItem(EpicureanCrops.TOMATO_PLANT, defaultSettings()));
-		PEPPER_SEEDS = register("pepper_seeds", new PlantableItem(EpicureanCrops.PEPPER_PLANT, defaultSettings()));
-		SOYBEAN = register("soybean", new PlantableItem(EpicureanCrops.SOYBEAN_PLANT, foodSettings(2, 0.2f)));
+		ONION = register("onion", new AliasedBlockItem(EpicureanCrops.ONION_PLANT, foodSettings(2, 0.2f)));
+		TOMATO_SEEDS = register("tomato_seeds", new AliasedBlockItem(EpicureanCrops.TOMATO_PLANT, defaultSettings()));
+		PEPPER_SEEDS = register("pepper_seeds", new AliasedBlockItem(EpicureanCrops.PEPPER_PLANT, defaultSettings()));
+		SOYBEAN = register("soybean", new AliasedBlockItem(EpicureanCrops.SOYBEAN_PLANT, foodSettings(2, 0.2f)));
 		CompostingChanceRegistry.INSTANCE.add(JELLY, 0.65f);
 		CompostingChanceRegistry.INSTANCE.add(SUPER_JELLY, 0.65f);
 		CompostingChanceRegistry.INSTANCE.add(PEPPER_SEEDS, 0.3f);

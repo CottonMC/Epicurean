@@ -37,8 +37,8 @@ public class CookingResultSlot extends CraftingResultSlot {
 			if (!remainder.isEmpty()) {
 				if (ingredient.isEmpty()) {
 					this.craftingInv.setInvStack(i, remainder);
-				} else if (ItemStack.areEqualIgnoreTags(ingredient, remainder) && ItemStack.areTagsEqual(ingredient, remainder)) {
-					remainder.addAmount(ingredient.getAmount());
+				} else if (ItemStack.areItemsEqual(ingredient, remainder) && ItemStack.areTagsEqual(ingredient, remainder)) {
+					remainder.increment(ingredient.getCount());
 					this.craftingInv.setInvStack(i, remainder);
 				} else if (!this.player.inventory.insertStack(remainder)) {
 					this.player.dropItem(remainder, false);

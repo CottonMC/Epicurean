@@ -61,7 +61,7 @@ public class DressingMealRecipe extends MealRecipe {
 				else return false;
 			}
 		}
-		CompoundTag profile = targetMeal.getOrCreateSubCompoundTag("FlavorProfile");
+		CompoundTag profile = targetMeal.getOrCreateSubTag("FlavorProfile");
 		if (profile.containsKey("Seasonings")) {
 			CompoundTag seasonings = profile.getCompound("Seasonings");
 			int existingSeasonings = 0;

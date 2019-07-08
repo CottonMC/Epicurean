@@ -5,7 +5,6 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.util.NbtType;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.ChatFormat;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.entity.LivingEntity;
@@ -15,10 +14,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.potion.PotionUtil;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
@@ -37,9 +37,10 @@ public class MealItem extends Item implements DynamicFood {
 	public boolean hasRecipeRemainder() {
 		return false;
 	}
+	
 
 	@Override
-	public ItemStack onItemFinishedUsing(ItemStack stack, World world, LivingEntity entity) {
+	public ItemStack finishUsing(ItemStack stack, World world, LivingEntity entity) {
 		if (entity instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity)entity;
 			for (StatusEffectInstance effect : getMealEffects(stack)) {
@@ -55,7 +56,7 @@ public class MealItem extends Item implements DynamicFood {
 				player.getHungerManager().add(addHunger, addSaturation);
 			}
 		}
-		super.onItemFinishedUsing(stack, world, entity);
+		super.finishUsing(stack, world, entity);
 		return stack;
 	}
 
@@ -66,41 +67,41 @@ public class MealItem extends Item implements DynamicFood {
 
 	@Environment(EnvType.CLIENT)
 	@Override
-	public void buildTooltip(ItemStack stack, World world, List<Component> tooltip, TooltipContext ctx) {
-		super.buildTooltip(stack, world, tooltip, ctx);
+	public void appendTooltip(ItemStack stack, World world, List<Text> tooltip, TooltipContext ctx) {
+		super.appendTooltip(stack, world, tooltip, ctx);
 		PotionUtil.buildTooltip(stack, tooltip, 1.0F);
 		if (!stack.hasTag()) return;
 		if (stack.getTag().containsKey("FlavorProfile")) {
 			if (Screen.hasShiftDown()) {
 				CompoundTag profile = stack.getTag().getCompound("FlavorProfile");
-				String flavor = new TranslatableComponent("tooltip.epicurean.flavor." + profile.getString("ProminentFlavor").toLowerCase()).getText();
-				tooltip.add(new TranslatableComponent("tooltip.epicurean.meal.flavor", flavor).applyFormat(ChatFormat.GRAY));
+				String flavor = new TranslatableText("tooltip.epicurean.flavor." + profile.getString("ProminentFlavor").toLowerCase()).asString();
+				tooltip.add(new TranslatableText("tooltip.epicurean.meal.flavor", flavor).formatted(Formatting.GRAY));
 				int hunger = 0;
 				float saturation = 0;
 				if (profile.containsKey("Hunger")) hunger = profile.getInt("Hunger");
 				if (profile.containsKey("Saturation")) saturation = profile.getFloat("Saturation");
 				float percentage = Math.round(saturation*100.0);
 				if ((hunger != 0 || saturation != 0) && !FabricLoader.getInstance().isModLoaded("appleskin")) {
-					tooltip.add(new TranslatableComponent("tooltip.epicurean.meal.restores"));
+					tooltip.add(new TranslatableText("tooltip.epicurean.meal.restores"));
 					if (hunger != 0 && !EpicureanGastronomy.config.useSaturationOnly) {
-						tooltip.add(new TranslatableComponent("tooltip.epicurean.meal.hunger", hunger).applyFormat(ChatFormat.GRAY));
+						tooltip.add(new TranslatableText("tooltip.epicurean.meal.hunger", hunger).formatted(Formatting.GRAY));
 					}
 					if (saturation != 0) {
-						tooltip.add(new TranslatableComponent("tooltip.epicurean.meal.saturation", percentage).applyFormat(ChatFormat.GRAY));
+						tooltip.add(new TranslatableText("tooltip.epicurean.meal.saturation", percentage).formatted(Formatting.GRAY));
 					}
 				}
 				if (profile.containsKey("Seasonings")) {
-					tooltip.add(new TranslatableComponent("tooltip.epicurean.meal.seasonings"));
+					tooltip.add(new TranslatableText("tooltip.epicurean.meal.seasonings"));
 					CompoundTag seasonings = profile.getCompound("Seasonings");
 					for (String key : seasonings.getKeys()) {
 						String name = Registry.ITEM.get(new Identifier(key)).getTranslationKey();
 						int amount = seasonings.getInt(key);
-						TranslatableComponent translation = new TranslatableComponent(name);
-						tooltip.add(new TextComponent(" - "+amount + " x " + translation.getText()).applyFormat(ChatFormat.GRAY));
+						TranslatableText translation = new TranslatableText(name);
+						tooltip.add(new LiteralText(" - "+amount + " x " + translation.asString()).formatted(Formatting.GRAY));
 					}
 				}
 			} else {
-				tooltip.add(new TranslatableComponent("tooltip.epicurean.readmore").applyFormat(ChatFormat.GREEN));
+				tooltip.add(new TranslatableText("tooltip.epicurean.readmore").formatted(Formatting.GREEN));
 			}
 		}
 
@@ -108,10 +109,10 @@ public class MealItem extends Item implements DynamicFood {
 
 	@Override
 	public int getDynamicHunger(ItemStack itemStack, PlayerEntity playerEntity) {
-		int ret = this.getFoodSetting().getHunger();
+		int ret = this.getFoodComponent().getHunger();
 		if (itemStack.getOrCreateTag().containsKey("FlavorProfile", NbtType.COMPOUND)) {
-			if (itemStack.getSubCompoundTag("FlavorProfile").containsKey("Hunger", NbtType.INT)) {
-				ret += itemStack.getSubCompoundTag("FlavorProfile").getInt("Hunger");
+			if (itemStack.getSubTag("FlavorProfile").containsKey("Hunger", NbtType.INT)) {
+				ret += itemStack.getSubTag("FlavorProfile").getInt("Hunger");
 			}
 		}
 		return ret;
@@ -119,10 +120,10 @@ public class MealItem extends Item implements DynamicFood {
 
 	@Override
 	public float getDynamicSaturation(ItemStack itemStack, PlayerEntity playerEntity) {
-		float ret = this.getFoodSetting().getSaturationModifier();
+		float ret = this.getFoodComponent().getSaturationModifier();
 		if (itemStack.getOrCreateTag().containsKey("FlavorProfile", NbtType.COMPOUND)) {
-			if (itemStack.getSubCompoundTag("FlavorProfile").containsKey("Saturation", NbtType.FLOAT)) {
-				ret += itemStack.getSubCompoundTag("FlavorProfile").getFloat("Saturation");
+			if (itemStack.getSubTag("FlavorProfile").containsKey("Saturation", NbtType.FLOAT)) {
+				ret += itemStack.getSubTag("FlavorProfile").getFloat("Saturation");
 			}
 		}
 		return ret;

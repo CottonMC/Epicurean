@@ -1,12 +1,12 @@
 package io.github.cottonmc.epicurean.mixins;
 
 import io.github.cottonmc.epicurean.meal.IngredientProfiles;
-import net.minecraft.ChatFormat;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -18,21 +18,21 @@ import java.util.List;
 @Mixin(Item.class)
 public class MixinIngredientTooltips {
 
-	@Inject(method = "buildTooltip", at = @At("HEAD"))
-	public void addFlavorProfiles(ItemStack stack, World world, List<Component> tooltips, TooltipContext ctx, CallbackInfo ci) {
+	@Inject(method = "appendTooltip", at = @At("HEAD"))
+	public void addFlavorProfiles(ItemStack stack, World world, List<Text> tooltips, TooltipContext ctx, CallbackInfo ci) {
 		if (IngredientProfiles.MEAL_INGREDIENTS.containsKey(stack.getItem())) {
-			String flavor = new TranslatableComponent("tooltip.epicurean.flavor." + IngredientProfiles.MEAL_INGREDIENTS.get(stack.getItem()).asString()).getText();
-			tooltips.add(new TranslatableComponent("tooltip.epicurean.ingredient", flavor).applyFormat(ChatFormat.GRAY, ChatFormat.ITALIC));
+			String flavor = new TranslatableText("tooltip.epicurean.flavor." + IngredientProfiles.MEAL_INGREDIENTS.get(stack.getItem()).asString()).asString();
+			tooltips.add(new TranslatableText("tooltip.epicurean.ingredient", flavor).formatted(Formatting.GRAY, Formatting.ITALIC));
 		} else if (IngredientProfiles.DRESSINGS.containsKey(stack.getItem())) {
-			String flavor = new TranslatableComponent("tooltip.epicurean.flavor." + IngredientProfiles.DRESSINGS.get(stack.getItem()).asString()).getText();
-			tooltips.add(new TranslatableComponent("tooltip.epicurean.dressing", flavor).applyFormat(ChatFormat.GRAY, ChatFormat.ITALIC));
+			String flavor = new TranslatableText("tooltip.epicurean.flavor." + IngredientProfiles.DRESSINGS.get(stack.getItem()).asString()).asString();
+			tooltips.add(new TranslatableText("tooltip.epicurean.dressing", flavor).formatted(Formatting.GRAY, Formatting.ITALIC));
 		}
 		if (stack.getItem().isFood()) {
 			if (stack.hasTag())  {
 				if (stack.getTag().containsKey("jellied")) {
-					tooltips.add(new TranslatableComponent("tooltip.epicurean.jellied").applyFormat(ChatFormat.DARK_RED));
+					tooltips.add(new TranslatableText("tooltip.epicurean.jellied").formatted(Formatting.DARK_RED));
 				} else if (stack.getTag().containsKey("super_jellied")) {
-					tooltips.add(new TranslatableComponent("tooltip.epicurean.super_jellied").applyFormat(ChatFormat.GREEN));
+					tooltips.add(new TranslatableText("tooltip.epicurean.super_jellied").formatted(Formatting.GREEN));
 				}
 			}
 		}

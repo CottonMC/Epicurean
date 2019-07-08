@@ -1,6 +1,6 @@
 package io.github.cottonmc.epicurean.container;
 
-import net.minecraft.client.gui.screen.recipebook.RecipeBookScreen;
+import net.minecraft.client.gui.screen.recipebook.RecipeBookWidget;
 import net.minecraft.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.Ingredient;
@@ -10,9 +10,9 @@ import net.minecraft.util.DefaultedList;
 import java.util.Iterator;
 import java.util.List;
 
-public class CookingRecipeBookScreen extends RecipeBookScreen {
+public class CookingRecipeBookWidget extends RecipeBookWidget {
 
-	public CookingRecipeBookScreen() {
+	public CookingRecipeBookWidget() {
 
 	}
 

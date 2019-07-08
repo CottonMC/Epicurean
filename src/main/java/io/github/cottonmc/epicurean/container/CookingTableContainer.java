@@ -130,7 +130,7 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 				MealRecipe recipe = optional.get();
 				if (resultInv.shouldCraftRecipe(world, serverPlayer, recipe)) {
 					stack = recipe.craft(cookingInv);
-					stack.setAmount(1);
+					stack.setCount(1);
 				}
 			}
 
@@ -148,7 +148,7 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 			stackToTransfer = stackInSlot.copy();
 			if (slotNum == RESULT_SLOT) {
 				this.context.run((world, pos) -> {
-					stackInSlot.getItem().onCrafted(stackInSlot, world, player);
+					stackInSlot.getItem().onCraft(stackInSlot, world, player);
 				});
 				if (!this.insertItem(stackInSlot, FIRST_PLAYER_SLOT, SLOT_COUNT, true)) {
 					return ItemStack.EMPTY;
@@ -173,7 +173,7 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 				slot.markDirty();
 			}
 
-			if (stackInSlot.getAmount() == stackToTransfer.getAmount()) {
+			if (stackInSlot.getCount() == stackToTransfer.getCount()) {
 				return ItemStack.EMPTY;
 			}
 

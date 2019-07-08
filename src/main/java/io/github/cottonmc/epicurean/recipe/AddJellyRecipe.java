@@ -56,7 +56,7 @@ public class AddJellyRecipe extends SpecialCraftingRecipe {
 			}
 		}
 		if (food.isEmpty()) return food;
-		food.setAmount(1); //otherwise every crafting op will give 64 food back
+		food.setCount(1); //otherwise every crafting op will give 64 food back
 		CompoundTag tag = food.getOrCreateTag();
 		if (jelly.getItem() == EpicureanItems.SUPER_JELLY) tag.putByte("super_jellied", (byte)0);
 		else tag.putByte("jellied", (byte)0);

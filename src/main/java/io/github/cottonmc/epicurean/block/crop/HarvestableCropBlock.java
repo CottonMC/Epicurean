@@ -9,7 +9,7 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.StateFactory;
-import net.minecraft.state.property.IntegerProperty;
+import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -24,7 +24,7 @@ import java.util.List;
 public class HarvestableCropBlock extends CropBlock {
 	public final Item cropItem;
 	private final int resetGrowthTo;
-	public static final IntegerProperty AGE = Properties.AGE_7;
+	public static final IntProperty AGE = Properties.AGE_7;
 
 	public HarvestableCropBlock(Item cropItem, int resetGrowthTo) {
 		super(FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.CROP).ticksRandomly().breakInstantly().build().noCollision());
@@ -34,7 +34,7 @@ public class HarvestableCropBlock extends CropBlock {
 	}
 
 	@Override
-	public IntegerProperty getAgeProperty() {
+	public IntProperty getAgeProperty() {
 		return super.getAgeProperty();
 	}
 

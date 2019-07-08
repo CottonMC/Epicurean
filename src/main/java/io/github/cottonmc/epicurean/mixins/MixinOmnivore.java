@@ -4,7 +4,7 @@ import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import net.minecraft.advancement.criterion.Criterions;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.FoodItemSetting;
+import net.minecraft.item.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -32,7 +32,7 @@ import javax.annotation.Nullable;
 public abstract class MixinOmnivore implements DynamicFood {
 
 	@Shadow @Nullable
-	public abstract FoodItemSetting getFoodSetting();
+	public abstract FoodComponent getFoodComponent();
 
 	@Inject(method = "getUseAction", at = @At("RETURN"), cancellable = true)
 	public void getOmnivoreUseAction(ItemStack stack, CallbackInfoReturnable cir) {
@@ -57,7 +57,7 @@ public abstract class MixinOmnivore implements DynamicFood {
 		}
 	}
 
-	@Inject(method = "onItemFinishedUsing", at = @At("HEAD"), cancellable = true)
+	@Inject(method = "finishUsing", at = @At("HEAD"), cancellable = true)
 	public void getOmnivoreOnItemFinishedUsing(ItemStack stack, World world, LivingEntity entity, CallbackInfoReturnable cir) {
 		if (stack.getItem() == Items.CAKE) {
 			if (entity instanceof PlayerEntity) {
@@ -69,7 +69,7 @@ public abstract class MixinOmnivore implements DynamicFood {
 					Criterions.CONSUME_ITEM.handle((ServerPlayerEntity) player, stack);
 				}
 			}
-			stack.subtractAmount(1);
+			stack.decrement(1);
 			cir.setReturnValue(stack);
 		} else if (EpicureanGastronomy.config.omnivoreEnabled) {
 			if (entity instanceof PlayerEntity) {
@@ -88,10 +88,10 @@ public abstract class MixinOmnivore implements DynamicFood {
 			double damageConf = EpicureanGastronomy.config.omnivoreItemDamage;
 			int damage = (int)damageConf;
 			if (damageConf < 1 && damageConf > 0) {
-				damage = (int)Math.ceil(damageConf*stack.getItem().getDurability());
+				damage = (int)Math.ceil(damageConf*stack.getItem().getMaxDamage());
 			}
-			if (stack.hasDurability() && damage > 0) stack.applyDamage(damage, entity, (user) -> user.sendToolBreakStatus(entity.getActiveHand()));
-			else stack.subtractAmount(1);
+			if (stack.isDamageable() && damage > 0) stack.damage(damage, entity, (user) -> user.sendToolBreakStatus(entity.getActiveHand()));
+			else stack.decrement(1);
 			cir.setReturnValue(stack);
 		}
 	}
@@ -99,7 +99,7 @@ public abstract class MixinOmnivore implements DynamicFood {
 	@Override
 	public int getDynamicHunger(ItemStack stack, PlayerEntity player) {
 		if (stack.getItem().isFood()) {
-			int base = this.getFoodSetting().getHunger();
+			int base = this.getFoodComponent().getHunger();
 			CompoundTag tag = stack.getOrCreateTag();
 			if (tag.containsKey("jellied")) return base + 2;
 			else if (tag.containsKey("super_jellied")) return base + 4;
@@ -113,7 +113,7 @@ public abstract class MixinOmnivore implements DynamicFood {
 	@Override
 	public float getDynamicSaturation(ItemStack stack, PlayerEntity player) {
 		if (stack.getItem().isFood()) {
-			float base = this.getFoodSetting().getSaturationModifier();
+			float base = this.getFoodComponent().getSaturationModifier();
 			CompoundTag tag = stack.getOrCreateTag();
 			if (tag.containsKey("jellied")) return base + 0.25f;
 			else if (tag.containsKey("super_jellied")) return base + 0.3f;
