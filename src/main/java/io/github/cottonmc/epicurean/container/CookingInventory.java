@@ -22,7 +22,7 @@ public class CookingInventory extends CraftingInventory {
 	public CookingInventory(Container container, @Nullable PlayerEntity player) {
 		super(container, SECTION_SIZE, 2);
 		this.accessor = player;
-		this.stacks = DefaultedList.create(SECTION_SIZE * 2, ItemStack.EMPTY);
+		this.stacks = DefaultedList.ofSize(SECTION_SIZE * 2, ItemStack.EMPTY);
 	}
 
 	public void provideRecipeInputs(RecipeFinder finder) {

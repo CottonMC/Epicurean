@@ -37,13 +37,13 @@ repositories {
 }
 
 dependencies {
-	minecraft "com.mojang:minecraft:1.14.3"
-	mappings "net.fabricmc:yarn:1.14.3+build.2"
+	minecraft "com.mojang:minecraft:1.14.4"
+	mappings "net.fabricmc:yarn:1.14.4+build.8"
 	modCompile "net.fabricmc:fabric-loader:0.4.8+build.154"
-	modCompile "net.fabricmc.fabric-api:fabric-api:0.3.0+build.187"
+	modCompile "net.fabricmc.fabric-api:fabric-api:0.3.0+build.207"
 
 	modCompile "io.github.prospector.modmenu:ModMenu:1.6.2-92"
-	modCompile "io.github.cottonmc:cotton:0.8.3-pre+1.14.3"
+	modCompile "io.github.cottonmc.cotton:cotton:1.0.0-rc.2"
 	modCompile "cloth-config:ClothConfig:0.2.1.14"
 	include "cloth-config:ClothConfig:0.2.1.14"
 //	modCompile "appleskin:appleskin-mc1.14:fabric:1.0.6"
