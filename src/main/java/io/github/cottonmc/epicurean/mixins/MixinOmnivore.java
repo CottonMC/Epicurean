@@ -1,6 +1,6 @@
 package io.github.cottonmc.epicurean.mixins;
 
-import io.github.cottonmc.epicurean.EpicureanGastronomy;
+import io.github.cottonmc.epicurean.Epicurean;
 import net.minecraft.advancement.criterion.Criterions;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -36,19 +36,19 @@ public abstract class MixinOmnivore implements DynamicFood {
 
 	@Inject(method = "getUseAction", at = @At("RETURN"), cancellable = true)
 	public void getOmnivoreUseAction(ItemStack stack, CallbackInfoReturnable cir) {
-		if (EpicureanGastronomy.config.omnivoreEnabled) cir.setReturnValue(UseAction.EAT);
+		if (Epicurean.config.omnivoreEnabled) cir.setReturnValue(UseAction.EAT);
 	}
 
 	@Inject(method = "getMaxUseTime", at = @At("RETURN"), cancellable = true)
 	public void getOmnivoreUseTime(ItemStack stack, CallbackInfoReturnable cir) {
-		if (EpicureanGastronomy.config.omnivoreEnabled) cir.setReturnValue(48);
+		if (Epicurean.config.omnivoreEnabled) cir.setReturnValue(48);
 	}
 
 	@Inject(method = "use", at = @At("HEAD"), cancellable = true)
 	public void omnivoreUse(World world, PlayerEntity player, Hand hand, CallbackInfoReturnable cir) {
-		if (EpicureanGastronomy.config.omnivoreEnabled) {
+		if (Epicurean.config.omnivoreEnabled) {
 			ItemStack stack = player.getStackInHand(hand);
-			if (player.canConsume(EpicureanGastronomy.config.useSaturationOnly)) {
+			if (player.canConsume(Epicurean.config.useSaturationOnly)) {
 				player.setCurrentHand(hand);
 				cir.setReturnValue(new TypedActionResult(ActionResult.SUCCESS, stack));
 			} else {
@@ -71,10 +71,10 @@ public abstract class MixinOmnivore implements DynamicFood {
 			}
 			stack.decrement(1);
 			cir.setReturnValue(stack);
-		} else if (EpicureanGastronomy.config.omnivoreEnabled) {
+		} else if (Epicurean.config.omnivoreEnabled) {
 			if (entity instanceof PlayerEntity) {
 				PlayerEntity player = (PlayerEntity) entity;
-				player.getHungerManager().add(EpicureanGastronomy.config.omnivoreFoodRestore, EpicureanGastronomy.config.omnivoreSaturationRestore);
+				player.getHungerManager().add(Epicurean.config.omnivoreFoodRestore, Epicurean.config.omnivoreSaturationRestore);
 				world.playSound(null, player.getBlockPos().getX(), player.getBlockPos().getY(), player.getBlockPos().getZ(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, world.random.nextFloat() * 0.1F + 0.9F);
 				player.incrementStat(Stats.USED.getOrCreateStat((Item)(Object)this));
 				if (player instanceof ServerPlayerEntity) {
@@ -85,7 +85,7 @@ public abstract class MixinOmnivore implements DynamicFood {
 				world.createExplosion(null, entity.getBlockPos().getX(), entity.getBlockPos().getY()+1, entity.getBlockPos().getZ(), 1.5f, Explosion.DestructionType.NONE);
 			}
 
-			double damageConf = EpicureanGastronomy.config.omnivoreItemDamage;
+			double damageConf = Epicurean.config.omnivoreItemDamage;
 			int damage = (int)damageConf;
 			if (damageConf < 1 && damageConf > 0) {
 				damage = (int)Math.ceil(damageConf*stack.getItem().getMaxDamage());
@@ -104,8 +104,8 @@ public abstract class MixinOmnivore implements DynamicFood {
 			if (tag.contains("jellied")) return base + 2;
 			else if (tag.contains("super_jellied")) return base + 4;
 			else return base;
-		} else if (EpicureanGastronomy.config.omnivoreEnabled) {
-			return EpicureanGastronomy.config.omnivoreFoodRestore;
+		} else if (Epicurean.config.omnivoreEnabled) {
+			return Epicurean.config.omnivoreFoodRestore;
 		}
 		return 0;
 	}
@@ -118,8 +118,8 @@ public abstract class MixinOmnivore implements DynamicFood {
 			if (tag.contains("jellied")) return base + 0.25f;
 			else if (tag.contains("super_jellied")) return base + 0.3f;
 			else return base;
-		} else if (EpicureanGastronomy.config.omnivoreEnabled) {
-			return EpicureanGastronomy.config.omnivoreSaturationRestore;
+		} else if (Epicurean.config.omnivoreEnabled) {
+			return Epicurean.config.omnivoreSaturationRestore;
 		}
 		return 0f;
 	}

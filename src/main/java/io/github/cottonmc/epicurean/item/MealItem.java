@@ -1,6 +1,6 @@
 package io.github.cottonmc.epicurean.item;
 
-import io.github.cottonmc.epicurean.EpicureanGastronomy;
+import io.github.cottonmc.epicurean.Epicurean;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.util.NbtType;
@@ -83,7 +83,7 @@ public class MealItem extends Item implements DynamicFood {
 				float percentage = Math.round(saturation*100.0);
 				if ((hunger != 0 || saturation != 0) && !FabricLoader.getInstance().isModLoaded("appleskin")) {
 					tooltip.add(new TranslatableText("tooltip.epicurean.meal.restores"));
-					if (hunger != 0 && !EpicureanGastronomy.config.useSaturationOnly) {
+					if (hunger != 0 && !Epicurean.config.useSaturationOnly) {
 						tooltip.add(new TranslatableText("tooltip.epicurean.meal.hunger", hunger).formatted(Formatting.GRAY));
 					}
 					if (saturation != 0) {

@@ -1,6 +1,6 @@
 package io.github.cottonmc.epicurean.recipe;
 
-import io.github.cottonmc.epicurean.EpicureanGastronomy;
+import io.github.cottonmc.epicurean.Epicurean;
 import io.github.cottonmc.epicurean.item.EpicureanItems;
 import io.github.cottonmc.epicurean.item.JellyItem;
 import io.github.cottonmc.epicurean.item.SpecialFoodItem;
@@ -39,7 +39,7 @@ public class AddJellyRecipe extends SpecialCraftingRecipe {
 				}
 			}
 		}
-		if (targetFood.getItem() instanceof SpecialFoodItem && !EpicureanGastronomy.config.edibleNuggets) return false;
+		if (targetFood.getItem() instanceof SpecialFoodItem && !Epicurean.config.edibleNuggets) return false;
 		return (!targetFood.hasTag() || (!targetFood.getTag().contains("jellied") && !targetFood.getTag().contains("super_jellied"))) && !targetJelly.isEmpty();
 	}
 

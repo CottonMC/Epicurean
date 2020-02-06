@@ -1,6 +1,6 @@
 package io.github.cottonmc.epicurean.recipe;
 
-import io.github.cottonmc.epicurean.EpicureanGastronomy;
+import io.github.cottonmc.epicurean.Epicurean;
 import io.github.cottonmc.epicurean.container.CookingInventory;
 import io.github.cottonmc.epicurean.item.EpicureanItems;
 import io.github.cottonmc.epicurean.item.Seasoning;
@@ -65,7 +65,7 @@ public class MealRecipe implements CraftingRecipe {
 		//make sure the seasonings fit on the meal
 		for (int i = CookingInventory.SECTION_SIZE; i < inv.getInvSize(); i++) {
 			ItemStack stack = inv.getInvStack(i);
-			boolean isSalt = EpicureanGastronomy.config.useSaltTag?
+			boolean isSalt = Epicurean.config.useSaltTag?
 					ItemTags.getContainer().get(new Identifier("c", "salt")).contains(stack.getItem()) : stack.getItem() == EpicureanItems.SALT;
 			if (stack.isEmpty() || isSalt) continue;
 			boolean seasoningFound = false;
@@ -202,7 +202,7 @@ public class MealRecipe implements CraftingRecipe {
 				seasoningBonus += ((Seasoning) stack.getItem()).getHungerRestored(stack);
 			}
 		}
-		hunger = (int) Math.ceil((hunger * EpicureanGastronomy.config.seasoningEfficiency) + seasoningBonus);
+		hunger = (int) Math.ceil((hunger * Epicurean.config.seasoningEfficiency) + seasoningBonus);
 		return hunger;
 	}
 
@@ -216,13 +216,13 @@ public class MealRecipe implements CraftingRecipe {
 				seasoningBonus += ((Seasoning) stack.getItem()).getSaturationModifier(stack);
 			}
 		}
-		return (float) ((saturation * EpicureanGastronomy.config.seasoningEfficiency) + seasoningBonus);
+		return (float) ((saturation * Epicurean.config.seasoningEfficiency) + seasoningBonus);
 	}
 
 	public static int countSalt(List<ItemStack> seasonings) {
 		int salt = 0;
 		for (ItemStack stack : seasonings) {
-			if (EpicureanGastronomy.config.useSaltTag?
+			if (Epicurean.config.useSaltTag?
 					ItemTags.getContainer().get(new Identifier("c", "salt")).contains(stack.getItem()) : stack.getItem() == EpicureanItems.SALT)
 				salt++;
 		}

@@ -2,7 +2,7 @@ package io.github.cottonmc.epicurean.recipe;
 
 import io.github.cottonmc.cotton.cauldron.Cauldron;
 import io.github.cottonmc.cotton.cauldron.CauldronBehavior;
-import io.github.cottonmc.epicurean.EpicureanGastronomy;
+import io.github.cottonmc.epicurean.Epicurean;
 import io.github.cottonmc.epicurean.item.EpicureanItems;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.ItemEntity;
@@ -38,7 +38,7 @@ public class EpicureanRecipes {
 	}
 
 	public static <S extends RecipeSerializer<T>, T extends Recipe<?>> S register(String name, S serializer) {
-		return Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(EpicureanGastronomy.MOD_ID, name), serializer);
+		return Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(Epicurean.MOD_ID, name), serializer);
 	}
 
 	public static void init() {

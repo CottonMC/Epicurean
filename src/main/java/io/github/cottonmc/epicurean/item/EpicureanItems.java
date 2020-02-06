@@ -1,6 +1,6 @@
 package io.github.cottonmc.epicurean.item;
 
-import io.github.cottonmc.epicurean.EpicureanGastronomy;
+import io.github.cottonmc.epicurean.Epicurean;
 import io.github.cottonmc.epicurean.block.crop.EpicureanCrops;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.minecraft.entity.effect.StatusEffects;
@@ -12,7 +12,7 @@ import net.minecraft.util.registry.Registry;
 
 public class EpicureanItems {
 	public static Item.Settings defaultSettings() {
-		return new Item.Settings().group(EpicureanGastronomy.EPICUREAN_GROUP);
+		return new Item.Settings().group(Epicurean.EPICUREAN_GROUP);
 	}
 
 	public static Item.Settings foodSettings(int hunger, float saturation) {
@@ -52,7 +52,7 @@ public class EpicureanItems {
 	public static final Item PANCAKE = register("pancake", new MealItem(5, 0.3f));
 
 	public static Item register(String name, Item item) {
-		Registry.register(Registry.ITEM, new Identifier(EpicureanGastronomy.MOD_ID, name), item);
+		Registry.register(Registry.ITEM, new Identifier(Epicurean.MOD_ID, name), item);
 		return item;
 	}
 

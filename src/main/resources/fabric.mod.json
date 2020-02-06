@@ -14,7 +14,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.github.cottonmc.epicurean.EpicureanGastronomy"
+      "io.github.cottonmc.epicurean.Epicurean"
     ],
     "client": [
       "io.github.cottonmc.epicurean.EpicureanClient"

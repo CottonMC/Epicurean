@@ -1,6 +1,6 @@
 package io.github.cottonmc.epicurean.item;
 
-import io.github.cottonmc.epicurean.EpicureanGastronomy;
+import io.github.cottonmc.epicurean.Epicurean;
 import net.minecraft.advancement.criterion.Criterions;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -26,22 +26,22 @@ public class SpecialFoodItem extends Item {
 	@Override
 	public TypedActionResult<ItemStack> use(World world, PlayerEntity player, Hand hand) {
 		ItemStack stack = player.getStackInHand(hand);
-		if (EpicureanGastronomy.config.edibleNuggets || EpicureanGastronomy.config.omnivoreEnabled) return super.use(world, player, hand);
+		if (Epicurean.config.edibleNuggets || Epicurean.config.omnivoreEnabled) return super.use(world, player, hand);
 		else return new TypedActionResult<>(ActionResult.PASS, stack);
 	}
 
 	@Override
 	public UseAction getUseAction(ItemStack stack) {
-		return (EpicureanGastronomy.config.edibleNuggets || EpicureanGastronomy.config.omnivoreEnabled)? UseAction.EAT : UseAction.NONE;
+		return (Epicurean.config.edibleNuggets || Epicurean.config.omnivoreEnabled)? UseAction.EAT : UseAction.NONE;
 	}
 
 	@Override
 	public ItemStack finishUsing(ItemStack stack, World world, LivingEntity entity) {
-		if (EpicureanGastronomy.config.edibleNuggets) return super.finishUsing(stack, world, entity);
-		else if (EpicureanGastronomy.config.omnivoreEnabled) {
+		if (Epicurean.config.edibleNuggets) return super.finishUsing(stack, world, entity);
+		else if (Epicurean.config.omnivoreEnabled) {
 			if (entity instanceof PlayerEntity) {
 				PlayerEntity player = (PlayerEntity) entity;
-				player.getHungerManager().add(EpicureanGastronomy.config.omnivoreFoodRestore, EpicureanGastronomy.config.omnivoreSaturationRestore);
+				player.getHungerManager().add(Epicurean.config.omnivoreFoodRestore, Epicurean.config.omnivoreSaturationRestore);
 				world.playSound(null, player.getBlockPos().getX(), player.getBlockPos().getY(), player.getBlockPos().getZ(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, world.random.nextFloat() * 0.1F + 0.9F);
 				player.incrementStat(Stats.USED.getOrCreateStat(this));
 				if (player instanceof ServerPlayerEntity) {

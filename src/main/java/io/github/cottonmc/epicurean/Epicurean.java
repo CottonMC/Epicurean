@@ -23,16 +23,16 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 
-public class EpicureanGastronomy implements ModInitializer {
+public class Epicurean implements ModInitializer {
     public static EpicureanConfig config;
     public static String MOD_ID = "epicurean";
     public static final ItemGroup EPICUREAN_GROUP = FabricItemGroupBuilder.build(new Identifier(MOD_ID, "epicurean_group"), () -> new ItemStack(EpicureanItems.JELLY));
 
-    public static final ModLogger LOGGER = new ModLogger(MOD_ID, "Epicurean Gastronomy");
+    public static final ModLogger LOGGER = new ModLogger(MOD_ID, "Epicurean");
 
     @Override
     public void onInitialize() {
-        config = ConfigManager.loadConfig(EpicureanConfig.class, "EpicureanGastronomy.json5");
+        config = ConfigManager.loadConfig(EpicureanConfig.class, "Epicurean.json5");
         if (config.omnivoreEnabled) {
             LOGGER.info("You're feeling hungry...");
             LOGGER.info("Be warned, this might cause weird behavior!");

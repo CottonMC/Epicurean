@@ -1,6 +1,6 @@
 package io.github.cottonmc.epicurean.mixins;
 
-import io.github.cottonmc.epicurean.EpicureanGastronomy;
+import io.github.cottonmc.epicurean.Epicurean;
 import net.minecraft.block.*;
 import net.minecraft.block.entity.Hopper;
 import net.minecraft.block.entity.HopperBlockEntity;
@@ -26,7 +26,7 @@ public class MixinHopperHarvesting {
 
 	@Inject(method = "extract(Lnet/minecraft/block/entity/Hopper;)Z", at = @At("HEAD"), cancellable = true)
 	private static void hopperHarvest(Hopper hopper, CallbackInfoReturnable cir) {
-		if (EpicureanGastronomy.config.hopperHarvest) {
+		if (Epicurean.config.hopperHarvest) {
 			World world = hopper.getWorld();
 			BlockPos pos = new BlockPos(hopper.getHopperX(), hopper.getHopperY(), hopper.getHopperZ());
 			BlockState state = world.getBlockState(pos.offset(Direction.UP, 2));

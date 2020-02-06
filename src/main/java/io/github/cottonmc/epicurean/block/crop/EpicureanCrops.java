@@ -1,6 +1,6 @@
 package io.github.cottonmc.epicurean.block.crop;
 
-import io.github.cottonmc.epicurean.EpicureanGastronomy;
+import io.github.cottonmc.epicurean.Epicurean;
 import io.github.cottonmc.epicurean.item.EpicureanItems;
 import net.minecraft.block.Block;
 import net.minecraft.util.Identifier;
@@ -14,7 +14,7 @@ public class EpicureanCrops {
 	public static final Block SOYBEAN_PLANT = register("soybean", new PickableCropBlock(EpicureanItems.SOYBEAN, 1));
 
 	private static Block register(String name, Block block) {
-		Registry.register(Registry.BLOCK, new Identifier(EpicureanGastronomy.MOD_ID, name), block);
+		Registry.register(Registry.BLOCK, new Identifier(Epicurean.MOD_ID, name), block);
 		return block;
 	}
 

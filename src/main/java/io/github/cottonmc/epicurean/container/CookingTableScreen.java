@@ -1,7 +1,7 @@
 package io.github.cottonmc.epicurean.container;
 
 import com.mojang.blaze3d.platform.GlStateManager;
-import io.github.cottonmc.epicurean.EpicureanGastronomy;
+import io.github.cottonmc.epicurean.Epicurean;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.LiteralText;
@@ -9,7 +9,7 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
 public class CookingTableScreen extends ContainerScreen<CookingTableContainer> /*implements RecipeBookProvider*/ {
-	private static final Identifier TEXTURE = new Identifier(EpicureanGastronomy.MOD_ID, "textures/gui/cooking_table.png");
+	private static final Identifier TEXTURE = new Identifier(Epicurean.MOD_ID, "textures/gui/cooking_table.png");
 	private static final Identifier RECIPE_BUTTON_TEX = new Identifier("textures/gui/recipe_button.png");
 	private final CookingRecipeBookWidget recipeBookGui = new CookingRecipeBookWidget();
 	private boolean isNarrow;

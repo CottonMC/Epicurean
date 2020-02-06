@@ -1,6 +1,6 @@
 package io.github.cottonmc.epicurean.mixins;
 
-import io.github.cottonmc.epicurean.EpicureanGastronomy;
+import io.github.cottonmc.epicurean.Epicurean;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.entity.player.PlayerEntity;
@@ -16,7 +16,7 @@ public abstract class MixinHungerHud {
 
 	@ModifyVariable(method = "renderStatusBars", at = @At(value = "STORE"), ordinal = 2)
 	public int getSaturationIntLevel(int orig) {
-		if (EpicureanGastronomy.config.useSaturationOnly && !FabricLoader.getInstance().isModLoaded("appleskin")) return (int)Math.floor(this.getCameraPlayer().getHungerManager().getSaturationLevel());
+		if (Epicurean.config.useSaturationOnly && !FabricLoader.getInstance().isModLoaded("appleskin")) return (int)Math.floor(this.getCameraPlayer().getHungerManager().getSaturationLevel());
 		else return orig;
 	}
 

@@ -1,6 +1,6 @@
 package io.github.cottonmc.epicurean.mixins;
 
-import io.github.cottonmc.epicurean.EpicureanGastronomy;
+import io.github.cottonmc.epicurean.Epicurean;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -22,7 +22,7 @@ public abstract class MixinPlayerEating extends LivingEntity {
 
 	@Inject(method = "canConsume", at = @At("HEAD"), cancellable = true)
 	public void overhaulHunger(boolean alwaysEdible, CallbackInfoReturnable cir) {
-		if (EpicureanGastronomy.config.useSaturationOnly) cir.setReturnValue(true);
+		if (Epicurean.config.useSaturationOnly) cir.setReturnValue(true);
 	}
 
 	@Inject(method = "eatFood", at = @At("HEAD"))
