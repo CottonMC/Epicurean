@@ -70,7 +70,7 @@ public class MealRecipe implements CraftingRecipe {
 			if (stack.isEmpty() || isSalt) continue;
 			boolean seasoningFound = false;
 			for (Ingredient ing : seasonings) {
-				if (ing.method_8093(stack)) seasoningFound = true;
+				if (ing.test(stack)) seasoningFound = true;
 			}
 			if (!seasoningFound) return false;
 		}
@@ -183,7 +183,7 @@ public class MealRecipe implements CraftingRecipe {
 		CompoundTag tag = new CompoundTag();
 		for (ItemStack stack : ingredients) {
 			String name = Registry.ITEM.getId(stack.getItem()).toString();
-			if (!tag.containsKey(name)) {
+			if (!tag.contains(name)) {
 				tag.putInt(name, 1);
 			} else {
 				tag.putInt(name, tag.getInt(name) + 1);

@@ -2,7 +2,7 @@ package io.github.cottonmc.epicurean.meal;
 
 import blue.endless.jankson.Jankson;
 import blue.endless.jankson.JsonObject;
-import blue.endless.jankson.impl.SyntaxError;
+import blue.endless.jankson.api.SyntaxError;
 import io.github.cottonmc.epicurean.EpicureanGastronomy;
 import net.fabricmc.fabric.api.resource.SimpleResourceReloadListener;
 import net.minecraft.entity.effect.StatusEffect;

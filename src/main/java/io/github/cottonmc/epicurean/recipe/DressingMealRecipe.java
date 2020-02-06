@@ -27,7 +27,7 @@ public class DressingMealRecipe extends MealRecipe {
 	ItemStack meal = ItemStack.EMPTY;
 
 	public DressingMealRecipe(Identifier id) {
-		super(id, "", ItemStack.EMPTY, DefaultedList.create(), DefaultedList.create());
+		super(id, "", ItemStack.EMPTY, DefaultedList.of(), DefaultedList.of());
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class DressingMealRecipe extends MealRecipe {
 			}
 		}
 		CompoundTag profile = targetMeal.getOrCreateSubTag("FlavorProfile");
-		if (profile.containsKey("Seasonings")) {
+		if (profile.contains("Seasonings")) {
 			CompoundTag seasonings = profile.getCompound("Seasonings");
 			int existingSeasonings = 0;
 			for (String seasoning : seasonings.getKeys()) {
@@ -78,7 +78,7 @@ public class DressingMealRecipe extends MealRecipe {
 	public ItemStack craft(CraftingInventory inv) {
 		ItemStack meal = this.meal.copy();
 		CompoundTag tag = meal.getTag();
-		if (meal.hasTag() && tag.containsKey("FlavorProfile")) {
+		if (meal.hasTag() && tag.contains("FlavorProfile")) {
 			CompoundTag profile = tag.getCompound("FlavorProfile");
 			List<ItemStack> seasonings = new ArrayList<>();
 			for (int i = CookingInventory.SECTION_SIZE; i < inv.getInvSize(); i++) {
@@ -89,7 +89,7 @@ public class DressingMealRecipe extends MealRecipe {
 			List<StatusEffectInstance> effects = PotionUtil.getCustomPotionEffects(meal);
 			tag.remove("CustomPotionEffects");
 			int saltCount = 0;
-			if (profile.containsKey("Salt")) saltCount += profile.getInt("Salt");
+			if (profile.contains("Salt")) saltCount += profile.getInt("Salt");
 			for (ItemStack seasoning : seasonings) {
 				Item item = seasoning.getItem();
 				if (item == EpicureanItems.SALT) saltCount++;

@@ -42,10 +42,10 @@ public class SpecialFoodItem extends Item {
 			if (entity instanceof PlayerEntity) {
 				PlayerEntity player = (PlayerEntity) entity;
 				player.getHungerManager().add(EpicureanGastronomy.config.omnivoreFoodRestore, EpicureanGastronomy.config.omnivoreSaturationRestore);
-				world.playSound(null, player.x, player.y, player.z, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, world.random.nextFloat() * 0.1F + 0.9F);
+				world.playSound(null, player.getBlockPos().getX(), player.getBlockPos().getY(), player.getBlockPos().getZ(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, world.random.nextFloat() * 0.1F + 0.9F);
 				player.incrementStat(Stats.USED.getOrCreateStat(this));
 				if (player instanceof ServerPlayerEntity) {
-					Criterions.CONSUME_ITEM.handle((ServerPlayerEntity) player, stack);
+					Criterions.CONSUME_ITEM.trigger((ServerPlayerEntity) player, stack);
 				}
 			}
 			stack.decrement(1);

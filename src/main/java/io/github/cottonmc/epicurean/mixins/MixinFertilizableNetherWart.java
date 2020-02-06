@@ -3,6 +3,7 @@ package io.github.cottonmc.epicurean.mixins;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Fertilizable;
 import net.minecraft.block.NetherWartBlock;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
@@ -23,7 +24,7 @@ public class MixinFertilizableNetherWart implements Fertilizable {
 	}
 
 	@Override
-	public void grow(World world, Random random, BlockPos pos, BlockState state) {
+	public void grow(ServerWorld world, Random random, BlockPos pos, BlockState state) {
 		int age = state.get(NetherWartBlock.AGE);
 		if (age < 3) world.setBlockState(pos, state.with(NetherWartBlock.AGE, age + 1));
 	}

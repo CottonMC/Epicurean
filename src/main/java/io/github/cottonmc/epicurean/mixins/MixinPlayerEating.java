@@ -29,11 +29,11 @@ public abstract class MixinPlayerEating extends LivingEntity {
 	public void eatJelliedFood(World world, ItemStack stack, CallbackInfoReturnable cir) {
 		PlayerEntity player = (PlayerEntity)(Object)this;
 		if (stack.hasTag()) {
-			if (stack.getTag().containsKey("jellied")) {
+			if (stack.getTag().contains("jellied")) {
 				player.getHungerManager().add(2, 0.25f);
-			} else if (stack.getTag().containsKey("super_jellied")) {
+			} else if (stack.getTag().contains("super_jellied")) {
 				player.getHungerManager().add(4, 0.3f);
-				player.addPotionEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 1200));
+				player.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, 1200));
 			}
 		}
 	}

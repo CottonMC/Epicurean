@@ -32,14 +32,14 @@ public class MealRecipeSerializer implements RecipeSerializer<MealRecipe> {
 	public MealRecipe read(Identifier id, PacketByteBuf buf) {
 		String group = buf.readString(32767);
 		int baseSize = buf.readVarInt();
-		DefaultedList<Ingredient> base = DefaultedList.create(baseSize, Ingredient.EMPTY);
+		DefaultedList<Ingredient> base = DefaultedList.ofSize(baseSize, Ingredient.EMPTY);
 
 		for(int i = 0; i < base.size(); i++) {
 			base.set(i, Ingredient.fromPacket(buf));
 		}
 
 		int seasoningSize = buf.readVarInt();
-		DefaultedList<Ingredient> seasoning = DefaultedList.create(seasoningSize, Ingredient.EMPTY);
+		DefaultedList<Ingredient> seasoning = DefaultedList.ofSize(seasoningSize, Ingredient.EMPTY);
 
 		for(int i = 0; i < seasoning.size(); i++) {
 			seasoning.set(i, Ingredient.fromPacket(buf));
@@ -67,7 +67,7 @@ public class MealRecipeSerializer implements RecipeSerializer<MealRecipe> {
 	}
 
 	private static DefaultedList<Ingredient> getIngredients(JsonArray json) {
-		DefaultedList<Ingredient> ingredients = DefaultedList.create();
+		DefaultedList<Ingredient> ingredients = DefaultedList.of();
 
 		for(int i = 0; i < json.size(); i++) {
 			Ingredient ingredient = Ingredient.fromJson(json.get(i));

@@ -9,6 +9,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -24,13 +25,14 @@ public class CookingTableBlock extends Block {
 				.build());
 	}
 
-	public boolean activate(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-		if (world.isClient) return true;
+	@Override
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+		if (world.isClient) return ActionResult.SUCCESS;
 		ContainerProviderRegistry.INSTANCE.openContainer(EpicureanBlocks.COOKING_CONTAINER, player, buf -> {
 			buf.writeBlockPos(pos);
 		});
 //		player.increaseStat(new Identifier(EpicureanGastronomy.MOD_ID, "open_cooking_table"));
-		return true;
+		return ActionResult.SUCCESS;
 	}
 
 }

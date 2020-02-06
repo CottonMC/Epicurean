@@ -44,15 +44,15 @@ public class MealItem extends Item implements DynamicFood {
 		if (entity instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity)entity;
 			for (StatusEffectInstance effect : getMealEffects(stack)) {
-				player.addPotionEffect(effect);
+				player.addStatusEffect(effect);
 			}
 			if (!stack.hasTag()) return stack;
-			if (stack.getTag().containsKey("FlavorProfile")) {
+			if (stack.getTag().contains("FlavorProfile")) {
 				CompoundTag profile = stack.getTag().getCompound("FlavorProfile");
 				int addHunger = 0;
 				float addSaturation = 0;
-				if (profile.containsKey("Hunger")) addHunger = profile.getInt("Hunger");
-				if (profile.containsKey("Saturation")) addSaturation = profile.getFloat("Saturation");
+				if (profile.contains("Hunger")) addHunger = profile.getInt("Hunger");
+				if (profile.contains("Saturation")) addSaturation = profile.getFloat("Saturation");
 				player.getHungerManager().add(addHunger, addSaturation);
 			}
 		}
@@ -61,7 +61,7 @@ public class MealItem extends Item implements DynamicFood {
 	}
 
 	public static List<StatusEffectInstance> getMealEffects(ItemStack stack) {
-		if (!stack.hasTag() || !stack.getTag().containsKey("CustomPotionEffects")) return Collections.singletonList(new StatusEffectInstance(StatusEffects.ABSORPTION, 200));
+		if (!stack.hasTag() || !stack.getTag().contains("CustomPotionEffects")) return Collections.singletonList(new StatusEffectInstance(StatusEffects.ABSORPTION, 200));
 		return PotionUtil.getPotionEffects(stack);
 	}
 
@@ -71,15 +71,15 @@ public class MealItem extends Item implements DynamicFood {
 		super.appendTooltip(stack, world, tooltip, ctx);
 		PotionUtil.buildTooltip(stack, tooltip, 1.0F);
 		if (!stack.hasTag()) return;
-		if (stack.getTag().containsKey("FlavorProfile")) {
+		if (stack.getTag().contains("FlavorProfile")) {
 			if (Screen.hasShiftDown()) {
 				CompoundTag profile = stack.getTag().getCompound("FlavorProfile");
 				String flavor = new TranslatableText("tooltip.epicurean.flavor." + profile.getString("ProminentFlavor").toLowerCase()).asString();
 				tooltip.add(new TranslatableText("tooltip.epicurean.meal.flavor", flavor).formatted(Formatting.GRAY));
 				int hunger = 0;
 				float saturation = 0;
-				if (profile.containsKey("Hunger")) hunger = profile.getInt("Hunger");
-				if (profile.containsKey("Saturation")) saturation = profile.getFloat("Saturation");
+				if (profile.contains("Hunger")) hunger = profile.getInt("Hunger");
+				if (profile.contains("Saturation")) saturation = profile.getFloat("Saturation");
 				float percentage = Math.round(saturation*100.0);
 				if ((hunger != 0 || saturation != 0) && !FabricLoader.getInstance().isModLoaded("appleskin")) {
 					tooltip.add(new TranslatableText("tooltip.epicurean.meal.restores"));
@@ -90,7 +90,7 @@ public class MealItem extends Item implements DynamicFood {
 						tooltip.add(new TranslatableText("tooltip.epicurean.meal.saturation", percentage).formatted(Formatting.GRAY));
 					}
 				}
-				if (profile.containsKey("Seasonings")) {
+				if (profile.contains("Seasonings")) {
 					tooltip.add(new TranslatableText("tooltip.epicurean.meal.seasonings"));
 					CompoundTag seasonings = profile.getCompound("Seasonings");
 					for (String key : seasonings.getKeys()) {
@@ -110,8 +110,8 @@ public class MealItem extends Item implements DynamicFood {
 	@Override
 	public int getDynamicHunger(ItemStack itemStack, PlayerEntity playerEntity) {
 		int ret = this.getFoodComponent().getHunger();
-		if (itemStack.getOrCreateTag().containsKey("FlavorProfile", NbtType.COMPOUND)) {
-			if (itemStack.getSubTag("FlavorProfile").containsKey("Hunger", NbtType.INT)) {
+		if (itemStack.getOrCreateTag().contains("FlavorProfile", NbtType.COMPOUND)) {
+			if (itemStack.getSubTag("FlavorProfile").contains("Hunger", NbtType.INT)) {
 				ret += itemStack.getSubTag("FlavorProfile").getInt("Hunger");
 			}
 		}
@@ -121,8 +121,8 @@ public class MealItem extends Item implements DynamicFood {
 	@Override
 	public float getDynamicSaturation(ItemStack itemStack, PlayerEntity playerEntity) {
 		float ret = this.getFoodComponent().getSaturationModifier();
-		if (itemStack.getOrCreateTag().containsKey("FlavorProfile", NbtType.COMPOUND)) {
-			if (itemStack.getSubTag("FlavorProfile").containsKey("Saturation", NbtType.FLOAT)) {
+		if (itemStack.getOrCreateTag().contains("FlavorProfile", NbtType.COMPOUND)) {
+			if (itemStack.getSubTag("FlavorProfile").contains("Saturation", NbtType.FLOAT)) {
 				ret += itemStack.getSubTag("FlavorProfile").getFloat("Saturation");
 			}
 		}

@@ -7,17 +7,18 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.context.LootContext;
+import net.minecraft.loot.context.LootContextParameters;
 import net.minecraft.sound.BlockSoundGroup;
-import net.minecraft.state.StateFactory;
+import net.minecraft.state.StateManager;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
-import net.minecraft.world.loot.context.LootContext;
-import net.minecraft.world.loot.context.LootContextParameters;
 
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class HarvestableCropBlock extends CropBlock {
 		super(FabricBlockSettings.of(Material.PLANT).sounds(BlockSoundGroup.CROP).ticksRandomly().breakInstantly().build().noCollision());
 		this.cropItem = cropItem;
 		this.resetGrowthTo = resetGrowthTo;
-		this.setDefaultState((this.stateFactory.getDefaultState()).with(this.getAgeProperty(), 0));
+		this.setDefaultState((this.getStateManager().getDefaultState()).with(this.getAgeProperty(), 0));
 	}
 
 	@Override
@@ -44,8 +45,8 @@ public class HarvestableCropBlock extends CropBlock {
 	}
 
 	@Override
-	public boolean activate(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
-		if (world.isClient) return true;
+	public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
+		if (world.isClient) return ActionResult.SUCCESS;
 		if (getAge(state) >= getMaxAge()) {
 			if (world.getBlockState(pos.offset(Direction.DOWN)).getBlock() == Blocks.FARMLAND) {
 				LootContext.Builder ctx = new LootContext
@@ -60,13 +61,13 @@ public class HarvestableCropBlock extends CropBlock {
 			} else {
 				world.breakBlock(pos, true);
 			}
-			return true;
+			return ActionResult.SUCCESS;
 		}
-		return false;
+		return ActionResult.FAIL;
 	}
 
 	@Override
-	protected void appendProperties(StateFactory.Builder<Block, BlockState> builder) {
+	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
 		builder.add(AGE);
 	}
 }

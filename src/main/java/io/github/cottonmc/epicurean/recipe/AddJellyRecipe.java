@@ -40,7 +40,7 @@ public class AddJellyRecipe extends SpecialCraftingRecipe {
 			}
 		}
 		if (targetFood.getItem() instanceof SpecialFoodItem && !EpicureanGastronomy.config.edibleNuggets) return false;
-		return (!targetFood.hasTag() || (!targetFood.getTag().containsKey("jellied") && !targetFood.getTag().containsKey("super_jellied"))) && !targetJelly.isEmpty();
+		return (!targetFood.hasTag() || (!targetFood.getTag().contains("jellied") && !targetFood.getTag().contains("super_jellied"))) && !targetJelly.isEmpty();
 	}
 
 	@Override

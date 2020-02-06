@@ -3,7 +3,7 @@
   "id": "epicurean",
   "version": "$version",
 
-  "name": "Epicurean Gastronomy",
+  "name": "Epicurean",
   "icon": "assets/epicurean/icon.png",
   "description": "Adds a selection of food and food-related tweaks.",
   "licence": "LGPL v3",
@@ -18,17 +18,10 @@
     ],
     "client": [
       "io.github.cottonmc.epicurean.EpicureanClient"
-    ],
-    "modmenu": [
-      "io.github.cottonmc.epicurean.util.EpicureanConfMenu"
     ]
   },
   "mixins": [
-    "epicurean.common.json",
-    {
-      "config": "epicurean.client.json",
-      "environment": "client"
-    }
+    "mixins.epicurean.json"
   ],
   "depends": {
     "fabricloader": ">=0.4.0",

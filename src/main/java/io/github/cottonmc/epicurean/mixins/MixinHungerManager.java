@@ -25,6 +25,13 @@ public class MixinHungerManager {
 
 	@ModifyConstant(method = "update", constant = @Constant(floatValue = 6.0F))
 	public float boostRegenExhaustion(float orig) {
-		return 4.0f;
+		if (EpicureanGastronomy.config.useSaturationOnly) return 4.0f;
+		else return orig;
+	}
+
+	@ModifyConstant(method = "update", constant = @Constant(intValue = 18))
+	public int disableSlowRegen(int orig) {
+		if (EpicureanGastronomy.config.useSaturationOnly) return 21;
+		else return orig;
 	}
 }

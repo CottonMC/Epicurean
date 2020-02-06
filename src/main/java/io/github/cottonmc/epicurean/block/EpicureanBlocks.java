@@ -16,7 +16,7 @@ public class EpicureanBlocks {
 
 	public static final Identifier COOKING_CONTAINER = new Identifier(EpicureanGastronomy.MOD_ID, "cooking");
 
-	public static Block register(String name, Block block) {
+	private static Block register(String name, Block block) {
 		Registry.register(Registry.BLOCK, new Identifier(EpicureanGastronomy.MOD_ID, name), block);
 		BlockItem item = new BlockItem(block, EpicureanItems.defaultSettings());
 		EpicureanItems.register(name, item);

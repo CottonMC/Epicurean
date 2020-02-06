@@ -3,7 +3,7 @@ package io.github.cottonmc.epicurean.container;
 import io.github.cottonmc.epicurean.block.EpicureanBlocks;
 import io.github.cottonmc.epicurean.recipe.EpicureanRecipes;
 import io.github.cottonmc.epicurean.recipe.MealRecipe;
-import net.minecraft.client.network.packet.GuiSlotUpdateS2CPacket;
+import net.minecraft.client.network.packet.ContainerSlotUpdateS2CPacket;
 import net.minecraft.container.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -135,14 +135,14 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 			}
 
 			resultInv.setInvStack(0, stack);
-			serverPlayer.networkHandler.sendPacket(new GuiSlotUpdateS2CPacket(syncId, 0, stack));
+			serverPlayer.networkHandler.sendPacket(new ContainerSlotUpdateS2CPacket(syncId, 0, stack));
 		}
 	}
 
 	@Override
 	public ItemStack transferSlot(PlayerEntity player, int slotNum) {
 		ItemStack stackToTransfer = ItemStack.EMPTY;
-		Slot slot = this.slotList.get(slotNum);
+		Slot slot = this.slots.get(slotNum);
 		if (slot != null && slot.hasStack()) {
 			ItemStack stackInSlot = slot.getStack();
 			stackToTransfer = stackInSlot.copy();

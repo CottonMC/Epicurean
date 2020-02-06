@@ -2,10 +2,17 @@
   "required": true,
   "package": "io.github.cottonmc.epicurean.mixins",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "mixins.epicurean.refmap.json",
+  "mixins": [
+    "MixinPlayerEating",
+    "MixinEdibleItems",
+    "MixinOmnivore",
+    "MixinHopperHarvesting",
+    "MixinFertilizableNetherWart",
+    "MixinHungerManager",
+    "MixinEggSeasoning"
+  ],
   "client": [
     "MixinHungerHud",
-    "MixinIngredientTooltips",
     "MixinRecipeBookGroups"
   ],
   "injectors": {

@@ -63,10 +63,10 @@ public abstract class MixinOmnivore implements DynamicFood {
 			if (entity instanceof PlayerEntity) {
 				PlayerEntity player = (PlayerEntity) entity;
 				player.getHungerManager().add(14, 2.8f);
-				world.playSound(null, player.x, player.y, player.z, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, world.random.nextFloat() * 0.1F + 0.8F);
+				world.playSound(null, player.getBlockPos().getX(), player.getBlockPos().getY(), player.getBlockPos().getZ(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, world.random.nextFloat() * 0.1F + 0.8F);
 				player.increaseStat(Stats.EAT_CAKE_SLICE, 7);
 				if (player instanceof ServerPlayerEntity) {
-					Criterions.CONSUME_ITEM.handle((ServerPlayerEntity) player, stack);
+					Criterions.CONSUME_ITEM.trigger((ServerPlayerEntity) player, stack);
 				}
 			}
 			stack.decrement(1);
@@ -75,14 +75,14 @@ public abstract class MixinOmnivore implements DynamicFood {
 			if (entity instanceof PlayerEntity) {
 				PlayerEntity player = (PlayerEntity) entity;
 				player.getHungerManager().add(EpicureanGastronomy.config.omnivoreFoodRestore, EpicureanGastronomy.config.omnivoreSaturationRestore);
-				world.playSound(null, player.x, player.y, player.z, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, world.random.nextFloat() * 0.1F + 0.9F);
+				world.playSound(null, player.getBlockPos().getX(), player.getBlockPos().getY(), player.getBlockPos().getZ(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, world.random.nextFloat() * 0.1F + 0.9F);
 				player.incrementStat(Stats.USED.getOrCreateStat((Item)(Object)this));
 				if (player instanceof ServerPlayerEntity) {
-					Criterions.CONSUME_ITEM.handle((ServerPlayerEntity) player, stack);
+					Criterions.CONSUME_ITEM.trigger((ServerPlayerEntity) player, stack);
 				}
 			}
 			if (stack.getItem() == Items.TNT || stack.getItem() == Items.TNT_MINECART) { // TNT/TNT minecart
-				world.createExplosion(null, entity.x, entity.y+1, entity.z, 1.5f, Explosion.DestructionType.NONE);
+				world.createExplosion(null, entity.getBlockPos().getX(), entity.getBlockPos().getY()+1, entity.getBlockPos().getZ(), 1.5f, Explosion.DestructionType.NONE);
 			}
 
 			double damageConf = EpicureanGastronomy.config.omnivoreItemDamage;
@@ -101,8 +101,8 @@ public abstract class MixinOmnivore implements DynamicFood {
 		if (stack.getItem().isFood()) {
 			int base = this.getFoodComponent().getHunger();
 			CompoundTag tag = stack.getOrCreateTag();
-			if (tag.containsKey("jellied")) return base + 2;
-			else if (tag.containsKey("super_jellied")) return base + 4;
+			if (tag.contains("jellied")) return base + 2;
+			else if (tag.contains("super_jellied")) return base + 4;
 			else return base;
 		} else if (EpicureanGastronomy.config.omnivoreEnabled) {
 			return EpicureanGastronomy.config.omnivoreFoodRestore;
@@ -115,8 +115,8 @@ public abstract class MixinOmnivore implements DynamicFood {
 		if (stack.getItem().isFood()) {
 			float base = this.getFoodComponent().getSaturationModifier();
 			CompoundTag tag = stack.getOrCreateTag();
-			if (tag.containsKey("jellied")) return base + 0.25f;
-			else if (tag.containsKey("super_jellied")) return base + 0.3f;
+			if (tag.contains("jellied")) return base + 0.25f;
+			else if (tag.contains("super_jellied")) return base + 0.3f;
 			else return base;
 		} else if (EpicureanGastronomy.config.omnivoreEnabled) {
 			return EpicureanGastronomy.config.omnivoreSaturationRestore;
