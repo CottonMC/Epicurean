@@ -5,10 +5,7 @@ import net.minecraft.container.CraftingResultSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeType;
 import net.minecraft.util.DefaultedList;
 
 public class CookingResultSlot extends CraftingResultSlot {
@@ -24,7 +21,7 @@ public class CookingResultSlot extends CraftingResultSlot {
 	@Override
 	public ItemStack onTakeItem(PlayerEntity player, ItemStack result) {
 		this.onCrafted(result);
-		DefaultedList<ItemStack> remainders = player.world.getRecipeManager().getRemainingStacks(RecipeType.CRAFTING, this.craftingInv, player.world);
+		DefaultedList<ItemStack> remainders = player.world.getRecipeManager().getRemainingStacks(EpicureanRecipes.MEAL, this.craftingInv, player.world);
 
 		for(int i = 0; i < remainders.size(); ++i) {
 			ItemStack ingredient = this.craftingInv.getInvStack(i);
@@ -33,7 +30,7 @@ public class CookingResultSlot extends CraftingResultSlot {
 				this.craftingInv.takeInvStack(i, 1);
 				ingredient = this.craftingInv.getInvStack(i);
 			}
-			if (!ingredient.getItem().hasRecipeRemainder()) continue;
+
 			if (!remainder.isEmpty()) {
 				if (ingredient.isEmpty()) {
 					this.craftingInv.setInvStack(i, remainder);
