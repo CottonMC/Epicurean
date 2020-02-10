@@ -22,11 +22,6 @@ public class SeasoningItem extends Item implements Seasoning {
 		this.effect = effect;
 	}
 
-	@Override
-	public boolean hasRecipeRemainder() {
-		return false;
-	}
-
 	public int getHungerRestored(ItemStack stack) {
 		return this.hungerRestored;
 	}

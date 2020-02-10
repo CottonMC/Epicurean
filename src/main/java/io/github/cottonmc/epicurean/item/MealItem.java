@@ -34,12 +34,6 @@ public class MealItem extends Item implements DynamicFood {
 	}
 
 	@Override
-	public boolean hasRecipeRemainder() {
-		return false;
-	}
-	
-
-	@Override
 	public ItemStack finishUsing(ItemStack stack, World world, LivingEntity entity) {
 		if (entity instanceof PlayerEntity) {
 			PlayerEntity player = (PlayerEntity)entity;
