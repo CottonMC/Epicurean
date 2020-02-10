@@ -9,6 +9,7 @@ import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.screen.ScreenProviderRegistry;
 import net.fabricmc.fabric.api.event.client.ItemTooltipCallback;
 import net.minecraft.client.render.RenderLayer;
+import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 
@@ -21,10 +22,10 @@ public class EpicureanClient implements ClientModInitializer {
 
 		ItemTooltipCallback.EVENT.register((stack, tooltipContext, tooltips) -> {
 			if (IngredientProfiles.MEAL_INGREDIENTS.containsKey(stack.getItem())) {
-				String flavor = new TranslatableText("tooltip.epicurean.flavor." + IngredientProfiles.MEAL_INGREDIENTS.get(stack.getItem()).asString()).asString();
+				Text flavor = new TranslatableText("tooltip.epicurean.flavor." + IngredientProfiles.MEAL_INGREDIENTS.get(stack.getItem()).asString());
 				tooltips.add(new TranslatableText("tooltip.epicurean.ingredient", flavor).formatted(Formatting.GRAY, Formatting.ITALIC));
 			} else if (IngredientProfiles.DRESSINGS.containsKey(stack.getItem())) {
-				String flavor = new TranslatableText("tooltip.epicurean.flavor." + IngredientProfiles.DRESSINGS.get(stack.getItem()).asString()).asString();
+				Text flavor = new TranslatableText("tooltip.epicurean.flavor." + IngredientProfiles.DRESSINGS.get(stack.getItem()).asString());
 				tooltips.add(new TranslatableText("tooltip.epicurean.dressing", flavor).formatted(Formatting.GRAY, Formatting.ITALIC));
 			}
 			if (stack.getItem().isFood()) {
