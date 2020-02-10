@@ -1,5 +1,6 @@
 package io.github.cottonmc.epicurean.item;
 
+import io.github.cottonmc.epicurean.api.Seasoning;
 import io.github.cottonmc.epicurean.meal.IngredientProfiles;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;

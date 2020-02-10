@@ -7,14 +7,11 @@ import io.github.cottonmc.epicurean.block.EpicureanBlocks;
 import io.github.cottonmc.epicurean.block.crop.EpicureanCrops;
 import io.github.cottonmc.epicurean.item.EpicureanItems;
 import io.github.cottonmc.epicurean.meal.IngredientProfiles;
-import io.github.cottonmc.epicurean.meal.MealBooster;
-import io.github.cottonmc.epicurean.meal.SkillCheckMealBooster;
 import io.github.cottonmc.epicurean.recipe.EpicureanRecipes;
 import io.github.cottonmc.epicurean.util.EpicureanConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.resource.ResourceType;
@@ -44,7 +41,7 @@ public class Epicurean implements ModInitializer {
         CropGeneration.registerCrops();
         ResourceManagerHelper.get(ResourceType.SERVER_DATA).registerReloadListener(new IngredientProfiles());
 
-//        if (FabricLoader.getInstance().isModLoaded("skillcheck")) MealBooster.BOOSTERS.add(new SkillCheckMealBooster());
+//        if (FabricLoader.getInstance().isModLoaded("skillcheck")) MealBooster.BOOSTERS.add(new SkillCheckMealBooster()); TODO: port SkillCheck back up
     }
 
 }

@@ -1,5 +1,6 @@
 package io.github.cottonmc.epicurean.meal;
 
+import io.github.cottonmc.epicurean.api.MealBooster;
 import io.github.cottonmc.epicurean.container.CookingInventory;
 import io.github.cottonmc.epicurean.recipe.MealRecipe;
 //import io.github.cottonmc.skillcheck.SkillCheck;
