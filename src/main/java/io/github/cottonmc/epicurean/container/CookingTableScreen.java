@@ -4,7 +4,6 @@ import com.mojang.blaze3d.platform.GlStateManager;
 import io.github.cottonmc.epicurean.Epicurean;
 import net.minecraft.client.gui.screen.ingame.ContainerScreen;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Identifier;
 
@@ -72,11 +71,11 @@ public class CookingTableScreen extends ContainerScreen<CookingTableContainer> /
 		super.drawMouseoverTooltip(mouseX, mouseY);
 		if (mouseX >= this.x + 26 && mouseY >= this.y+11
 				&& mouseX <= this.x + 43 && mouseY <= this.y + 26) {
-			renderTooltip(new LiteralText("tooltip.epicurean.table.base").asString(), mouseX, mouseY);
+			renderTooltip(new TranslatableText("tooltip.epicurean.table.base").asString(), mouseX, mouseY);
 		}
 		if (mouseX >= this.x + 94 && mouseY >= this.y+11
 				&& mouseX <= this.x + 109 && mouseY <= this.y + 26) {
-			renderTooltip(new LiteralText("tooltip.epicurean.table.seasoning").asString(), mouseX, mouseY);
+			renderTooltip(new TranslatableText("tooltip.epicurean.table.seasoning").asString(), mouseX, mouseY);
 		}
 	}
 
