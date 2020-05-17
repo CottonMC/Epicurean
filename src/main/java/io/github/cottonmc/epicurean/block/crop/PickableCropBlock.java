@@ -16,11 +16,6 @@ public class PickableCropBlock extends HarvestableCropBlock {
 	}
 
 	@Override
-	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-		builder.add(AGE);
-	}
-
-	@Override
 	public int getMaxAge() {
 		return 3;
 	}
@@ -28,5 +23,11 @@ public class PickableCropBlock extends HarvestableCropBlock {
 	@Override
 	public IntProperty getAgeProperty() {
 		return AGE;
+	}
+
+	@Override
+	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
+		super.appendProperties(builder); //TODO: this appends AGE_7 when I don't want it to, will that break things?
+		builder.add(AGE);
 	}
 }
