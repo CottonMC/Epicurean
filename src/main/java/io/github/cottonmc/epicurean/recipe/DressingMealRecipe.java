@@ -14,8 +14,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.potion.PotionUtil;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
-import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
@@ -46,7 +46,7 @@ public class DressingMealRecipe extends MealRecipe {
 		if (!(inv instanceof CookingInventory)) return false;
 		ItemStack targetMeal = ItemStack.EMPTY;
 		for(int i = 0; i < CookingInventory.SECTION_SIZE; i++) {
-			ItemStack stack = inv.getInvStack(i);
+			ItemStack stack = inv.getStack(i);
 			if (!stack.isEmpty()) {
 				if (stack.getItem() instanceof MealItem) {
 					if (!targetMeal.isEmpty()) return false;
@@ -55,9 +55,9 @@ public class DressingMealRecipe extends MealRecipe {
 			}
 		}
 		int dressings = 0;
-		for (int i = CookingInventory.SECTION_SIZE; i < inv.getInvSize(); i++) {
-			if (!inv.getInvStack(i).isEmpty()) {
-				if (inv.getInvStack(i).getItem() == EpicureanItems.SALT || IngredientProfiles.DRESSINGS.containsKey(inv.getInvStack(i).getItem())) dressings++;
+		for (int i = CookingInventory.SECTION_SIZE; i < inv.size(); i++) {
+			if (!inv.getStack(i).isEmpty()) {
+				if (inv.getStack(i).getItem() == EpicureanItems.SALT || IngredientProfiles.DRESSINGS.containsKey(inv.getStack(i).getItem())) dressings++;
 				else return false;
 			}
 		}
@@ -81,8 +81,8 @@ public class DressingMealRecipe extends MealRecipe {
 		if (meal.hasTag() && tag.contains("FlavorProfile")) {
 			CompoundTag profile = tag.getCompound("FlavorProfile");
 			List<ItemStack> seasonings = new ArrayList<>();
-			for (int i = CookingInventory.SECTION_SIZE; i < inv.getInvSize(); i++) {
-				if (!inv.getInvStack(i).isEmpty()) seasonings.add(inv.getInvStack(i));
+			for (int i = CookingInventory.SECTION_SIZE; i < inv.size(); i++) {
+				if (!inv.getStack(i).isEmpty()) seasonings.add(inv.getStack(i));
 			}
 			FlavorGroup prominent = FlavorGroup.forName(profile.getString("ProminentFlavor"));
 			CompoundTag ingredients = profile.getCompound("Seasonings");

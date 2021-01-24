@@ -20,8 +20,8 @@ import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
 import net.minecraft.recipe.CraftingRecipe;
 import net.minecraft.tag.ItemTags;
-import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
@@ -55,7 +55,7 @@ public class MealRecipe implements CraftingRecipe {
 		int foundBases = 0;
 
 		for (int i = 0; i < CookingInventory.SECTION_SIZE; i++) {
-			ItemStack stack = inv.getInvStack(i);
+			ItemStack stack = inv.getStack(i);
 			if (!stack.isEmpty()) {
 				++foundBases;
 				finder.addItem(stack);
@@ -63,10 +63,10 @@ public class MealRecipe implements CraftingRecipe {
 		}
 
 		//make sure the seasonings fit on the meal
-		for (int i = CookingInventory.SECTION_SIZE; i < inv.getInvSize(); i++) {
-			ItemStack stack = inv.getInvStack(i);
+		for (int i = CookingInventory.SECTION_SIZE; i < inv.size(); i++) {
+			ItemStack stack = inv.getStack(i);
 			boolean isSalt = Epicurean.config.useSaltTag?
-					ItemTags.getContainer().get(new Identifier("c", "salt")).contains(stack.getItem()) : stack.getItem() == EpicureanItems.SALT;
+					ItemTags.getTagGroup().getTagOrEmpty(new Identifier("c", "salt")).contains(stack.getItem()) : stack.getItem() == EpicureanItems.SALT;
 			if (stack.isEmpty() || isSalt) continue;
 			boolean seasoningFound = false;
 			for (Ingredient ing : seasonings) {
@@ -96,11 +96,11 @@ public class MealRecipe implements CraftingRecipe {
 		int prominence = 0;
 		List<ItemStack> ingredients = new ArrayList<>();
 		for (int i = 0; i < CookingInventory.SECTION_SIZE; i++) {
-			if (!inv.getInvStack(i).isEmpty()) ingredients.add(inv.getInvStack(i));
+			if (!inv.getStack(i).isEmpty()) ingredients.add(inv.getStack(i));
 		}
 		List<ItemStack> seasonings = new ArrayList<>();
-		for (int i = CookingInventory.SECTION_SIZE; i < inv.getInvSize(); i++) {
-			if (!inv.getInvStack(i).isEmpty()) seasonings.add(inv.getInvStack(i));
+		for (int i = CookingInventory.SECTION_SIZE; i < inv.size(); i++) {
+			if (!inv.getStack(i).isEmpty()) seasonings.add(inv.getStack(i));
 		}
 		List<StatusEffectInstance> effects = new ArrayList<>();
 		for (ItemStack ingredient : ingredients) {
@@ -223,7 +223,7 @@ public class MealRecipe implements CraftingRecipe {
 		int salt = 0;
 		for (ItemStack stack : seasonings) {
 			if (Epicurean.config.useSaltTag?
-					ItemTags.getContainer().get(new Identifier("c", "salt")).contains(stack.getItem()) : stack.getItem() == EpicureanItems.SALT)
+					ItemTags.getTagGroup().getTagOrEmpty(new Identifier("c", "salt")).contains(stack.getItem()) : stack.getItem() == EpicureanItems.SALT)
 				salt++;
 		}
 		return salt;

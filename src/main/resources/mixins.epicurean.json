@@ -4,7 +4,6 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "MixinPlayerEating",
-    "MixinEdibleItems",
     "MixinOmnivore",
     "MixinHopperHarvesting",
     "MixinFertilizableNetherWart",
@@ -12,8 +11,7 @@
     "MixinEggSeasoning"
   ],
   "client": [
-    "MixinHungerHud",
-    "MixinRecipeBookGroups"
+    "MixinHungerHud"
   ],
   "injectors": {
     "defaultRequire": 1

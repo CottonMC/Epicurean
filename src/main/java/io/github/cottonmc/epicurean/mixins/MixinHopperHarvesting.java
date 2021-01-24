@@ -10,8 +10,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameters;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -25,7 +27,7 @@ import java.util.List;
 public class MixinHopperHarvesting {
 
 	@Inject(method = "extract(Lnet/minecraft/block/entity/Hopper;)Z", at = @At("HEAD"), cancellable = true)
-	private static void hopperHarvest(Hopper hopper, CallbackInfoReturnable cir) {
+	private static void hopperHarvest(Hopper hopper, CallbackInfoReturnable<Boolean> cir) {
 		if (Epicurean.config.hopperHarvest) {
 			World world = hopper.getWorld();
 			BlockPos pos = new BlockPos(hopper.getHopperX(), hopper.getHopperY(), hopper.getHopperZ());
@@ -138,14 +140,14 @@ public class MixinHopperHarvesting {
 
 	private static LootContext.Builder getLootContext(World world, BlockPos pos) {
 		return new LootContext
-				.Builder(world.getServer().getWorld(world.dimension.getType()))
-				.put(LootContextParameters.POSITION, pos).put(LootContextParameters.TOOL, ItemStack.EMPTY);
+				.Builder((ServerWorld) world)
+				.parameter(LootContextParameters.ORIGIN, new Vec3d(pos.getX(), pos.getY(), pos.getZ())).parameter(LootContextParameters.TOOL, ItemStack.EMPTY);
 	}
 
 	private static List<ItemStack> attemptCollect(Inventory inv, List<ItemStack> results) {
 		List<ItemStack> remaining = new ArrayList<>();
-		for (int i = 0; i < results.size(); i++) {
-			ItemStack insert = HopperBlockEntity.transfer(null, inv, results.get(i), null);
+		for (ItemStack result : results) {
+			ItemStack insert = HopperBlockEntity.transfer(null, inv, result, null);
 			remaining.add(insert);
 		}
 		return remaining;
@@ -160,8 +162,8 @@ public class MixinHopperHarvesting {
 	}
 
 	private static void spawnResults(World world, BlockPos spawnAt, List<ItemStack> toSpawn) {
-		for (int i = 0; i < toSpawn.size(); i++) {
-			world.spawnEntity(new ItemEntity(world, spawnAt.getX(), spawnAt.getY(), spawnAt.getZ(), toSpawn.get(i)));
+		for (ItemStack itemStack : toSpawn) {
+			world.spawnEntity(new ItemEntity(world, spawnAt.getX(), spawnAt.getY(), spawnAt.getZ(), itemStack));
 		}
 	}
 }

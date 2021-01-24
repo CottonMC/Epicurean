@@ -27,7 +27,7 @@ public class PickableCropBlock extends HarvestableCropBlock {
 
 	@Override
 	protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
-		super.appendProperties(builder); //TODO: this appends AGE_7 when I don't want it to, will that break things?
+//		super.appendProperties(builder); //TODO: this appends AGE_7 when I don't want it to, will that break things?
 		builder.add(AGE);
 	}
 }

@@ -1,7 +1,8 @@
 package io.github.cottonmc.epicurean.mixins;
 
 import io.github.cottonmc.epicurean.Epicurean;
-import net.minecraft.advancement.criterion.Criterions;
+
+import net.minecraft.advancement.criterion.Criteria;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FoodComponent;
@@ -58,7 +59,7 @@ public abstract class MixinOmnivore implements DynamicFood {
 	}
 
 	@Inject(method = "finishUsing", at = @At("HEAD"), cancellable = true)
-	public void getOmnivoreOnItemFinishedUsing(ItemStack stack, World world, LivingEntity entity, CallbackInfoReturnable cir) {
+	public void getOmnivoreOnItemFinishedUsing(ItemStack stack, World world, LivingEntity entity, CallbackInfoReturnable<ItemStack> cir) {
 		if (stack.getItem() == Items.CAKE) {
 			if (entity instanceof PlayerEntity) {
 				PlayerEntity player = (PlayerEntity) entity;
@@ -66,7 +67,7 @@ public abstract class MixinOmnivore implements DynamicFood {
 				world.playSound(null, player.getBlockPos().getX(), player.getBlockPos().getY(), player.getBlockPos().getZ(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, world.random.nextFloat() * 0.1F + 0.8F);
 				player.increaseStat(Stats.EAT_CAKE_SLICE, 7);
 				if (player instanceof ServerPlayerEntity) {
-					Criterions.CONSUME_ITEM.trigger((ServerPlayerEntity) player, stack);
+					Criteria.CONSUME_ITEM.trigger((ServerPlayerEntity) player, stack);
 				}
 			}
 			stack.decrement(1);
@@ -78,7 +79,7 @@ public abstract class MixinOmnivore implements DynamicFood {
 				world.playSound(null, player.getBlockPos().getX(), player.getBlockPos().getY(), player.getBlockPos().getZ(), SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 0.5F, world.random.nextFloat() * 0.1F + 0.9F);
 				player.incrementStat(Stats.USED.getOrCreateStat((Item)(Object)this));
 				if (player instanceof ServerPlayerEntity) {
-					Criterions.CONSUME_ITEM.trigger((ServerPlayerEntity) player, stack);
+					Criteria.CONSUME_ITEM.trigger((ServerPlayerEntity) player, stack);
 				}
 			}
 			if (stack.getItem() == Items.TNT || stack.getItem() == Items.TNT_MINECART) { // TNT/TNT minecart

@@ -4,9 +4,12 @@ import io.github.cottonmc.epicurean.Epicurean;
 import io.github.cottonmc.epicurean.container.CookingTableContainer;
 import io.github.cottonmc.epicurean.item.EpicureanItems;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
+import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
+
 import net.minecraft.block.Block;
-import net.minecraft.container.BlockContext;
 import net.minecraft.item.BlockItem;
+import net.minecraft.screen.ScreenHandlerContext;
+import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -16,6 +19,8 @@ public class EpicureanBlocks {
 
 	public static final Identifier COOKING_CONTAINER = new Identifier(Epicurean.MOD_ID, "cooking");
 
+	public static ScreenHandlerType<CookingTableContainer> COOKING_SCREEN;
+
 	private static Block register(String name, Block block) {
 		Registry.register(Registry.BLOCK, new Identifier(Epicurean.MOD_ID, name), block);
 		BlockItem item = new BlockItem(block, EpicureanItems.defaultSettings());
@@ -24,6 +29,6 @@ public class EpicureanBlocks {
 	}
 
 	public static void init() {
-		ContainerProviderRegistry.INSTANCE.registerFactory(COOKING_CONTAINER, (syncId, id, player, buf) -> new CookingTableContainer(syncId, player.inventory, BlockContext.create(player.world, buf.readBlockPos())));
+		COOKING_SCREEN = ScreenHandlerRegistry.registerExtended(COOKING_CONTAINER, (syncId, inv, buf) -> new CookingTableContainer(syncId, inv, ScreenHandlerContext.create(inv.player.world, buf.readBlockPos())));
 	}
 }

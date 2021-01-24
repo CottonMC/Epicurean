@@ -6,8 +6,9 @@ import io.github.cottonmc.epicurean.block.EpicureanBlocks;
 import io.github.cottonmc.epicurean.meal.IngredientProfiles;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
-import net.fabricmc.fabric.api.client.screen.ScreenProviderRegistry;
-import net.fabricmc.fabric.api.event.client.ItemTooltipCallback;
+import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
+import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
+
 import net.minecraft.client.render.RenderLayer;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
@@ -17,7 +18,7 @@ public class EpicureanClient implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
-		ScreenProviderRegistry.INSTANCE.registerFactory(EpicureanBlocks.COOKING_CONTAINER, (syncId, identifier, player, buf) -> new CookingTableScreen(syncId, player));
+		ScreenRegistry.register(EpicureanBlocks.COOKING_SCREEN, CookingTableScreen::new);
 		BlockRenderLayerMap.INSTANCE.putBlocks(RenderLayer.getCutout(), EpicureanCrops.ONION_PLANT, EpicureanCrops.PEPPER_PLANT, EpicureanCrops.SOYBEAN_PLANT, EpicureanCrops.TOMATO_PLANT);
 
 		ItemTooltipCallback.EVENT.register((stack, tooltipContext, tooltips) -> {

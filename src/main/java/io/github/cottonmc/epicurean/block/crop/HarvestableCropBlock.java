@@ -9,6 +9,7 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.context.LootContext;
 import net.minecraft.loot.context.LootContextParameters;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.state.property.IntProperty;
 import net.minecraft.state.property.Properties;
@@ -17,6 +18,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -49,8 +51,8 @@ public class HarvestableCropBlock extends CropBlock {
 		if (getAge(state) >= getMaxAge()) {
 			if (world.getBlockState(pos.offset(Direction.DOWN)).getBlock() == Blocks.FARMLAND) {
 				LootContext.Builder ctx = new LootContext
-						.Builder(world.getServer().getWorld(world.dimension.getType()))
-						.put(LootContextParameters.POSITION, pos).put(LootContextParameters.TOOL, ItemStack.EMPTY);
+						.Builder((ServerWorld) world)
+						.parameter(LootContextParameters.ORIGIN, new Vec3d(pos.getX(), pos.getY(), pos.getZ())).parameter(LootContextParameters.TOOL, ItemStack.EMPTY);
 				List<ItemStack> results = state.getDroppedStacks(ctx);
 				for (ItemStack stack : results) {
 					ItemEntity entity = new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, stack);

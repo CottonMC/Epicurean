@@ -1,11 +1,11 @@
 package io.github.cottonmc.epicurean.container;
 
-import net.minecraft.container.Container;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.recipe.RecipeFinder;
-import net.minecraft.util.DefaultedList;
+import net.minecraft.screen.ScreenHandler;
+import net.minecraft.util.collection.DefaultedList;
 
 import javax.annotation.Nullable;
 
@@ -15,11 +15,11 @@ public class CookingInventory extends CraftingInventory {
 	@Nullable
 	public final PlayerEntity accessor;
 
-	public CookingInventory(Container container) {
+	public CookingInventory(ScreenHandler container) {
 		this(container, null);
 	}
 
-	public CookingInventory(Container container, @Nullable PlayerEntity player) {
+	public CookingInventory(ScreenHandler container, @Nullable PlayerEntity player) {
 		super(container, SECTION_SIZE, 2);
 		this.accessor = player;
 		this.stacks = DefaultedList.ofSize(SECTION_SIZE * 2, ItemStack.EMPTY);

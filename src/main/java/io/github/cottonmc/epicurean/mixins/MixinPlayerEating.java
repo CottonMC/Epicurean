@@ -21,12 +21,12 @@ public abstract class MixinPlayerEating extends LivingEntity {
 	}
 
 	@Inject(method = "canConsume", at = @At("HEAD"), cancellable = true)
-	public void overhaulHunger(boolean alwaysEdible, CallbackInfoReturnable cir) {
+	public void overhaulHunger(boolean alwaysEdible, CallbackInfoReturnable<Boolean> cir) {
 		if (Epicurean.config.useSaturationOnly) cir.setReturnValue(true);
 	}
 
 	@Inject(method = "eatFood", at = @At("HEAD"))
-	public void eatJelliedFood(World world, ItemStack stack, CallbackInfoReturnable cir) {
+	public void eatJelliedFood(World world, ItemStack stack, CallbackInfoReturnable<ItemStack> cir) {
 		PlayerEntity player = (PlayerEntity)(Object)this;
 		if (stack.hasTag()) {
 			if (stack.getTag().contains("jellied")) {

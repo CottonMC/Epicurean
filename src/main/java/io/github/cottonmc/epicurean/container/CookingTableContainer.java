@@ -1,26 +1,28 @@
 package io.github.cottonmc.epicurean.container;
 
+import java.util.Optional;
+
 import io.github.cottonmc.epicurean.block.EpicureanBlocks;
 import io.github.cottonmc.epicurean.recipe.EpicureanRecipes;
 import io.github.cottonmc.epicurean.recipe.MealRecipe;
-import net.minecraft.client.network.packet.ContainerSlotUpdateS2CPacket;
-import net.minecraft.container.*;
+
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.CraftingResultInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.Recipe;
+import net.minecraft.network.packet.s2c.play.ScreenHandlerSlotUpdateS2CPacket;
 import net.minecraft.recipe.RecipeFinder;
+import net.minecraft.screen.CraftingScreenHandler;
+import net.minecraft.screen.ScreenHandlerContext;
+import net.minecraft.screen.slot.Slot;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.world.World;
 
-import java.util.Optional;
-
-public class CookingTableContainer extends CraftingContainer<CookingInventory> {
+public class CookingTableContainer extends CraftingScreenHandler {
 	private final CookingInventory cookingInv;
 	private final CraftingResultInventory resultInv;
-	private final BlockContext context;
+	private final ScreenHandlerContext context;
 	private final PlayerEntity player;
 
 	public static final int RESULT_SLOT = 0;
@@ -29,11 +31,11 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 	public static final int SLOT_COUNT = 49;
 
 	public CookingTableContainer(int syncId, PlayerInventory playerInv) {
-		this(syncId, playerInv, BlockContext.create(playerInv.player.world, playerInv.player.getBlockPos()));
+		this(syncId, playerInv, ScreenHandlerContext.create(playerInv.player.world, playerInv.player.getBlockPos()));
 	}
 
-	public CookingTableContainer(int syncId, PlayerInventory playerInv, BlockContext ctx) {
-		super(null, syncId);
+	public CookingTableContainer(int syncId, PlayerInventory playerInv, ScreenHandlerContext ctx) {
+		super(syncId, playerInv);
 		this.cookingInv = new CookingInventory(this, playerInv.player);
 		this.resultInv = new CraftingResultInventory();
 		this.context = ctx;
@@ -78,10 +80,10 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 		this.resultInv.clear();
 	}
 
-	@Override
-	public boolean matches(Recipe<? super CookingInventory> recipe) {
-		return recipe.matches(this.cookingInv, this.player.world);
-	}
+//	@Override
+//	public boolean matches(Recipe<CookingInventory> recipe) {
+//		return recipe.matches(this.cookingInv, this.player.world);
+//	}
 
 	@Override
 	public int getCraftingResultSlotIndex() {
@@ -108,11 +110,11 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 		return canUse(this.context, player, EpicureanBlocks.COOKING_TABLE);
 	}
 
-	public void onContentChanged(Inventory inv) {
-		this.context.run((world, pos) -> {
-			syncCraft(this.syncId, world, this.player, this.cookingInv, this.resultInv);
-		});
-	}
+//	public void onContentChanged(Inventory inv) {
+//		this.context.run((world, pos) -> {
+//			syncCraft(this.syncId, world, this.player, this.cookingInv, this.resultInv);
+//		});
+//	}
 
 	public void close(PlayerEntity player) {
 		super.close(player);
@@ -120,24 +122,24 @@ public class CookingTableContainer extends CraftingContainer<CookingInventory> {
 			this.dropInventory(player, world, this.cookingInv);
 		});
 	}
-
-	protected static void syncCraft(int syncId, World world, PlayerEntity player, CookingInventory cookingInv, CraftingResultInventory resultInv) {
-		if (!world.isClient) {
-			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
-			ItemStack stack = ItemStack.EMPTY;
-			Optional<MealRecipe> optional = world.getServer().getRecipeManager().getFirstMatch(EpicureanRecipes.MEAL, cookingInv, world);
-			if (optional.isPresent()) {
-				MealRecipe recipe = optional.get();
-				if (resultInv.shouldCraftRecipe(world, serverPlayer, recipe)) {
-					stack = recipe.craft(cookingInv);
-					stack.setCount(1);
-				}
-			}
-
-			resultInv.setInvStack(0, stack);
-			serverPlayer.networkHandler.sendPacket(new ContainerSlotUpdateS2CPacket(syncId, 0, stack));
-		}
-	}
+//
+//	protected static void syncCraft(int syncId, World world, PlayerEntity player, CookingInventory cookingInv, CraftingResultInventory resultInv) {
+//		if (!world.isClient) {
+//			ServerPlayerEntity serverPlayer = (ServerPlayerEntity) player;
+//			ItemStack stack = ItemStack.EMPTY;
+//			Optional<MealRecipe> optional = world.getServer().getRecipeManager().getFirstMatch(EpicureanRecipes.MEAL, cookingInv, world);
+//			if (optional.isPresent()) {
+//				MealRecipe recipe = optional.get();
+//				if (resultInv.shouldCraftRecipe(world, serverPlayer, recipe)) {
+//					stack = recipe.craft(cookingInv);
+//					stack.setCount(1);
+//				}
+//			}
+//
+//			resultInv.setStack(0, stack);
+////			serverPlayer.networkHandler.sendPacket(new ScreenHandlerSlotUpdateS2CPacket(syncId, 0, stack));
+//		}
+//	}
 
 	@Override
 	public ItemStack transferSlot(PlayerEntity player, int slotNum) {

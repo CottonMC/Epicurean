@@ -24,8 +24,8 @@ public class AddJellyRecipe extends SpecialCraftingRecipe {
 		ItemStack targetJelly = ItemStack.EMPTY;
 		if (inv == null) return false;
 		else {
-			for (int i = 0; i < inv.getInvSize(); i++) {
-				ItemStack stack = inv.getInvStack(i);
+			for (int i = 0; i < inv.size(); i++) {
+				ItemStack stack = inv.getStack(i);
 				if (!stack.isEmpty()) {
 					if (stack.getItem() instanceof JellyItem) {
 						if (!targetJelly.isEmpty()) return false;
@@ -47,8 +47,8 @@ public class AddJellyRecipe extends SpecialCraftingRecipe {
 	public ItemStack craft(CraftingInventory inv) {
 		ItemStack food = ItemStack.EMPTY;
 		ItemStack jelly = ItemStack.EMPTY;
-		for (int i = 0; i < inv.getInvSize(); i++) {
-			ItemStack stack = inv.getInvStack(i);
+		for (int i = 0; i < inv.size(); i++) {
+			ItemStack stack = inv.getStack(i);
 			if (stack.getItem() instanceof JellyItem) {
 				jelly = stack;
 			} else if (stack.getItem().isFood()) {

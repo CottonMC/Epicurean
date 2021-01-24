@@ -11,7 +11,7 @@ public class JellyItem extends SeasoningItem {
 	}
 
 	@Override
-	public boolean hasEnchantmentGlint(ItemStack stack) {
+	public boolean hasGlint(ItemStack stack) {
 		return stack.getItem() == EpicureanItems.SUPER_JELLY;
 	}
 

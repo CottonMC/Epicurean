@@ -1,7 +1,7 @@
 package io.github.cottonmc.epicurean.recipe;
 
-import io.github.cottonmc.cotton.cauldron.Cauldron;
-import io.github.cottonmc.cotton.cauldron.CauldronBehavior;
+//import io.github.cottonmc.cotton.cauldron.Cauldron;
+//import io.github.cottonmc.cotton.cauldron.CauldronBehavior;
 import io.github.cottonmc.epicurean.Epicurean;
 import io.github.cottonmc.epicurean.item.EpicureanItems;
 import net.minecraft.block.Blocks;
@@ -42,31 +42,31 @@ public class EpicureanRecipes {
 	}
 
 	public static void init() {
-		CauldronBehavior.registerBehavior(
-				(ctx) -> FluidTags.WATER.contains(ctx.getFluid())
-						&& ctx.getStack().getItem() == Items.NETHER_WART
-						&& ctx.getWorld().getBlockState(ctx.getPos().down()).getBlock() == Blocks.FIRE
-						&& !ctx.getWorld().isClient,
-				(ctx) -> {
-					PlayerEntity player = ctx.getPlayer();
-					ItemStack stack = ctx.getStack();
-					if (player == null || !player.abilities.creativeMode) {
-						ItemStack salt = new ItemStack(EpicureanItems.SALT, 1);
-						if (player != null) player.increaseStat(Stats.USE_CAULDRON, 1);
-						stack.decrement(1);
-						if (player != null) {
-							if (stack.isEmpty()) {
-								player.setStackInHand(ctx.getHand(), salt);
-							} else if (!player.inventory.insertStack(salt)) {
-								player.dropItem(salt, false);
-							}
-						} else {
-							ItemEntity entity = new ItemEntity(ctx.getWorld(), ctx.getPos().getX(), ctx.getPos().getY()+1, ctx.getPos().getZ(), salt);
-							ctx.getWorld().spawnEntity(entity);
-						}
-					}
-					((Cauldron)ctx.getState().getBlock()).drain(ctx.getWorld(), ctx.getPos(), ctx.getState(), Fluids.WATER, 1);
-					ctx.getWorld().playSound(null, ctx.getPos(), SoundEvents.BLOCK_NETHER_WART_BREAK, SoundCategory.BLOCKS, 1.0f, 1.0f);
-				});
+//		CauldronBehavior.registerBehavior(
+//				(ctx) -> FluidTags.WATER.contains(ctx.getFluid())
+//						&& ctx.getStack().getItem() == Items.NETHER_WART
+//						&& ctx.getWorld().getBlockState(ctx.getPos().down()).getBlock() == Blocks.FIRE
+//						&& !ctx.getWorld().isClient,
+//				(ctx) -> {
+//					PlayerEntity player = ctx.getPlayer();
+//					ItemStack stack = ctx.getStack();
+//					if (player == null || !player.abilities.creativeMode) {
+//						ItemStack salt = new ItemStack(EpicureanItems.SALT, 1);
+//						if (player != null) player.increaseStat(Stats.USE_CAULDRON, 1);
+//						stack.decrement(1);
+//						if (player != null) {
+//							if (stack.isEmpty()) {
+//								player.setStackInHand(ctx.getHand(), salt);
+//							} else if (!player.inventory.insertStack(salt)) {
+//								player.dropItem(salt, false);
+//							}
+//						} else {
+//							ItemEntity entity = new ItemEntity(ctx.getWorld(), ctx.getPos().getX(), ctx.getPos().getY()+1, ctx.getPos().getZ(), salt);
+//							ctx.getWorld().spawnEntity(entity);
+//						}
+//					}
+//					((Cauldron)ctx.getState().getBlock()).drain(ctx.getWorld(), ctx.getPos(), ctx.getState(), Fluids.WATER, 1);
+//					ctx.getWorld().playSound(null, ctx.getPos(), SoundEvents.BLOCK_NETHER_WART_BREAK, SoundCategory.BLOCKS, 1.0f, 1.0f);
+//				});
 	}
 }

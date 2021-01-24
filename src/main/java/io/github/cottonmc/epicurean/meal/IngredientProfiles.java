@@ -66,12 +66,12 @@ public class IngredientProfiles implements SimpleResourceReloadListener {
 		return CompletableFuture.runAsync(() -> {
 			MEAL_INGREDIENTS.clear();
 			DRESSINGS.clear();
-			Tag<Item> SPICY = ItemTags.getContainer().get(new Identifier(Epicurean.MOD_ID, "spicy"));
-			Tag<Item> UMAMI = ItemTags.getContainer().get(new Identifier(Epicurean.MOD_ID, "umami"));
-			Tag<Item> ACIDIC = ItemTags.getContainer().get(new Identifier(Epicurean.MOD_ID, "acidic"));
-			Tag<Item> SWEET = ItemTags.getContainer().get(new Identifier(Epicurean.MOD_ID, "sweet"));
-			Tag<Item> BITTER = ItemTags.getContainer().get(new Identifier(Epicurean.MOD_ID, "bitter"));
-			Tag<Item> FILLING = ItemTags.getContainer().get(new Identifier(Epicurean.MOD_ID, "filling"));
+			Tag<Item> SPICY = ItemTags.getTagGroup().getTagOrEmpty(new Identifier(Epicurean.MOD_ID, "spicy"));
+			Tag<Item> UMAMI = ItemTags.getTagGroup().getTagOrEmpty(new Identifier(Epicurean.MOD_ID, "umami"));
+			Tag<Item> ACIDIC = ItemTags.getTagGroup().getTagOrEmpty(new Identifier(Epicurean.MOD_ID, "acidic"));
+			Tag<Item> SWEET = ItemTags.getTagGroup().getTagOrEmpty(new Identifier(Epicurean.MOD_ID, "sweet"));
+			Tag<Item> BITTER = ItemTags.getTagGroup().getTagOrEmpty(new Identifier(Epicurean.MOD_ID, "bitter"));
+			Tag<Item> FILLING = ItemTags.getTagGroup().getTagOrEmpty(new Identifier(Epicurean.MOD_ID, "filling"));
 
 			// Highest impact: add spicy foods
 			if (SPICY != null) putTag(SPICY, FlavorGroup.SPICY);
@@ -90,7 +90,7 @@ public class IngredientProfiles implements SimpleResourceReloadListener {
 	}
 
 	private void putTag(Tag<Item> tag, FlavorGroup flavor) {
-		Tag<Item> DRESSING_TAG = ItemTags.getContainer().get(new Identifier(Epicurean.MOD_ID, "dressings"));
+		Tag<Item> DRESSING_TAG = ItemTags.getTagGroup().getTagOrEmpty(new Identifier(Epicurean.MOD_ID, "dressings"));
 		for (Item ingredient : tag.values()) {
 			if (DRESSING_TAG != null && DRESSING_TAG.contains(ingredient)) {
 				DRESSINGS.put(ingredient, flavor);
